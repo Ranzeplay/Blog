@@ -6,7 +6,7 @@
 <h1>@Model.Metadata.Title</h1>
 <p>Published at @Model.Metadata.Time.Value.ToString("R")</p>
 <p>Category @Model.Metadata.Category</p>
-<p class="text-secondary">
+<p>
     Tags: &nbsp;
     @foreach(var tag in Model.Metadata.Tags)
     {

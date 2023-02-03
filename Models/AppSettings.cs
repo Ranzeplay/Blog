@@ -2,6 +2,6 @@
 {
     public class AppSettings
     {
-        public string BlogStorageRootDirectory { get; set; } = "./Storage";
+        public string BlogStorageRootDirectory { get; set; } = "Storage";
     }
 }

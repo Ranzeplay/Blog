@@ -3,6 +3,7 @@ using Markdig;
 using Markdig.Extensions.Yaml;
 using Markdig.Syntax;
 using Microsoft.Extensions.Hosting;
+using System.Reflection.Metadata;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.RepresentationModel;
@@ -23,31 +24,37 @@ namespace Blog.Managers
 
             var document = Markdown.Parse(text, pipeline);
 
-            var yamlDeserializer = new DeserializerBuilder()
-                    .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                    .Build();
-
-            using (var input = new StringReader(text))
+            // Parse metadata
+            var metadata = ParseArticleMetadata(text);
+            if (metadata != null)
             {
-                var parser = new Parser(input);
-                parser.Consume<StreamStart>();
-                parser.Consume<DocumentStart>();
-                var metadata = yamlDeserializer.Deserialize<ArticleMetadata>(parser);
-                parser.Consume<DocumentEnd>();
+                // Parse content
+                var html = Markdown.ToHtml(document, pipeline);
 
-                if (metadata != null)
+                return new()
                 {
-                    var html = Markdown.ToHtml(document, pipeline);
-
-                    return new()
-                    {
-                        HtmlContent = html,
-                        Metadata = metadata
-                    };
-                }
+                    HtmlContent = html,
+                    Metadata = metadata
+                };
             }
 
             return null;
+        }
+
+        public static ArticleMetadata? ParseArticleMetadata(string text)
+        {
+            var input = new StringReader(text);
+            var yamlDeserializer = new DeserializerBuilder()
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                .Build();
+
+            var parser = new Parser(input);
+            parser.Consume<StreamStart>();
+            parser.Consume<DocumentStart>();
+            var metadata = yamlDeserializer.Deserialize<ArticleMetadata>(parser);
+            parser.Consume<DocumentEnd>();
+
+            return metadata;
         }
     }
 }
