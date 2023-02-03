@@ -1,0 +1,19 @@
+﻿@model Blog.Models.Article.ArticleViewModel
+@{
+    ViewData["Title"] = "Article";
+}
+
+<h1>@Model.Metadata.Title</h1>
+<p>Published at @Model.Metadata.Time.Value.ToString("R")</p>
+<p>Category @Model.Metadata.Category</p>
+<p class="text-secondary">
+    Tags: &nbsp;
+    @foreach(var tag in Model.Metadata.Tags)
+    {
+        <span>@tag</span>
+    }
+</p>
+
+<br />
+
+@Html.Raw(Model.HtmlContent)

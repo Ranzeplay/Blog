@@ -1,3 +1,6 @@
+using Blog.Models;
+using Microsoft.Extensions.Configuration;
+
 namespace Blog
 {
     public class Program
@@ -9,6 +12,8 @@ namespace Blog
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
