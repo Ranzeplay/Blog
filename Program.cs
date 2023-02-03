@@ -1,3 +1,4 @@
+using Blog.Managers;
 using Blog.Models;
 using Microsoft.Extensions.Configuration;
 
@@ -13,6 +14,9 @@ namespace Blog
             builder.Services.AddControllersWithViews();
 
             builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
+            // Configure services
+            builder.Services.AddSingleton<ArticleManager>();
             
             var app = builder.Build();
 

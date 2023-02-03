@@ -10,11 +10,13 @@ namespace Blog.Controllers
     {
         private readonly AppSettings _appSettings;
         private readonly string _articleDirectory;
+        private readonly ArticleManager _articleManager;
 
-        public ArticleController(IOptions<AppSettings> options)
+        public ArticleController(IOptions<AppSettings> options, ArticleManager articleManager)
         {
             _appSettings = options.Value;
             _articleDirectory = Path.Combine(Environment.CurrentDirectory, _appSettings.BlogStorageRootDirectory, "Articles");
+            _articleManager = articleManager;
         }
 
         public IActionResult Read([FromRoute] string id)
@@ -42,38 +44,19 @@ namespace Blog.Controllers
         [Route("/Articles")]
         public IActionResult List(string? query)
         {
-            var result = new List<ArticleMetadataViewModel>();
-
-            foreach (var articleDirectory in Directory.GetDirectories(_articleDirectory))
-            {
-                var file = Path.Combine(articleDirectory, "text.md");
-                var text = System.IO.File.ReadAllText(file);
-
-                var metadata = MarkdownManager.ParseArticleMetadata(text);
-                if (metadata != null)
-                {
-                    result.Add(new()
-                    {
-                        ArticleId = Path.GetFileName(articleDirectory),
-                        Title = metadata.Title,
-                        Time = metadata.Time,
-                        Category = metadata.Category,
-                        Tags = metadata.Tags,
-                    });
-                }
-            }
+            var result = _articleManager.GetArticleMetadata();
 
             // Filter search query
             if (!string.IsNullOrWhiteSpace(query))
             {
                 query = query.ToLower();
-                result = result.FindAll(a => a.ArticleId.ToLower().Contains(query)
-                || a.Tags.Any(t => t.ToLower().Contains(query))
-                || a.Category.ToLower().Contains(query));
+                result = Array.FindAll(result, a => a.ArticleId.ToLower().Contains(query)
+                                                    || a.Tags.Any(t => t.ToLower().Contains(query))
+                                                    || a.Category.ToLower().Contains(query));
             }
 
             // Sort entries by time order
-            result.Sort((a, b) => a.Time.Value.CompareTo(b.Time.Value));
+            Array.Sort(result, (a, b) => a.Time.Value.CompareTo(b.Time.Value));
 
             return View(result);
         }

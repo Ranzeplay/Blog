@@ -4,7 +4,7 @@
 }
 
 <h1>@Model.Metadata.Title</h1>
-<p>Published at @Model.Metadata.Time.Value.ToString("R")</p>
+
 <p>Category @Model.Metadata.Category</p>
 <p>
     Tags: &nbsp;
@@ -17,3 +17,8 @@
 <br />
 
 @Html.Raw(Model.HtmlContent)
+
+<br />
+
+<p>Published at @Model.Metadata.Time.Value.ToString("R")</p>
+<a asp-action="List" role="button" class="btn btn-link">Back to list</a>
