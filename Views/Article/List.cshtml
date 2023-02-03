@@ -6,7 +6,7 @@
 
 <h1>Published articles</h1>
 
-<form class="form-inline" asp-action="List" method="get">
+<form class="form-inline" asp-controller="Article" asp-action="List" method="get">
     <label class="sr-only" for="inlineFormInput">Search blog</label>
     <input type="text" class="form-control mr-4 mb-2" name="query" id="inlineFormInput" placeholder="Search blog">
 
@@ -27,7 +27,7 @@
                 }
             </p>
             <p class="card-text">Category: @article.Category</p>
-            <a asp-action="Read" asp-route-id="@article.ArticleId" class="card-link">Read</a>
+            <a asp-asp-controller="Article" asp-action="Read" asp-route-id="@article.ArticleId" class="card-link">Read</a>
         </div>
     </div>
 }

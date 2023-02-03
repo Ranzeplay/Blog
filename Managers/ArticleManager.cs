@@ -43,12 +43,12 @@ namespace Blog.Managers
             IndexedArticles = result.ToArray();
         }
 
-        public ArticleMetadataViewModel[] GetArticleMetadata(int count = -1)
+        public ArticleMetadataViewModel[] GetArticleMetadata(int maxCount = -1)
         {
-            return count switch
+            return maxCount switch
             {
                 -1 => IndexedArticles,
-                _ => IndexedArticles[..count]
+                _ => IndexedArticles.TakeLast(maxCount).ToArray()
             };
         }
 
