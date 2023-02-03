@@ -39,6 +39,7 @@ namespace Blog.Controllers
         }
 
         [HttpGet]
+        [Route("/Articles")]
         public IActionResult List(string? query)
         {
             var result = new List<ArticleMetadataViewModel>();
