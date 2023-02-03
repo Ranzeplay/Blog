@@ -65,5 +65,29 @@ namespace Blog.Managers
             var article = MarkdownManager.ParseArticleFile(text);
             return article;
         }
+
+        public Dictionary<string, int> GetCategoriesWithCount()
+        {
+            var result = new Dictionary<string, int>();
+
+            foreach (var article in IndexedArticles)
+            {
+                if (result.ContainsKey(article.Category))
+                {
+                    result[article.Category] += 1;
+                }
+                else
+                {
+                    result[article.Category] = 1;
+                }
+            }
+
+            return result;
+        }
+
+        public ArticleMetadataViewModel[] FindByCategory(string name)
+        {
+            return Array.FindAll(IndexedArticles, a => a.Category.Equals(name));
+        }
     }
 }

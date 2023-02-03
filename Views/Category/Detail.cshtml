@@ -1,0 +1,26 @@
+﻿@model Blog.Models.Category.CategoryDetailViewModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Category: @Model.Name</h1>
+<h6>@Model.Articles.Length article(s) in total</h6>
+
+@foreach (var article in Model.Articles)
+{
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">@article.Title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Published at @article.Time.Value.ToString("R")</h6>
+                <p>
+                    Tags: &nbsp;
+                @foreach (var tag in article.Tags)
+                {
+                            <span>@tag</span>
+                }
+                </p>
+                <p class="card-text">Category: @article.Category</p>
+                <a asp-asp-controller="Article" asp-controller="Article" asp-action="Read" asp-route-id="@article.ArticleId" class="card-link">Read</a>
+            </div>
+        </div>
+}
