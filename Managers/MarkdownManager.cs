@@ -2,6 +2,7 @@
 using Markdig;
 using Markdig.Extensions.Yaml;
 using Markdig.Syntax;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Hosting;
 using System.Reflection.Metadata;
 using YamlDotNet.Core;
@@ -55,6 +56,37 @@ namespace Blog.Managers
             parser.Consume<DocumentEnd>();
 
             return metadata;
+        }
+
+        public static Models.API.ArticleViewModel? ParseOriginalMarkdown(string text)
+        {
+            var pipeline = new MarkdownPipelineBuilder()
+               .UseAdvancedExtensions()
+               .UseYamlFrontMatter()
+               .UseBootstrap()
+               .Build();
+
+            var document = Markdown.Parse(text, pipeline);
+
+            // Parse metadata
+            var metadata = ParseArticleMetadata(text);
+            if (metadata != null)
+            {
+                var yamlBlock = document.Descendants<YamlFrontMatterBlock>().FirstOrDefault();
+                if (yamlBlock != null)
+                {
+                    string yaml = text.Substring(yamlBlock.Span.Start, yamlBlock.Span.Length);
+                    text = text[yaml.Length..];
+                }
+
+                return new()
+                {
+                    Content = text,
+                    Metadata = metadata
+                };
+            }
+
+            return null;
         }
     }
 }

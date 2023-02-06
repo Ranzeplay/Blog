@@ -1,6 +1,7 @@
 ﻿using Blog.Managers;
 using Blog.Models;
-using Blog.Models.Article;
+using Blog.Models.API;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -19,6 +20,7 @@ namespace Blog.Controllers
             _articleManager = articleManager;
         }
 
+        [HttpGet]
         public IActionResult Read([FromRoute] string id)
         {
             var targetArticleDirectory = Path.Combine(_articleDirectory, id);
@@ -35,30 +37,9 @@ namespace Blog.Controllers
 
             var text = System.IO.File.ReadAllText(articleFilePath);
 
-            var article = MarkdownManager.ParseArticleFile(text);
+            var model = MarkdownManager.ParseOriginalMarkdown(text);
 
-            return View(article);
-        }
-
-        [HttpGet]
-        [Route("/Articles")]
-        public IActionResult List(string? query)
-        {
-            var result = _articleManager.GetArticleMetadata();
-
-            // Filter search query
-            if (!string.IsNullOrWhiteSpace(query))
-            {
-                query = query.ToLower();
-                result = Array.FindAll(result, a => a.ArticleId.ToLower().Contains(query)
-                                                    || a.Tags.Any(t => t.ToLower().Contains(query))
-                                                    || a.Category.ToLower().Contains(query));
-            }
-
-            // Sort entries by time order
-            Array.Sort(result, (a, b) => a.Time.Value.CompareTo(b.Time.Value));
-
-            return View(result);
+            return Json(model);
         }
     }
 }

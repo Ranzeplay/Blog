@@ -17,7 +17,17 @@ namespace Blog
 
             // Configure services
             builder.Services.AddSingleton<ArticleManager>();
-            
+
+            // CORS settings
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200");
+                    });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,6 +40,8 @@ namespace Blog
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseCors();
 
             app.UseRouting();
 
