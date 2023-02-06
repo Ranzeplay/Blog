@@ -1,44 +1,15 @@
 <header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">Blog</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
-        </ul>
+  <div class="mt-4 mb-4">
+    <nav class="w-2/3 flex flex-wrap items-center justify-between py-3 shadow-md navbar m-auto rounded-xl">
+      <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+        <div class="container-fluid">
+          <a class="text-xl text-black font-serif font-bold mr-8" href="#">Blog</a>
+
+          <a class="px-4 py-2 text-black" href="#">Home</a>
+          <a class="px-4 py-2 text-black" href="#">Articles</a>
+          <a class="px-4 py-2 text-black" href="#">Pages</a>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </div>
 </header>
