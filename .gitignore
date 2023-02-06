@@ -362,5 +362,11 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
+# Angular files
+ClientApp/.angular/
+
+# Visual Studio Code files
+**/.vscode/
+
 # Configurations
 Storage/
