@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { marked } from 'marked';
 import { Subscription } from 'rxjs';
 import { Article } from 'src/app/models/article';
 
@@ -30,10 +29,10 @@ export class ArticleReadComponent implements OnInit, OnDestroy {
     this.routeSubscription = this.route.params.subscribe((params) => {
       this.blogId = params['id'];
 
-      this.http.get<Article>('https://localhost:44378/Article/Read/' + this.blogId).subscribe(val => {
-        console.log(val);
+      this.http.get<Article>(this.baseUrl + '/Article/Read/' + this.blogId).subscribe(val => {
+        console.log('Successfully fetched article');
         this.content = val;
-        this.text = marked.parse(val.content);
+        this.text = val.content;
       });
     });
   }

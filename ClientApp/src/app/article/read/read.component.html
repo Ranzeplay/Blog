@@ -1,10 +1,10 @@
-<p>{{content}}</p>
-
 <div class="mt-4 mb-4">
-  <div class="w-2/3 shadow-md m-auto rounded-xl p-8">
-    <h5 class="font-monospace">{{ content.metadata.time }}</h5>
-    <h1>{{ content.metadata.title }}</h1>
+  <div class="shadow-md m-auto rounded-xl p-8">
+    <div class="mb-4">
+      <h5 class="font-monospace">{{ content.metadata.time }}</h5>
+      <h1 class="text-6xl font-serif font-extrabold">{{ content.metadata.title }}</h1>
+    </div>
 
-    <div id="content" [innerHTML]="text"></div>
+    <app-article-view [markdown]="text"></app-article-view>
   </div>
 </div>
