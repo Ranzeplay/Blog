@@ -14,6 +14,8 @@ import { ArticleViewComponent } from './article/view/view.component';
 import { GoTopButtonModule } from 'ng-go-top-button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ArticleListComponent } from './article/list/list.component';
+import { ArticleCardComponent } from './article/card/card.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CounterComponent,
     FetchDataComponent,
     ArticleReadComponent,
-    ArticleViewComponent
+    ArticleViewComponent,
+    ArticleListComponent,
+    ArticleCardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,7 +38,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'home', component: HomeComponent,},
       { path: 'article/read/:id', component: ArticleReadComponent },
+      { path: 'article/list', component: ArticleListComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
     ])

@@ -1,6 +1,5 @@
 ﻿using Blog.Managers;
 using Blog.Models;
-using Blog.Models.API;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -40,6 +39,13 @@ namespace Blog.Controllers
             var model = MarkdownManager.ParseOriginalMarkdown(text);
 
             return Json(model);
+        }
+
+        [HttpGet]
+        public IActionResult List(string? query)
+        {
+            var articles = _articleManager.GetArticleMetadata();
+            return Json(articles);
         }
     }
 }
