@@ -1,5 +1,6 @@
 ﻿using Blog.Models;
 using Blog.Models.Article;
+using Blog.Models.Category;
 using Microsoft.Extensions.Options;
 
 namespace Blog.Managers
@@ -7,7 +8,7 @@ namespace Blog.Managers
     public class ArticleManager
     {
         private readonly string _articleDirectory;
-        private ArticleMetadataViewModel[] IndexedArticles { get; set; }
+        private IEnumerable<ArticleMetadataViewModel> IndexedArticles { get; set; }
 
         public ArticleManager(IOptions<AppSettings> options)
         {
@@ -43,12 +44,12 @@ namespace Blog.Managers
             IndexedArticles = result.ToArray();
         }
 
-        public ArticleMetadataViewModel[] GetArticleMetadata(int maxCount = -1)
+        public IEnumerable<ArticleMetadataViewModel> GetArticleMetadata(int maxCount = -1)
         {
             return maxCount switch
             {
                 -1 => IndexedArticles,
-                _ => IndexedArticles.TakeLast(maxCount).ToArray()
+                _ => IndexedArticles.TakeLast(maxCount)
             };
         }
 
@@ -66,28 +67,34 @@ namespace Blog.Managers
             return article;
         }
 
-        public Dictionary<string, int> GetCategoriesWithCount()
+        public IEnumerable<CategoryIndexViewModel> GetCategoriesWithCount()
         {
-            var result = new Dictionary<string, int>();
+            var result = new List<CategoryIndexViewModel>();
 
             foreach (var article in IndexedArticles)
             {
-                if (result.ContainsKey(article.Category))
+                var index = result.FindIndex(r => r.Name == article.Category);
+
+                if (index == -1)
                 {
-                    result[article.Category] += 1;
+                    result.Add(new CategoryIndexViewModel
+                    {
+                        Name = article.Category!,
+                        Count = 1
+                    });
                 }
                 else
                 {
-                    result[article.Category] = 1;
+                    result[index].Count++;
                 }
             }
 
             return result;
         }
 
-        public ArticleMetadataViewModel[] FindByCategory(string name)
+        public IEnumerable<ArticleMetadataViewModel> FindByCategory(string name)
         {
-            return Array.FindAll(IndexedArticles, a => a.Category.Equals(name));
+            return IndexedArticles.Where(a => a.Category.Equals(name));
         }
     }
 }

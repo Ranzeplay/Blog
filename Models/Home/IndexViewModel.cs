@@ -4,6 +4,6 @@ namespace Blog.Models.Home
 {
     public class IndexViewModel
     {
-        public ArticleMetadataViewModel[] LatestArticles { get; set; }
+        public IEnumerable<ArticleMetadataViewModel> LatestArticles { get; set; }
     }
 }

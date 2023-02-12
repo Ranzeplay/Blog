@@ -18,25 +18,14 @@ namespace Blog.Controllers
         }
 
         [HttpGet]
-        [Route("/Categories")]
         public IActionResult List(string? query)
         {
             var categories = _articleManager.GetCategoriesWithCount();
 
-            if(!string.IsNullOrWhiteSpace(query)) {
-                foreach(var category in categories)
-                {
-                    if (!category.Key.Contains(query))
-                    {
-                        categories.Remove(category.Key);
-                    }
-                }
-            }
-
-            return View(categories);
+            return Json(categories);
         }
 
-        [HttpGet("/Category/{name}")]
+        [HttpGet]
         public IActionResult Detail([FromRoute] string name)
         {
             var articles = _articleManager.FindByCategory(name);
@@ -45,7 +34,7 @@ namespace Blog.Controllers
                 return NotFound("No such category");
             }
 
-            return View(new CategoryDetailViewModel
+            return Json(new CategoryDetailViewModel
             {
                 Articles = articles,
                 Name = name
