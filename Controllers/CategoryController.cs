@@ -26,9 +26,9 @@ namespace Blog.Controllers
         }
 
         [HttpGet]
-        public IActionResult Detail([FromRoute] string name)
+        public IActionResult Detail([FromRoute] string id)
         {
-            var articles = _articleManager.FindByCategory(name);
+            var articles = _articleManager.FindByCategory(id);
             if (!articles.Any())
             {
                 return NotFound("No such category");
@@ -37,7 +37,7 @@ namespace Blog.Controllers
             return Json(new CategoryDetailViewModel
             {
                 Articles = articles,
-                Name = name
+                Name = id
             });
         }
     }
