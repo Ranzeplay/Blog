@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { CategoryDetail } from 'src/app/models/categoryDetail';
 
 @Component({
-  selector: 'app-detail',
+  selector: 'app-category-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })

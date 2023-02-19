@@ -4,7 +4,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { CategoryIndex } from 'src/app/models/categoryIndex';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-category-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
 })

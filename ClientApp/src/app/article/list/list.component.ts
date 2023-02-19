@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { ArticleMetadata } from 'src/app/models/articleMetadata';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-article-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
 })

@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Article } from 'src/app/models/article';
 
 @Component({
-  selector: 'app-read',
+  selector: 'app-article-read',
   templateUrl: './read.component.html',
   styleUrls: ['./read.component.css'],
 })
