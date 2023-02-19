@@ -3,8 +3,8 @@
     [routerLink]="['/article/read', metadata.articleId]">{{ metadata.title }}</a>
   <h5 class="font-monospace text-gray-600 font-thin">{{ metadata.time }}</h5>
 
-  <div class="grid grid-rows-2 grid-cols-3 w-3/4">
-    <div class="flex p-1 m-2 col-span-1 row-span-2 border-gray-800 rounded-lg text-gray-800 border items-center">
+  <div class="grid grid-rows-1 grid-cols-8 w-3/4">
+    <div class="flex p-1 m-2 col-span-2 row-span-1 border-gray-800 rounded-lg text-gray-800 border items-center">
       <a class="m-auto text-xl text-black hover:underline" [routerLink]="['/category/detail', metadata.category]">{{ metadata.category }}</a>
     </div>
     <div class="flex p-1 m-2 col-span-1 row-span-1 bg-gray-200 rounded-lg text-black items-center" *ngFor="let tag of metadata.tags">
