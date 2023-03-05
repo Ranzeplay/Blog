@@ -8,7 +8,7 @@
       <a class="m-auto text-xl text-black hover:underline" [routerLink]="['/category/detail', metadata.category]">{{ metadata.category }}</a>
     </div>
     <div class="flex p-1 m-2 col-span-1 row-span-1 bg-gray-200 rounded-lg text-black items-center" *ngFor="let tag of metadata.tags">
-      <p class="m-auto">{{ tag }}</p>
+      <a class="m-auto text-black hover:underline" [routerLink]="['/tag/detail', tag]">{{ tag }}</a>
     </div>
   </div>
 </div>

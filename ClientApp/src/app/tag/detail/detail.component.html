@@ -1,0 +1,17 @@
+<div class="mt-4 mb-4">
+  <div class="shadow-xl m-auto rounded-xl p-8">
+    <div class="mb-4">
+      <h1 class="text-6xl font-serif font-extrabold">Articles under tag</h1>
+      <h5 class="text-3xl">{{ tagName }}</h5>
+    </div>
+
+    <!-- <div class="mb-6">
+      <input type="text" id="search-input" placeholder="Search for articles..." [(ngModel)]="query" (change)="queryArticles(query)"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+    </div> -->
+
+    <div class="mt-4">
+      <app-article-card [metadata]="item" *ngFor="let item of content.articles"></app-article-card>
+    </div>
+  </div>
+</div>
