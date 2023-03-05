@@ -19,6 +19,7 @@ import { ArticleCardComponent } from './article/card/card.component';
 import { CategoryListComponent as CategoryListComponent } from './category/list/list.component';
 import { DetailComponent as CategoryDetailComponent } from './category/detail/detail.component';
 import { ListComponent as TagListComponent } from './tag/list/list.component';
+import { DetailComponent as TagDetailComponent } from './tag/detail/detail.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ListComponent as TagListComponent } from './tag/list/list.component';
     ArticleCardComponent,
     CategoryListComponent,
     CategoryDetailComponent,
-    TagListComponent
+    TagListComponent,
+    TagDetailComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -44,17 +46,18 @@ import { ListComponent as TagListComponent } from './tag/list/list.component';
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'home', component: HomeComponent,},
+      { path: 'home', component: HomeComponent },
       { path: 'article/read/:id', component: ArticleReadComponent },
       { path: 'article/list', component: ArticleListComponent },
       { path: 'category/list', component: CategoryListComponent },
       { path: 'category/detail/:id', component: CategoryDetailComponent },
       { path: 'tag/list', component: TagListComponent },
+      { path: 'tag/detail/:id', component: TagDetailComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    ]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
