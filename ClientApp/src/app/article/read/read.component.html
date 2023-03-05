@@ -6,5 +6,14 @@
     </div>
 
     <app-article-view [markdown]="text"></app-article-view>
+
+    <div class="grid grid-rows-1 grid-cols-8 w-3/4 mt-8">
+      <div class="flex p-1 mr-2 col-span-2 row-span-1 border-gray-800 rounded-lg text-gray-800 border items-center">
+        <a class="m-auto text-md text-black hover:underline" [routerLink]="['/category/detail', content.metadata.category]">{{ content.metadata.category }}</a>
+      </div>
+      <div class="flex p-1 mr-2 col-span-1 row-span-1 bg-gray-200 rounded-lg text-black items-center" *ngFor="let tag of content.metadata.tags">
+        <a class="m-auto text-sm text-black hover:underline" [routerLink]="['/tag/detail', tag]">{{ tag }}</a>
+      </div>
+    </div>
   </div>
 </div>
