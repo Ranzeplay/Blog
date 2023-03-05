@@ -1,6 +1,7 @@
 ﻿using Blog.Models;
 using Blog.Models.Article;
 using Blog.Models.Category;
+using Blog.Models.Tag;
 using Microsoft.Extensions.Options;
 
 namespace Blog.Managers
@@ -94,7 +95,40 @@ namespace Blog.Managers
 
         public IEnumerable<ArticleMetadataViewModel> FindByCategory(string name)
         {
-            return IndexedArticles.Where(a => a.Category.Equals(name));
+            return IndexedArticles.Where(a => a.Category == name);
+        }
+
+        public IEnumerable<TagIndexViewModel> GetTagsWithCount()
+        {
+            var result = new List<TagIndexViewModel>();
+
+            foreach (var article in IndexedArticles)
+            {
+                foreach (var tag in article.Tags ?? Array.Empty<string>())
+                {
+                    var index = result.FindIndex(r => r.Name == tag);
+
+                    if (index == -1)
+                    {
+                        result.Add(new TagIndexViewModel
+                        {
+                            Name = tag,
+                            Count = 1
+                        });
+                    }
+                    else
+                    {
+                        result[index].Count++;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        public IEnumerable<ArticleMetadataViewModel> FindByTag(string name)
+        {
+            return IndexedArticles.Where(a => a.Tags != null && a.Tags.Contains(name));
         }
     }
 }

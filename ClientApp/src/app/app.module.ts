@@ -18,6 +18,7 @@ import { ArticleListComponent } from './article/list/list.component';
 import { ArticleCardComponent } from './article/card/card.component';
 import { CategoryListComponent as CategoryListComponent } from './category/list/list.component';
 import { DetailComponent as CategoryDetailComponent } from './category/detail/detail.component';
+import { ListComponent as TagListComponent } from './tag/list/list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DetailComponent as CategoryDetailComponent } from './category/detail/de
     ArticleListComponent,
     ArticleCardComponent,
     CategoryListComponent,
-    CategoryDetailComponent
+    CategoryDetailComponent,
+    TagListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -47,6 +49,7 @@ import { DetailComponent as CategoryDetailComponent } from './category/detail/de
       { path: 'article/list', component: ArticleListComponent },
       { path: 'category/list', component: CategoryListComponent },
       { path: 'category/detail/:id', component: CategoryDetailComponent },
+      { path: 'tag/list', component: TagListComponent },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
     ])
