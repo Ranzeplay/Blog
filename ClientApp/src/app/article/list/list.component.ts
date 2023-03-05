@@ -22,7 +22,6 @@ export class ArticleListComponent implements OnInit {
     this.http
       .get<ArticleMetadata[]>(this.baseUrl + '/Article/List/')
       .subscribe((val) => {
-        console.log('Successfully fetched article');
         this.articles = val;
         this.shownArticles = this.articles;
       });

@@ -27,7 +27,6 @@ export class DetailComponent {
       this.categoryName = params['id'];
 
       this.http.get<CategoryDetail>(this.baseUrl + '/Category/Detail/' + this.categoryName).subscribe(val => {
-        console.log('Successfully fetched article');
         this.content = val;
       });
     });

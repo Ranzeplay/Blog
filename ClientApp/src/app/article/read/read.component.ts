@@ -30,7 +30,6 @@ export class ArticleReadComponent implements OnInit, OnDestroy {
       this.blogId = params['id'];
 
       this.http.get<Article>(this.baseUrl + '/Article/Read/' + this.blogId).subscribe(val => {
-        console.log('Successfully fetched article');
         this.content = val;
         this.text = val.content;
       });
