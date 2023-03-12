@@ -9,7 +9,6 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { ArticleReadComponent } from './article/read/read.component';
 import { ArticleViewComponent } from './article/view/view.component';
-import { GoTopButtonModule } from 'ng-go-top-button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ArticleListComponent } from './article/list/list.component';
@@ -18,6 +17,7 @@ import { CategoryListComponent as CategoryListComponent } from './category/list/
 import { DetailComponent as CategoryDetailComponent } from './category/detail/detail.component';
 import { ListComponent as TagListComponent } from './tag/list/list.component';
 import { DetailComponent as TagDetailComponent } from './tag/detail/detail.component';
+import { NgxScrollTopModule } from 'ngx-scrolltop';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,6 @@ import { DetailComponent as TagDetailComponent } from './tag/detail/detail.compo
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    GoTopButtonModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
@@ -50,6 +49,7 @@ import { DetailComponent as TagDetailComponent } from './tag/detail/detail.compo
       { path: 'tag/list', component: TagListComponent },
       { path: 'tag/detail/:id', component: TagDetailComponent },
     ]),
+    NgxScrollTopModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

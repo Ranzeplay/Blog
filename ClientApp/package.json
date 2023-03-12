@@ -31,7 +31,7 @@
     "@types/marked": "^4.0.8",
     "jquery": "^3.6.3",
     "marked": "^4.2.12",
-    "ng-go-top-button": "^10.0.1",
+    "ngx-scrolltop": "^5.1.0",
     "oidc-client": "^1.11.5",
     "popper.js": "^1.16.0",
     "run-script-os": "^1.1.6",
