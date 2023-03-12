@@ -7,8 +7,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ArticleReadComponent } from './article/read/read.component';
 import { ArticleViewComponent } from './article/view/view.component';
 import { GoTopButtonModule } from 'ng-go-top-button';
@@ -26,8 +24,6 @@ import { DetailComponent as TagDetailComponent } from './tag/detail/detail.compo
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     ArticleReadComponent,
     ArticleViewComponent,
     ArticleListComponent,
@@ -53,8 +49,6 @@ import { DetailComponent as TagDetailComponent } from './tag/detail/detail.compo
       { path: 'category/detail/:id', component: CategoryDetailComponent },
       { path: 'tag/list', component: TagListComponent },
       { path: 'tag/detail/:id', component: TagDetailComponent },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
     ]),
   ],
   providers: [],
