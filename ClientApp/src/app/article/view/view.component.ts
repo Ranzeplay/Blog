@@ -1,6 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { marked } from 'marked';
-import * as jQuery from 'jquery';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -43,41 +42,46 @@ export class ArticleViewComponent implements OnInit {
   }
 
   private updateStyles() {
-    jQuery('h1', '#article-content').toggleClass('text-6xl font-semibold mt-4');
-    jQuery('h2', '#article-content').toggleClass('text-5xl font-semibold mt-3');
-    jQuery('h3', '#article-content').toggleClass('text-4xl font-semibold mt-3');
-    jQuery('h4', '#article-content').toggleClass('text-3xl font-semibold mt-2');
-    jQuery('h5', '#article-content').toggleClass('text-2xl font-semibold mt-1');
-    jQuery('h6', '#article-content').toggleClass('text-xl font-semibold mt-1');
+    var container = document.getElementById('article-content')!;
 
-    jQuery('ul', '#article-content').toggleClass('ml-4 list-disc');
-    jQuery('ol', '#article-content').toggleClass('ml-4 list-decimal');
+    container?.querySelectorAll('h1').forEach((e) => e.className = 'text-6xl font-semibold mt-4');
+    container?.querySelectorAll('h2').forEach((e) => e.className = 'text-5xl font-semibold mt-3');
+    container?.querySelectorAll('h3').forEach((e) => e.className = 'text-4xl font-semibold mt-3');
+    container?.querySelectorAll('h4').forEach((e) => e.className = 'text-3xl font-semibold mt-2');
+    container?.querySelectorAll('h5').forEach((e) => e.className = 'text-2xl font-semibold mt-1');
+    container?.querySelectorAll('h6').forEach((e) => e.className = 'text-xl font-semibold mt-1');
 
-    jQuery('p', '#article-content').toggleClass('mt-1');
+    container?.querySelectorAll('ul').forEach((e) => e.className = 'mt-1 ml-4 list-disc');
+    container?.querySelectorAll('ol').forEach((e) => e.className = 'mt-1 ml-4 list-decimal');
 
-    jQuery('a', '#article-content').toggleClass(
-      'font-medium text-blue-600 hover:underline'
-    );
+    container?.querySelectorAll('p').forEach((e) => e.className = 'mt-1');
 
-    jQuery('code', '#article-content').toggleClass('bg-gray-100 text-red');
+    container?.querySelectorAll('a').forEach((e) => e.className = 'font-medium text-blue-600 hover:underline');
 
-    jQuery('em', '#article-content').toggleClass('italic');
-    jQuery('strong', '#article-content').toggleClass('font-semibold');
+    container?.querySelectorAll('code').forEach((e) => e.className = 'bg-gray-100 text-red');
 
-    jQuery('blockquote', '#article-content').toggleClass(
-      'p-2 my-4 border-l-4 border-gray-300 bg-gray-50'
-    );
-    jQuery('blockquote > p', '#article-content').toggleClass(
-      'text-md italic font-medium leading-relaxed text-gray-900'
-    );
+    container?.querySelectorAll('em').forEach((e) => e.className = 'italic');
+    container?.querySelectorAll('strong').forEach((e) => e.className = 'font-semibold');
 
-    jQuery('img', '#article-content').each((_, element) => {
-      var img = element as HTMLImageElement;
+    container?.querySelectorAll('blockquote').forEach((e) => {
+      e.className = 'p-4 my-4 border-l-4 border-gray-300 bg-gray-50';
+
+      // Adjust child paragraph, not recursively
+      e.childNodes.forEach(c => {
+        if(c.nodeName === 'p') {
+          (c as HTMLParagraphElement).className = 'ml-3 border-l-4 border-gray-300 bg-gray-50';
+        }
+      })
+    });
+
+    container?.querySelectorAll('img').forEach((e) => {
+      e.className = 'mt-2 rounded-xl drop-shadow-lg border-2';
+
+      // Update URL
+      var img = e as HTMLImageElement;
       var imgUrl = new URL(img.src);
       var newUrl = this.baseUrl + '/Article/Asset/' + this.blogId + '/' + imgUrl.pathname.split('/').pop();
       img.src = newUrl;
-
-	  jQuery(element).toggleClass('mt-2 rounded-xl drop-shadow-lg border-2');
     });
   }
 }
