@@ -11,7 +11,7 @@ namespace Blog
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllers();
 
             builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
@@ -49,7 +49,9 @@ namespace Blog
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller}/{action=Index}/{id?}");
+
+            app.MapFallbackToFile("index.html");
 
             app.Run();
         }

@@ -8,7 +8,7 @@ export function getBaseUrl() {
   if (isDevMode()) {
     return 'https://localhost:5001';
   } else {
-    return 'https://api.ranzeplay.me';
+    return 'https://ranzeplay.me';
   }
 }
 

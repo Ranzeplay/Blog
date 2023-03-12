@@ -8,12 +8,10 @@ namespace Blog.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly AppSettings _appSettings;
         private readonly ArticleManager _articleManager;
 
-        public CategoryController(IOptions<AppSettings> options, ArticleManager articleManager)
+        public CategoryController(ArticleManager articleManager)
         {
-            _appSettings = options.Value;
             _articleManager = articleManager;
         }
 
