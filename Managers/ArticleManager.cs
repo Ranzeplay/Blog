@@ -130,5 +130,24 @@ namespace Blog.Managers
         {
             return IndexedArticles.Where(a => a.Tags != null && a.Tags.Contains(name));
         }
+
+        /// <summary>
+        /// Get file path of an asset
+        /// </summary>
+        /// <param name="articleId">The Id of the article</param>
+        /// <param name="assetName">The name of the asset</param>
+        /// <returns>Return null if the asset doesn't found</returns>
+        public string? GetAssetPath(string articleId, string assetName)
+        {
+            var targetArticleDirectory = Path.Combine(_articleDirectory, articleId);
+            var articleAssetDirectory = Path.Combine(targetArticleDirectory, "Assets");
+            var assetFile = Path.Combine(articleAssetDirectory, assetName);
+            if (!File.Exists(assetFile))
+            {
+                return null;
+            }
+
+            return assetFile;
+        }
     }
 }

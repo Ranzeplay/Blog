@@ -2,10 +2,13 @@
 using Blog.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Options;
 
 namespace Blog.Controllers
 {
+    [Route("Article")]
     public class ArticleController : Controller
     {
         private readonly AppSettings _appSettings;
@@ -19,7 +22,7 @@ namespace Blog.Controllers
             _articleManager = articleManager;
         }
 
-        [HttpGet]
+        [HttpGet("Read/{id}")]
         public IActionResult Read([FromRoute] string id)
         {
             var targetArticleDirectory = Path.Combine(_articleDirectory, id);
@@ -41,11 +44,31 @@ namespace Blog.Controllers
             return Json(model);
         }
 
-        [HttpGet]
-        public IActionResult List(string? query)
+        [HttpGet("List/{query}")]
+        [HttpGet("List")]
+        public IActionResult List(string? query) 
         {
             var articles = _articleManager.GetArticleMetadata();
             return Json(articles);
+        }
+
+        [HttpGet("Asset/{id}/{path}")]
+        public IActionResult Asset([FromRoute] string id, [FromRoute] string path)
+        {
+            var assetPath = _articleManager.GetAssetPath(id, path);
+            if(assetPath != null)
+            {
+                new FileExtensionContentTypeProvider().TryGetContentType(assetPath, out var contentType);
+
+                if(contentType != null)
+                {
+                    var content = System.IO.File.ReadAllBytes(assetPath);
+
+                    return File(content, contentType);
+                }
+            }
+
+            return NotFound("Coudn't acquire the requested asset!");
         }
     }
 }
