@@ -2,8 +2,8 @@
 {
     public class TagIndexViewModel
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public long Count { get; set; }
+        public long Count { get; set; } = 0;
     }
 }
