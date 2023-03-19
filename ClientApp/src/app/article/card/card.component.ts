@@ -7,5 +7,5 @@ import { ArticleMetadata } from 'src/app/models/articleMetadata';
   styleUrls: ['./card.component.css'],
 })
 export class ArticleCardComponent {
-  @Input() metadata!: ArticleMetadata;
+  @Input() metadata: ArticleMetadata = ArticleMetadata.newEmpty();
 }

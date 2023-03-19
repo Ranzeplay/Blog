@@ -1,38 +1,29 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { TagDetail } from 'src/app/models/tagDetail';
+import { TagService } from 'src/app/services/tag.service';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.css']
+  styleUrls: ['./detail.component.css'],
 })
 export class DetailComponent {
-  tagName: string;
-  routeSubscription!: Subscription;
-  content!: TagDetail;
+  tagName: string = '';
+  content: TagDetail = TagDetail.newEmpty();
 
   constructor(
     public route: ActivatedRoute,
-    private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string
-  ) {
-    this.tagName = '';
-  }
+    private tagService: TagService
+  ) {}
 
   ngOnInit(): void {
-    this.routeSubscription = this.route.params.subscribe((params) => {
+    this.route.params.subscribe((params) => {
       this.tagName = params['id'];
 
-      this.http.get<TagDetail>(this.baseUrl + '/Tag/Detail/' + this.tagName).subscribe(val => {
+      this.tagService.getTag(this.tagName).subscribe((val) => {
         this.content = val;
       });
     });
-  }
-
-  ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
   }
 }

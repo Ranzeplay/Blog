@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArticleMetadata } from 'src/app/models/articleMetadata';
+import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
   selector: 'app-article-list',
@@ -8,23 +8,20 @@ import { ArticleMetadata } from 'src/app/models/articleMetadata';
   styleUrls: ['./list.component.css'],
 })
 export class ArticleListComponent implements OnInit {
-  articles!: ArticleMetadata[];
+  articles: ArticleMetadata[] = [];
   query: string = '';
 
-  shownArticles!: ArticleMetadata[];
+  shownArticles: ArticleMetadata[] = [];
 
   constructor(
-    private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string
+    private articleService: ArticleService
   ) {}
 
   ngOnInit(): void {
-    this.http
-      .get<ArticleMetadata[]>(this.baseUrl + '/Article/List/')
-      .subscribe((val) => {
-        this.articles = val;
-        this.shownArticles = this.articles;
-      });
+    this.articleService.indexArticles().subscribe((val) => {
+      this.articles = val;
+      this.shownArticles = this.articles;
+    });
   }
 
   public queryArticles(query: string) {

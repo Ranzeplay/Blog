@@ -2,6 +2,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { CategoryIndex } from 'src/app/models/categoryIndex';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-category-list',
@@ -13,17 +14,11 @@ export class CategoryListComponent implements OnInit {
 
   arrowRight = faArrowRight;
 
-  constructor(
-    private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string
-  ) {}
+  constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.http
-      .get<CategoryIndex[]>(this.baseUrl + '/Category/List/')
-      .subscribe((val) => {
-        this.categories = val;
-      });
-
+    this.categoryService.indexCategories().subscribe((val) => {
+      this.categories = val;
+    });
   }
 }

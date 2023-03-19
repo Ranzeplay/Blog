@@ -6,4 +6,8 @@ export class ArticleMetadata {
     public category: string,
     public tags: string[]
   ) {}
+
+  public static newEmpty(): ArticleMetadata {
+    return new ArticleMetadata('', '', new Date(), '', []);
+  }
 }

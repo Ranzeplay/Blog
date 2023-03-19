@@ -2,6 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { marked } from 'marked';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
   selector: 'app-article-view',
@@ -9,28 +10,24 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./view.component.css'],
 })
 export class ArticleViewComponent implements OnInit {
-  @Input() markdown: string = '';
+  @Input() articleId: string = '';
 
-  routeSubscription: Subscription;
-  blogId: string;
+  markdown: string = '';
 
   constructor(
-    public route: ActivatedRoute,
-    @Inject('BASE_URL') private baseUrl: string
-  ) {
-    this.blogId = '';
-    this.routeSubscription = new Subscription();
-  }
+    @Inject('BASE_URL') private baseUrl: string,
+    private articleService: ArticleService
+  ) {}
 
   ngOnInit(): void {
     // console.log(this.markdown);
-    this.applyRawMarkdown();
 
-    this.routeSubscription = this.route.params.subscribe((params) => {
-      this.blogId = params['id'];
+    this.articleService.getArticle(this.articleId).subscribe(article => {
+      this.markdown = article.content;
 
+      this.applyRawMarkdown();
       this.updateStyles();
-    });
+    })
   }
 
   private applyRawMarkdown() {
@@ -80,7 +77,7 @@ export class ArticleViewComponent implements OnInit {
       // Update URL
       var img = e as HTMLImageElement;
       var imgUrl = new URL(img.src);
-      var newUrl = this.baseUrl + '/Article/Asset/' + this.blogId + '/' + imgUrl.pathname.split('/').pop();
+      var newUrl = this.baseUrl + '/Article/Asset/' + this.articleId + '/' + imgUrl.pathname.split('/').pop();
       img.src = newUrl;
     });
   }

@@ -18,6 +18,9 @@ import { DetailComponent as CategoryDetailComponent } from './category/detail/de
 import { ListComponent as TagListComponent } from './tag/list/list.component';
 import { DetailComponent as TagDetailComponent } from './tag/detail/detail.component';
 import { NgxScrollTopModule } from 'ngx-scrolltop';
+import { ArticleService } from './services/article.service';
+import { CategoryService } from './services/category.service';
+import { TagService } from './services/tag.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,7 @@ import { NgxScrollTopModule } from 'ngx-scrolltop';
     ]),
     NgxScrollTopModule,
   ],
-  providers: [],
+  providers: [ArticleService, CategoryService, TagService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
