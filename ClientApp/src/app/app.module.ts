@@ -21,6 +21,7 @@ import { NgxScrollTopModule } from 'ngx-scrolltop';
 import { ArticleService } from './services/article.service';
 import { CategoryService } from './services/category.service';
 import { TagService } from './services/tag.service';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { TagService } from './services/tag.service';
     CategoryDetailComponent,
     TagListComponent,
     TagDetailComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,9 +1,10 @@
 <body>
   <app-nav-menu></app-nav-menu>
-  <main class="w-2/3 m-auto relative">
+  <main class="w-2/3 m-auto flex flex-col min-h-screen">
     <div ngxScrollTop class="{{ bttClassList }}">
       <fa-icon [icon]="arrowUp"></fa-icon>
     </div>
     <router-outlet></router-outlet>
   </main>
+  <app-footer></app-footer>
 </body>
