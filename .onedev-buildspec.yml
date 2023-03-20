@@ -1,0 +1,35 @@
+version: 18
+jobs:
+- name: CI
+  jobExecutor: Local
+  steps:
+  - !CheckoutStep
+    name: Checkout
+    cloneCredential: !DefaultCredential {}
+    withLfs: true
+    withSubmodules: true
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !CommandStep
+    name: Restore project
+    runInContainer: false
+    interpreter: !DefaultInterpreter
+      commands:
+      - dotnet restore
+    useTTY: false
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !CommandStep
+    name: Build release
+    runInContainer: false
+    interpreter: !DefaultInterpreter
+      commands:
+      - dotnet release
+    useTTY: false
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  triggers:
+  - !BranchUpdateTrigger {}
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  cpuRequirement: 250
+  memoryRequirement: 256
+  timeout: 3600
