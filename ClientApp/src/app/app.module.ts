@@ -22,6 +22,11 @@ import { ArticleService } from './services/article.service';
 import { CategoryService } from './services/category.service';
 import { TagService } from './services/tag.service';
 import { FooterComponent } from './footer/footer.component';
+import { ListComponent as PageListComponent } from './page/list/list.component';
+import { PageService } from './services/page.service';
+import { PageCardComponent } from './page/card/card.component';
+import { PageReadComponent } from './page/read/read.component';
+import { PageViewComponent } from './page/view/view.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +42,10 @@ import { FooterComponent } from './footer/footer.component';
     TagListComponent,
     TagDetailComponent,
     FooterComponent,
+    PageListComponent,
+    PageCardComponent,
+    PageReadComponent,
+    PageViewComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -53,10 +62,12 @@ import { FooterComponent } from './footer/footer.component';
       { path: 'category/detail/:id', component: CategoryDetailComponent },
       { path: 'tag/list', component: TagListComponent },
       { path: 'tag/detail/:id', component: TagDetailComponent },
+      { path: 'page/list', component: PageListComponent },
+      { path: 'page/read/:id', component: PageReadComponent },
     ]),
     NgxScrollTopModule,
   ],
-  providers: [ArticleService, CategoryService, TagService],
+  providers: [ArticleService, CategoryService, TagService, PageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

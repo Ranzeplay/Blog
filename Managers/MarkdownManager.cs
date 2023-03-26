@@ -1,4 +1,5 @@
 ﻿using Blog.Models.Article;
+using Blog.Models.Page;
 using Markdig;
 using Markdig.Extensions.Yaml;
 using Markdig.Syntax;
@@ -58,7 +59,7 @@ namespace Blog.Managers
             return metadata;
         }
 
-        public static Models.API.ArticleViewModel? ParseOriginalMarkdown(string text)
+        public static Models.API.ArticleViewModel? ParseOriginalArticleMarkdown(string text)
         {
             var pipeline = new MarkdownPipelineBuilder()
                .UseAdvancedExtensions()
@@ -70,6 +71,80 @@ namespace Blog.Managers
 
             // Parse metadata
             var metadata = ParseArticleMetadata(text);
+            if (metadata != null)
+            {
+                var yamlBlock = document.Descendants<YamlFrontMatterBlock>().FirstOrDefault();
+                if (yamlBlock != null)
+                {
+                    string yaml = text.Substring(yamlBlock.Span.Start, yamlBlock.Span.Length);
+                    text = text[yaml.Length..];
+                }
+
+                return new()
+                {
+                    Content = text,
+                    Metadata = metadata
+                };
+            }
+
+            return null;
+        }
+
+        public static PageViewModel? ParsePageFile(string text)
+        {
+            var pipeline = new MarkdownPipelineBuilder()
+                .UseAdvancedExtensions()
+                .UseYamlFrontMatter()
+                .UseBootstrap()
+                .Build();
+
+            var document = Markdown.Parse(text, pipeline);
+
+            // Parse metadata
+            var metadata = ParsePageMetadata(text);
+            if (metadata != null)
+            {
+                // Parse content
+                var html = Markdown.ToHtml(document, pipeline);
+
+                return new()
+                {
+                    HtmlContent = html,
+                    Metadata = metadata
+                };
+            }
+
+            return null;
+        }
+
+        public static PageMetadata? ParsePageMetadata(string text)
+        {
+            var input = new StringReader(text);
+            var yamlDeserializer = new DeserializerBuilder()
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                .Build();
+
+            var parser = new Parser(input);
+            parser.Consume<StreamStart>();
+            parser.Consume<DocumentStart>();
+            var metadata = yamlDeserializer.Deserialize<PageMetadata>(parser);
+            parser.Consume<DocumentEnd>();
+
+            return metadata;
+        }
+
+        public static Models.API.PageViewModel? ParseOriginalPageMarkdown(string text)
+        {
+            var pipeline = new MarkdownPipelineBuilder()
+               .UseAdvancedExtensions()
+               .UseYamlFrontMatter()
+               .UseBootstrap()
+               .Build();
+
+            var document = Markdown.Parse(text, pipeline);
+
+            // Parse metadata
+            var metadata = ParsePageMetadata(text);
             if (metadata != null)
             {
                 var yamlBlock = document.Descendants<YamlFrontMatterBlock>().FirstOrDefault();

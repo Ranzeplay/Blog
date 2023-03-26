@@ -1,0 +1,11 @@
+<div class="mt-4 mb-4">
+  <div class="shadow-xl m-auto rounded-xl p-8">
+    <div class="mb-4">
+      <h1 class="text-6xl font-serif font-extrabold">Pages</h1>
+    </div>
+
+    <div class="mt-4">
+      <app-page-card [metadata]="item" *ngFor="let item of pages"></app-page-card>
+    </div>
+  </div>
+</div>

@@ -17,6 +17,7 @@ namespace Blog
 
             // Configure services
             builder.Services.AddSingleton<ArticleManager>();
+            builder.Services.AddSingleton<PageManager>();
 
             // CORS settings
             builder.Services.AddCors(options =>

@@ -8,38 +8,44 @@ using Microsoft.Extensions.Options;
 
 namespace Blog.Controllers
 {
-    [Route("Article")]
-    public class ArticleController : Controller
+    [Route("Page")]
+    public class PageController : Controller
     {
         private readonly AppSettings _appSettings;
-        private readonly string _articleDirectory;
-        private readonly ArticleManager _articleManager;
+        private readonly string _pageDirectory;
+        private readonly PageManager _pageManager;
 
-        public ArticleController(IOptions<AppSettings> options, ArticleManager articleManager)
+        public PageController(IOptions<AppSettings> options, PageManager pageManagers)
         {
             _appSettings = options.Value;
-            _articleDirectory = Path.Combine(Environment.CurrentDirectory, _appSettings.BlogStorageRootDirectory, "Articles");
-            _articleManager = articleManager;
+            _pageDirectory = Path.Combine(Environment.CurrentDirectory, _appSettings.BlogStorageRootDirectory, "Pages");
+            _pageManager = pageManagers;
         }
 
         [HttpGet("Read/{id}")]
         public IActionResult Read([FromRoute] string id)
         {
-            var targetArticleDirectory = Path.Combine(_articleDirectory, id);
-            if (!Directory.Exists(targetArticleDirectory))
+            // Add home page exception
+            if(id == "{{ home }}")
             {
-                return NotFound("Article doesn't exist");
+                id = _appSettings.HomePageId!;
             }
 
-            var articleFilePath = Path.Combine(targetArticleDirectory, "text.md");
-            if (!System.IO.File.Exists(articleFilePath))
+            var targetPageDirectory = Path.Combine(_pageDirectory, id);
+            if (!Directory.Exists(targetPageDirectory))
             {
-                return NotFound("Article not found, please contact website operator.");
+                return NotFound("Page doesn't exist");
             }
 
-            var text = System.IO.File.ReadAllText(articleFilePath);
+            var pageFilePath = Path.Combine(targetPageDirectory, "text.md");
+            if (!System.IO.File.Exists(pageFilePath))
+            {
+                return NotFound("Page not found, please contact website operator.");
+            }
 
-            var model = MarkdownManager.ParseOriginalArticleMarkdown(text);
+            var text = System.IO.File.ReadAllText(pageFilePath);
+
+            var model = MarkdownManager.ParseOriginalPageMarkdown(text);
 
             return Json(model);
         }
@@ -48,14 +54,14 @@ namespace Blog.Controllers
         [HttpGet("List")]
         public IActionResult List(string? query) 
         {
-            var articles = _articleManager.GetArticleMetadata();
-            return Json(articles);
+            var pages = _pageManager.GetPageMetadata();
+            return Json(pages);
         }
 
         [HttpGet("Asset/{id}/{path}")]
         public IActionResult Asset([FromRoute] string id, [FromRoute] string path)
         {
-            var assetPath = _articleManager.GetAssetPath(id, path);
+            var assetPath = _pageManager.GetAssetPath(id, path);
             if(assetPath != null)
             {
                 new FileExtensionContentTypeProvider().TryGetContentType(assetPath, out var contentType);
