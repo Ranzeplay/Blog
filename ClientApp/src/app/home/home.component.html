@@ -1,3 +1,21 @@
-<div class="mt-8">
-  <app-page-view [pageId]="homePageId"></app-page-view>
+<div class="mt-8 shadow-sm rounded-xl border border-gray-200 p-4">
+  <div class="m-4">
+    <app-page-view [pageId]="homePageId"></app-page-view>
+  </div>
+</div>
+<div class="grid grid-cols-3 mt-4">
+  <div class="col-span-2 shadow-sm rounded-xl border border-gray-200 mr-1 p-4">
+    <h3 class="text-3xl font-serif font-semibold">Latest articles</h3>
+    <div class="mt-2 border-t border-gray-500 pt-2" *ngFor="let article of latestArticles">
+      <a class="text-md font-semibold hover:underline text-black" [routerLink]="['/article/read', article.articleId]">{{ article.title }}</a>
+      <h5 class="font-monospace text-gray-600 font-thin text-sm">{{ article.time }}</h5>
+    </div>
+  </div>
+  <div class="col-span-1 shadow-sm rounded-xl border border-gray-200 ml-1 p-4">
+    <h3 class="text-3xl font-serif font-semibold">Categories</h3>
+    <div class="mt-2 border-t border-gray-500 pt-2" *ngFor="let category of categories">
+      <a class="text-md font-semibold hover:underline text-black" [routerLink]="['/category/detail', category.name]">{{ category.name }}</a>
+      <h5 class="font-monospace text-gray-600 font-thin text-sm">Containing {{ category.count }} article(s)</h5>
+    </div>
+  </div>
 </div>
