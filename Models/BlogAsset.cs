@@ -21,6 +21,8 @@ namespace Blog.Models
                 ContentType = contentType!;
 
                 Content = File.ReadAllBytes(filePath);
+
+                return;
             }
             
             throw new FileNotFoundException($"Coudn't acquire the requested asset \"{filePath}\"");

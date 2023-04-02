@@ -3,6 +3,7 @@ using Blog.Models.Article;
 using Blog.Models.Category;
 using Blog.Models.Page;
 using Blog.Models.Tag;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
 namespace Blog.Managers
@@ -10,12 +11,16 @@ namespace Blog.Managers
     public class PageManager
     {
         private readonly string _pageDirectory;
+        private readonly IMemoryCache _memoryCache;
+        private readonly ILogger _logger;
         private IEnumerable<PageMetadataViewModel> IndexedPages { get; set; }
 
-        public PageManager(IOptions<AppSettings> options)
+        public PageManager(IOptions<AppSettings> options, IMemoryCache memoryCache, ILogger<ArticleManager> logger)
         {
             _pageDirectory = Path.Combine(Environment.CurrentDirectory, options.Value.BlogStorageRootDirectory, "Pages");
             IndexedPages = Array.Empty<PageMetadataViewModel>();
+            _memoryCache = memoryCache;
+            _logger = logger;
 
             IndexPages();
         }
@@ -74,10 +79,22 @@ namespace Blog.Managers
 
         public BlogAsset? GetAsset(string articleId, string assetName)
         {
-            var path = GetAssetPath(articleId, assetName);
-            if (File.Exists(path))
+            var key = $"{articleId}.{assetName}";
+            if (_memoryCache.TryGetValue<BlogAsset>(key, out var asset))
             {
-                return new(path);
+                return asset;
+            }
+            else
+            {
+                var path = GetAssetPath(articleId, assetName);
+                if (File.Exists(path))
+                {
+                    var item = new BlogAsset(path);
+                    _memoryCache.Set(key, item, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(2)));
+                    _logger.LogInformation($"Cached asset in article, whose id is {key}");
+
+                    return item;
+                }
             }
 
             return null;

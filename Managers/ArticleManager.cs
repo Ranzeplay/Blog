@@ -1,7 +1,9 @@
-﻿using Blog.Models;
+﻿using Blog.Controllers;
+using Blog.Models;
 using Blog.Models.Article;
 using Blog.Models.Category;
 using Blog.Models.Tag;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
 namespace Blog.Managers
@@ -9,12 +11,16 @@ namespace Blog.Managers
     public class ArticleManager
     {
         private readonly string _articleDirectory;
+        private readonly IMemoryCache _memoryCache;
+        private readonly ILogger _logger;
         private IEnumerable<ArticleMetadataViewModel> IndexedArticles { get; set; }
 
-        public ArticleManager(IOptions<AppSettings> options)
+        public ArticleManager(IOptions<AppSettings> options, IMemoryCache memoryCache, ILogger<ArticleManager> logger)
         {
             _articleDirectory = Path.Combine(Environment.CurrentDirectory, options.Value.BlogStorageRootDirectory, "Articles");
             IndexedArticles = Array.Empty<ArticleMetadataViewModel>();
+            _memoryCache = memoryCache;
+            _logger = logger;
 
             IndexArticles();
         }
@@ -136,12 +142,24 @@ namespace Blog.Managers
             return assetFile;
         }
 
-        public BlogAsset? GetAsset(string articleId, string assetName)
+        public BlogAsset? GetAsset(string pageId, string assetName)
         {
-            var path = GetAssetPath(articleId, assetName);
-            if (File.Exists(path))
+            var key = $"{pageId}.{assetName}";
+            if (_memoryCache.TryGetValue<BlogAsset>(key, out var asset))
             {
-                return new(path);
+                return asset;
+            }
+            else
+            {
+                var path = GetAssetPath(pageId, assetName);
+                if (File.Exists(path))
+                {
+                    var item = new BlogAsset(path);
+                    _memoryCache.Set(key, item, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(2)));
+                    _logger.LogInformation($"Cache asset in page, whose id is {key}");
+
+                    return item;
+                }
             }
 
             return null;
