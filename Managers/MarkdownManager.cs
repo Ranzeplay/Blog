@@ -8,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using System.Reflection.Metadata;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
-using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -16,12 +15,27 @@ namespace Blog.Managers
 {
     public class MarkdownManager
     {
+        public static T? ParseMarkdownMetadata<T>(string text)
+        {
+            var input = new StringReader(text);
+            var yamlDeserializer = new DeserializerBuilder()
+                .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                .Build();
+
+            var parser = new Parser(input);
+            parser.Consume<StreamStart>();
+            parser.Consume<DocumentStart>();
+            var metadata = yamlDeserializer.Deserialize<T>(parser);
+            parser.Consume<DocumentEnd>();
+
+            return metadata;
+        }
+
         public static ArticleViewModel? ParseOriginalArticleMarkdown(string text)
         {
             var pipeline = new MarkdownPipelineBuilder()
                .UseAdvancedExtensions()
                .UseYamlFrontMatter()
-               .UseBootstrap()
                .Build();
 
             var document = Markdown.Parse(text, pipeline);
@@ -45,22 +59,6 @@ namespace Blog.Managers
             }
 
             return null;
-        }
-
-        public static T? ParseMarkdownMetadata<T>(string text)
-        {
-            var input = new StringReader(text);
-            var yamlDeserializer = new DeserializerBuilder()
-                .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                .Build();
-
-            var parser = new Parser(input);
-            parser.Consume<StreamStart>();
-            parser.Consume<DocumentStart>();
-            var metadata = yamlDeserializer.Deserialize<T>(parser);
-            parser.Consume<DocumentEnd>();
-
-            return metadata;
         }
 
         public static PageViewModel? ParseOriginalPageMarkdown(string text)

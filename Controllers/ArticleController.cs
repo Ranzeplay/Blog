@@ -55,17 +55,10 @@ namespace Blog.Controllers
         [HttpGet("Asset/{id}/{path}")]
         public IActionResult Asset([FromRoute] string id, [FromRoute] string path)
         {
-            var assetPath = _articleManager.GetAssetPath(id, path);
-            if(assetPath != null)
+            var asset = _articleManager.GetAsset(id, path);
+            if (asset != null)
             {
-                new FileExtensionContentTypeProvider().TryGetContentType(assetPath, out var contentType);
-
-                if(contentType != null)
-                {
-                    var content = System.IO.File.ReadAllBytes(assetPath);
-
-                    return File(content, contentType);
-                }
+                return File(asset.Content, asset.ContentType);
             }
 
             return NotFound("Coudn't acquire the requested asset!");

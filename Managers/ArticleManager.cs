@@ -135,5 +135,16 @@ namespace Blog.Managers
 
             return assetFile;
         }
+
+        public BlogAsset? GetAsset(string articleId, string assetName)
+        {
+            var path = GetAssetPath(articleId, assetName);
+            if (File.Exists(path))
+            {
+                return new(path);
+            }
+
+            return null;
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace Blog.Controllers
         public IActionResult Read([FromRoute] string id)
         {
             // Add home page exception
-            if(id == "{{ home }}")
+            if (id == "{{ home }}")
             {
                 id = _appSettings.HomePageId!;
             }
@@ -52,7 +52,7 @@ namespace Blog.Controllers
 
         [HttpGet("List/{query}")]
         [HttpGet("List")]
-        public IActionResult List(string? query) 
+        public IActionResult List(string? query)
         {
             var pages = _pageManager.GetPageMetadata();
             return Json(pages);
@@ -61,17 +61,10 @@ namespace Blog.Controllers
         [HttpGet("Asset/{id}/{path}")]
         public IActionResult Asset([FromRoute] string id, [FromRoute] string path)
         {
-            var assetPath = _pageManager.GetAssetPath(id, path);
-            if(assetPath != null)
+            var asset = _pageManager.GetAsset(id, path);
+            if (asset != null)
             {
-                new FileExtensionContentTypeProvider().TryGetContentType(assetPath, out var contentType);
-
-                if(contentType != null)
-                {
-                    var content = System.IO.File.ReadAllBytes(assetPath);
-
-                    return File(content, contentType);
-                }
+                return File(asset.Content, asset.ContentType);
             }
 
             return NotFound("Coudn't acquire the requested asset!");
