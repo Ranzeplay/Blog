@@ -4,6 +4,6 @@
     {
         public PageMetadata? Metadata { get; set; }
 
-        public string? HtmlContent { get; set; }
+        public string? Content { get; set; }
     }
 }

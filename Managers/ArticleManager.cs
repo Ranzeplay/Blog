@@ -26,9 +26,9 @@ namespace Blog.Managers
             foreach (var articleDirectory in Directory.GetDirectories(_articleDirectory))
             {
                 var file = Path.Combine(articleDirectory, "text.md");
-                var text = System.IO.File.ReadAllText(file);
+                var text = File.ReadAllText(file);
 
-                var metadata = MarkdownManager.ParseArticleMetadata(text);
+                var metadata = MarkdownManager.ParseMarkdownMetadata<ArticleMetadata>(text);
                 if (metadata != null)
                 {
                     result.Add(new()
@@ -52,20 +52,6 @@ namespace Blog.Managers
                 -1 => IndexedArticles,
                 _ => IndexedArticles.TakeLast(maxCount)
             };
-        }
-
-        public ArticleViewModel? GetArticle(string id)
-        {
-            var targetArticleDirectory = Path.Combine(_articleDirectory, id);
-            var articleFilePath = Path.Combine(targetArticleDirectory, "text.md");
-            if (!File.Exists(articleFilePath))
-            {
-                return null;
-            }
-
-            var text = File.ReadAllText(articleFilePath);
-            var article = MarkdownManager.ParseArticleFile(text);
-            return article;
         }
 
         public IEnumerable<CategoryIndexViewModel> GetCategoriesWithCount()

@@ -29,7 +29,7 @@ namespace Blog.Managers
                 var file = Path.Combine(pageDirectory, "text.md");
                 var text = File.ReadAllText(file);
 
-                var metadata = MarkdownManager.ParsePageMetadata(text);
+                var metadata = MarkdownManager.ParseMarkdownMetadata<PageMetadata>(text);
                 if (metadata != null)
                 {
                     result.Add(new()
@@ -51,20 +51,6 @@ namespace Blog.Managers
                 -1 => IndexedPages,
                 _ => IndexedPages.TakeLast(maxCount)
             };
-        }
-
-        public PageViewModel? GetPage(string id)
-        {
-            var targetPageDirectory = Path.Combine(_pageDirectory, id);
-            var pageFilePath = Path.Combine(targetPageDirectory, "text.md");
-            if (!File.Exists(pageFilePath))
-            {
-                return null;
-            }
-
-            var text = File.ReadAllText(pageFilePath);
-            var page = MarkdownManager.ParsePageFile(text);
-            return page;
         }
 
         /// <summary>

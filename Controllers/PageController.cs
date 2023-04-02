@@ -15,11 +15,11 @@ namespace Blog.Controllers
         private readonly string _pageDirectory;
         private readonly PageManager _pageManager;
 
-        public PageController(IOptions<AppSettings> options, PageManager pageManagers)
+        public PageController(IOptions<AppSettings> options, PageManager pageManager)
         {
             _appSettings = options.Value;
             _pageDirectory = Path.Combine(Environment.CurrentDirectory, _appSettings.BlogStorageRootDirectory, "Pages");
-            _pageManager = pageManagers;
+            _pageManager = pageManager;
         }
 
         [HttpGet("Read/{id}")]
