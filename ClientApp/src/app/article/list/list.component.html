@@ -1,12 +1,12 @@
-<div class="mt-4 mb-4">
-  <div class="shadow-xl m-auto rounded-xl p-8">
+<div class="blog-container">
+  <div class="blog-container-inner">
     <div class="mb-4">
-      <h1 class="text-6xl font-serif font-extrabold">Articles</h1>
+      <h1 class="blog-header">Articles</h1>
     </div>
 
-    <div class="mb-6">
+    <div class="searchbox">
       <input type="text" id="search-input" placeholder="Search for articles..." [(ngModel)]="query" (change)="queryArticles(query)"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        class="searchbox-input">
     </div>
 
     <div class="mt-4">

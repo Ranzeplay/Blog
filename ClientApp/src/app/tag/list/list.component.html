@@ -1,7 +1,7 @@
-<div class="mt-4 mb-4">
-  <div class="shadow-xl m-auto rounded-xl p-8">
+<div class="blog-container">
+  <div class="blog-container-inner">
     <div class="mb-4">
-      <h1 class="text-6xl font-serif font-extrabold">Tags</h1>
+      <h1 class="blog-title">Tags</h1>
     </div>
 
     <!-- <div class="mb-6">
@@ -10,13 +10,12 @@
     </div> -->
 
     <div class="mt-4">
-      <div class="grid grid-cols-2">
-        <div class="border-gray-300 border rounded-lg m-4 p-4" *ngFor="let tag of tags">
-          <a class="text-2xl font-semibold hover:underline text-black">{{ tag.name }}</a>
-          <h5 class="text-lg">{{ tag.count }} article(s)</h5>
+      <div class="tag-grid">
+        <div class="entry-container" *ngFor="let tag of tags">
+          <a class="entry-name">{{ tag.name }}</a>
+          <h5 class="entry-description">{{ tag.count }} article(s)</h5>
 
-          <a [routerLink]="['/tag/detail', tag.name]"
-            class="mt-2 inline-flex items-center px-3 py-1 text-sm font-medium text-center text-blue-700 bg-white border-blue-700 border rounded-lg">
+          <a [routerLink]="['/tag/detail', tag.name]" class="entry-link">
             View articles
             <fa-icon [icon]="arrowRight" class="ml-2"></fa-icon>
           </a>

@@ -4,21 +4,95 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.blog-card {
+  @apply mt-8 shadow-sm rounded-xl border border-gray-200 p-4
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.blog-container {
+  @apply mt-4 mb-4
 }
 
-code {
-  color: #e01a76;
+.blog-container-inner {
+  @apply shadow-xl m-auto rounded-xl p-8
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.blog-title {
+  @apply text-6xl font-serif font-extrabold
+}
+
+
+.searchbox {
+  @apply mb-6
+}
+
+.searchbox-input {
+  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+}
+
+.blog-header {
+  @apply text-6xl font-serif font-extrabold
+}
+
+.article-h1 {
+  @apply text-6xl font-semibold mt-4
+}
+
+.article-h2 {
+  @apply text-5xl font-semibold mt-3
+}
+
+.article-h3 {
+  @apply text-4xl font-semibold mt-3
+}
+
+.article-h4 {
+  @apply text-3xl font-semibold mt-2
+}
+
+.article-h5 {
+  @apply text-2xl font-semibold mt-1
+}
+
+.article-h6 {
+  @apply text-xl font-semibold mt-1
+}
+
+.article-ul {
+  @apply mt-1 ml-4 list-disc
+}
+
+.article-ol {
+  @apply mt-1 ml-4 list-decimal
+}
+
+.article-p {
+  @apply mt-1
+}
+
+.article-a {
+  @apply mt-1 text-blue-600 hover:underline
+}
+
+.article-code {
+  @apply bg-gray-100 text-red-800
+}
+
+.article-em {
+  @apply italic
+}
+
+.article-strong {
+  @apply font-semibold
+}
+
+.article-blockquote-outline {
+  @apply p-4 my-4 border-l-4 border-gray-300 bg-gray-50
+}
+
+.article-blockquote-p {
+  @apply ml-3 border-l-4 border-gray-300 bg-gray-50
+}
+
+.article-img {
+  @apply mt-2 rounded-xl drop-shadow-lg border-2
 }

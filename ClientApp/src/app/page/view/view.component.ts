@@ -37,38 +37,38 @@ export class PageViewComponent {
   private updateStyles() {
     var container = document.getElementById('page-content')!;
 
-    container?.querySelectorAll('h1').forEach((e) => e.className = 'text-6xl font-semibold mt-4');
-    container?.querySelectorAll('h2').forEach((e) => e.className = 'text-5xl font-semibold mt-3');
-    container?.querySelectorAll('h3').forEach((e) => e.className = 'text-4xl font-semibold mt-3');
-    container?.querySelectorAll('h4').forEach((e) => e.className = 'text-3xl font-semibold mt-2');
-    container?.querySelectorAll('h5').forEach((e) => e.className = 'text-2xl font-semibold mt-1');
-    container?.querySelectorAll('h6').forEach((e) => e.className = 'text-xl font-semibold mt-1');
+    container?.querySelectorAll('h1').forEach((e) => e.className = 'article-h1');
+    container?.querySelectorAll('h2').forEach((e) => e.className = 'article-h2');
+    container?.querySelectorAll('h3').forEach((e) => e.className = 'article-h3');
+    container?.querySelectorAll('h4').forEach((e) => e.className = 'article-h4');
+    container?.querySelectorAll('h5').forEach((e) => e.className = 'article-h5');
+    container?.querySelectorAll('h6').forEach((e) => e.className = 'article-h6');
 
-    container?.querySelectorAll('ul').forEach((e) => e.className = 'mt-1 ml-4 list-disc');
-    container?.querySelectorAll('ol').forEach((e) => e.className = 'mt-1 ml-4 list-decimal');
+    container?.querySelectorAll('ul').forEach((e) => e.className = 'article-ul');
+    container?.querySelectorAll('ol').forEach((e) => e.className = 'article-ol');
 
-    container?.querySelectorAll('p').forEach((e) => e.className = 'mt-1');
+    container?.querySelectorAll('p').forEach((e) => e.className = 'article-p');
 
-    container?.querySelectorAll('a').forEach((e) => e.className = 'font-medium text-blue-600 hover:underline');
+    container?.querySelectorAll('a').forEach((e) => e.className = 'article-a');
 
-    container?.querySelectorAll('code').forEach((e) => e.className = 'bg-gray-100 text-red');
+    container?.querySelectorAll('code').forEach((e) => e.className = 'article-code');
 
-    container?.querySelectorAll('em').forEach((e) => e.className = 'italic');
-    container?.querySelectorAll('strong').forEach((e) => e.className = 'font-semibold');
+    container?.querySelectorAll('em').forEach((e) => e.className = 'article-em');
+    container?.querySelectorAll('strong').forEach((e) => e.className = 'article-strong');
 
     container?.querySelectorAll('blockquote').forEach((e) => {
-      e.className = 'p-4 my-4 border-l-4 border-gray-300 bg-gray-50';
+      e.className = 'article-blockquote-outline';
 
       // Adjust child paragraph, not recursively
       e.childNodes.forEach(c => {
         if(c.nodeName === 'p') {
-          (c as HTMLParagraphElement).className = 'ml-3 border-l-4 border-gray-300 bg-gray-50';
+          (c as HTMLParagraphElement).className = 'article-blockquote-p';
         }
       })
     });
 
     container?.querySelectorAll('img').forEach((e) => {
-      e.className = 'mt-2 rounded-xl drop-shadow-lg border-2';
+      e.className = 'article-img';
 
       // Update URL
       var img = e as HTMLImageElement;

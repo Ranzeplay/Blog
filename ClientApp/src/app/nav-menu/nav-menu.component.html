@@ -1,15 +1,15 @@
 <header>
-  <div class="mt-4 mb-4">
-    <nav class="w-2/3 flex flex-wrap items-center justify-between py-3 shadow-md navbar m-auto rounded-xl">
-      <div class="container-fluid w-full flex flex-wrap items-center justify-between px-6">
+  <div class="blog-container">
+    <nav class="navbar">
+      <div class="navbar-container">
         <div class="container-fluid">
-          <a class="text-xl text-black font-serif font-bold mr-8" href="#">Blog</a>
+          <a class="site-name" href="#">Blog</a>
 
-          <a class="px-4 py-2 text-black" [routerLink]="['/home']">Home</a>
-          <a class="px-4 py-2 text-black" [routerLink]="['/category/list']">Categories</a>
-          <a class="px-4 py-2 text-black" [routerLink]="['/article/list']">Articles</a>
-          <a class="px-4 py-2 text-black" [routerLink]="['/tag/list']">Tags</a>
-          <a class="px-4 py-2 text-black" [routerLink]="['/page/list']">Pages</a>
+          <a class="site-entry" [routerLink]="['/home']">Home</a>
+          <a class="site-entry" [routerLink]="['/category/list']">Categories</a>
+          <a class="site-entry" [routerLink]="['/article/list']">Articles</a>
+          <a class="site-entry" [routerLink]="['/tag/list']">Tags</a>
+          <a class="site-entry" [routerLink]="['/page/list']">Pages</a>
         </div>
       </div>
     </nav>

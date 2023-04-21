@@ -1,0 +1,15 @@
+.time {
+  @apply font-mono text-gray-600 font-thin
+}
+
+.pill {
+  @apply flex p-1 m-2 col-span-2 row-span-1 rounded-lg border items-center
+}
+
+.pill-text {
+  @apply m-auto hover:underline
+}
+
+.pill-box {
+  @apply grid grid-rows-1 grid-cols-8 w-3/4
+}

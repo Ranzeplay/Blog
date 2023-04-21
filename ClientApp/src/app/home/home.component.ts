@@ -6,12 +6,12 @@ import { CategoryIndex } from '../models/categoryIndex';
 import { TagIndex } from '../models/tagIndex';
 import { ArticleService } from '../services/article.service';
 import { CategoryService } from '../services/category.service';
-import { PageService } from '../services/page.service';
 import { TagService } from '../services/tag.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   faGitHub = faGithub;

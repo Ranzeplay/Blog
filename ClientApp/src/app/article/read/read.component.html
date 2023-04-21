@@ -1,18 +1,18 @@
-<div class="mt-4 mb-4">
-  <div class="shadow-xl m-auto rounded-xl p-8">
+<div class="blog-container">
+  <div class="blog-container-inner">
     <div class="mb-4">
-      <h5 class="font-monospace">{{ content.metadata.time }}</h5>
-      <h1 class="text-6xl font-serif font-extrabold">{{ content.metadata.title }}</h1>
+      <h5 class="time">{{ content.metadata.time }}</h5>
+      <h1 class="blog-title">{{ content.metadata.title }}</h1>
     </div>
 
     <app-article-view [articleId]="articleId"></app-article-view>
 
-    <div class="grid grid-rows-1 grid-cols-8 w-3/4 mt-8">
-      <div class="flex p-1 mr-2 col-span-2 row-span-1 border-gray-800 rounded-lg text-gray-800 border items-center">
-        <a class="m-auto text-md text-black hover:underline" [routerLink]="['/category/detail', content.metadata.category]">{{ content.metadata.category }}</a>
+    <div class="pill-box mt-8">
+      <div class="pill border-gray-800 text-gray-800">
+        <a class="pill-text" [routerLink]="['/category/detail', content.metadata.category]">{{ content.metadata.category }}</a>
       </div>
-      <div class="flex p-1 mr-2 col-span-1 row-span-1 bg-gray-200 rounded-lg text-black items-center" *ngFor="let tag of content.metadata.tags">
-        <a class="m-auto text-sm text-black hover:underline" [routerLink]="['/tag/detail', tag]">{{ tag }}</a>
+      <div class="pill bg-gray-200 text-black" *ngFor="let tag of content.metadata.tags">
+        <a class="pill-text" [routerLink]="['/tag/detail', tag]">{{ tag }}</a>
       </div>
     </div>
   </div>

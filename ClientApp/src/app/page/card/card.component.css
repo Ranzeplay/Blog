@@ -1,0 +1,15 @@
+.container {
+  @apply mt-2 border-gray-700
+}
+
+.title {
+  @apply text-3xl font-semibold hover:underline text-black
+}
+
+.time {
+  @apply font-mono text-gray-600 font-thin
+}
+
+.break {
+  @apply h-px my-8 bg-gray-200 border-0
+}

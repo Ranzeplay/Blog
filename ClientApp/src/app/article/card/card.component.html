@@ -1,16 +1,16 @@
-<div class="mt-2 border-gray-700">
-  <a class="text-3xl font-semibold hover:underline text-black"
+<div class="container">
+  <a class="title"
     [routerLink]="['/article/read', metadata.articleId]">{{ metadata.title }}</a>
-  <h5 class="font-monospace text-gray-600 font-thin">{{ metadata.time }}</h5>
+  <h5 class="time">{{ metadata.time }}</h5>
 
-  <div class="grid grid-rows-1 grid-cols-8 w-3/4">
-    <div class="flex p-1 m-2 col-span-2 row-span-1 border-gray-800 rounded-lg text-gray-800 border items-center">
-      <a class="m-auto text-xl text-black hover:underline" [routerLink]="['/category/detail', metadata.category]">{{ metadata.category }}</a>
+  <div class="pill-box">
+    <div class="pill border-gray-800 text-gray-800">
+      <a class="pill-text text-xl text-black" [routerLink]="['/category/detail', metadata.category]">{{ metadata.category }}</a>
     </div>
-    <div class="flex p-1 m-2 col-span-1 row-span-1 bg-gray-200 rounded-lg text-black items-center" *ngFor="let tag of metadata.tags">
-      <a class="m-auto text-black hover:underline" [routerLink]="['/tag/detail', tag]">{{ tag }}</a>
+    <div class="pill bg-gray-200 text-black" *ngFor="let tag of metadata.tags">
+      <a class="pill-text text-black" [routerLink]="['/tag/detail', tag]">{{ tag }}</a>
     </div>
   </div>
 </div>
 
-<hr class="h-px my-8 bg-gray-200 border-0" />
+<hr class="break" />

@@ -1,0 +1,23 @@
+.blog-home-card {
+  @apply mt-8 shadow-sm rounded-xl border border-gray-200 p-4
+}
+
+.blog-home-widget {
+  @apply shadow-sm rounded-xl border border-gray-200 p-4
+}
+
+.blog-home-widget-header {
+  @apply text-3xl font-serif font-semibold
+}
+
+.blog-home-widget-list-container {
+  @apply mt-2 border-t border-gray-500 pt-2
+}
+
+.blog-home-widget-list-item-header {
+  @apply text-base font-semibold hover:underline text-black
+}
+
+.blog-home-widget-list-item-description {
+  @apply font-mono text-gray-600 font-thin text-sm
+}
