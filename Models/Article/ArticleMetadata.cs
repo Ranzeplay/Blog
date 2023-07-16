@@ -9,5 +9,7 @@
         public string? Category { get; set; }
 
         public string[]? Tags { get; set; }
+
+        public bool Draft { get; set; }
     }
 }

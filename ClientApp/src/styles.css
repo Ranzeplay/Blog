@@ -96,3 +96,30 @@
 .article-img {
   @apply mt-2 rounded-xl drop-shadow-lg border-2
 }
+
+@font-face {
+  font-family: NotoSerif;
+  src: url("assets/NotoSerifSC-Regular.otf") format("opentype");
+}
+
+.body-text {
+  font-family: NotoSerif;
+}
+
+@font-face {
+  font-family: MiSansDemiBold;
+  src: url("assets/MiSans-Demibold.ttf") format("truetype");
+}
+
+.title-text {
+  font-family: MiSansDemiBold;
+}
+
+@font-face {
+  font-family: MiSans;
+  src: url("assets/MiSans-Regular.ttf") format("truetype");
+}
+
+.menu-text {
+  font-family: MiSans;
+}
