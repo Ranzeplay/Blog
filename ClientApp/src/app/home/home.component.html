@@ -7,7 +7,7 @@
 <h3 class="mt-10 text-4xl font-serif font-bold mb-2">Latest articles</h3>
 <div class="grid grid-cols-3 grid-rows-1 gap-4">
   <app-blog-card *ngFor="let article of latestArticles" [title]="article.title"
-    [backgroundUrl]="'https://pic.mksucai.com/00/42/54/f76bfe111d2d5d7f.webp'" [category]="article.category"
+    [backgroundUrl]="'https://api.likepoems.com/img/pc'" [category]="article.category"
     [articleId]="article.articleId"></app-blog-card>
 </div>
 
