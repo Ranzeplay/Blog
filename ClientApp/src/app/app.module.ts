@@ -27,6 +27,7 @@ import { PageService } from './services/page.service';
 import { PageCardComponent } from './page/card/card.component';
 import { PageReadComponent } from './page/read/read.component';
 import { PageViewComponent } from './page/view/view.component';
+import { BlogCardComponent } from './components/blog-card/blog-card.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PageViewComponent } from './page/view/view.component';
     PageCardComponent,
     PageReadComponent,
     PageViewComponent,
+    BlogCardComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

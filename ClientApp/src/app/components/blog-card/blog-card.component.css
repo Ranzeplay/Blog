@@ -1,0 +1,10 @@
+.title {
+  font-family: NotoSerif;
+}
+
+.bg-image {
+  background-image: url("/assets/loading.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

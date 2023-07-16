@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.articleService.indexArticles().subscribe(articles => {
-      this.latestArticles = articles;
+      this.latestArticles = articles.slice(0, 5);
     });
 
     this.categoryService.indexCategories().subscribe(categories => {
