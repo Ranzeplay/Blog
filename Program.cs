@@ -1,5 +1,7 @@
+using Blog.Data;
 using Blog.Managers;
 using Blog.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Blog
@@ -20,6 +22,11 @@ namespace Blog
             builder.Services.AddSingleton<PageManager>();
 
             builder.Services.AddMemoryCache();
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlite(builder.Configuration.GetConnectionString("DatabaseConnection"));
+            });
 
             // CORS settings
             builder.Services.AddCors(options =>

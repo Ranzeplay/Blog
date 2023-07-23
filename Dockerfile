@@ -1,10 +1,12 @@
 # Adjust DOTNET_OS_VERSION as desired
-ARG DOTNET_OS_VERSION="-alpine"
+ARG OS_VERSION="-alpine"
 ARG DOTNET_SDK_VERSION=7.0
 
-FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_SDK_VERSION}${DOTNET_OS_VERSION} AS build
+FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_SDK_VERSION}${OS_VERSION} AS build
 WORKDIR /src
 
+# install nodejs & npm
+RUN apk add nodejs npm
 # copy everything
 COPY . ./
 # restore as distinct layers
