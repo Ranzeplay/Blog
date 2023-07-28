@@ -58,9 +58,8 @@ import { FullScreenAboutComponent } from './full-screen-about/full-screen-about.
     FontAwesomeModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: FullScreenAboutComponent, pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
-      { path: 'about', component: FullScreenAboutComponent },
       { path: 'article/read/:id', component: ArticleReadComponent },
       { path: 'article/list', component: ArticleListComponent },
       { path: 'category/list', component: CategoryListComponent },

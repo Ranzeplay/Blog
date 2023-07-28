@@ -15,7 +15,7 @@ export class AppComponent {
 
   constructor(location: Location){
     location.onUrlChange((url, _) => {
-      this.displayOutline = (url != "/about");
+      this.displayOutline = (url != "/");
     })
   }
 
