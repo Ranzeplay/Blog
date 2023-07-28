@@ -3,6 +3,7 @@ using Blog.Managers;
 using Blog.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Blog
 {
@@ -40,18 +41,27 @@ namespace Blog
 
             var app = builder.Build();
 
+            app.UseCors();
+
             // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (app.Environment.IsProduction())
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            else if(app.Environment.IsDevelopment()) { }
+            {
+                app.UseCors(options =>
+                {
+                    options.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin();
+                });
+            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            app.UseCors();
 
             app.UseRouting();
 
@@ -62,6 +72,15 @@ namespace Blog
                 pattern: "{controller}/{action=Index}/{id?}");
 
             app.MapFallbackToFile("index.html");
+
+            // Migrate database on startup
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider
+                    .GetRequiredService<ApplicationDbContext>();
+
+                dbContext.Database.Migrate();
+            }
 
             app.Run();
         }

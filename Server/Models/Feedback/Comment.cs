@@ -14,6 +14,8 @@ namespace Blog.Models.Feedback
 
         public string IPAddress { get; set; }
 
+        public string ArticleId { get; set; }
+
         public DateTime Time { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Article } from 'src/app/models/article';
+import { Comment } from 'src/app/models/comment';
 import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
@@ -12,10 +13,11 @@ export class ArticleReadComponent implements OnInit {
   articleId: string = '';
   content: Article = Article.newEmpty();
   text: string = '';
+  comments: Comment[] = [];
 
   constructor(
     public route: ActivatedRoute,
-    private articleService: ArticleService
+    private articleService: ArticleService,
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +28,10 @@ export class ArticleReadComponent implements OnInit {
         this.content = val;
         this.text = val.content;
       });
+    });
+
+    this.articleService.getComments(this.articleId).subscribe((val) => {
+      this.comments = val;
     });
   }
 }

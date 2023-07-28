@@ -29,6 +29,8 @@ import { PageReadComponent } from './page/read/read.component';
 import { PageViewComponent } from './page/view/view.component';
 import { BlogCardComponent } from './components/blog-card/blog-card.component';
 import { FullScreenAboutComponent } from './full-screen-about/full-screen-about.component';
+import { SendComponent } from './components/comment/send/send.component';
+import { EntryComponent } from './components/comment/entry/entry.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { FullScreenAboutComponent } from './full-screen-about/full-screen-about.
     PageViewComponent,
     BlogCardComponent,
     FullScreenAboutComponent,
+    SendComponent,
+    EntryComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
