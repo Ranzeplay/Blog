@@ -1,13 +1,14 @@
-# Adjust DOTNET_OS_VERSION as desired
-ARG OS_VERSION="-alpine"
-ARG DOTNET_SDK_VERSION=7.0
+FROM node:18-alpine AS client
 
-FROM mcr.microsoft.com/dotnet/sdk:${DOTNET_SDK_VERSION}${OS_VERSION} AS build
 WORKDIR /src
+COPY . ./
 
-# install nodejs & npm
-RUN apk add nodejs npm
-# copy everything
+WORKDIR /src/ClientApp
+RUN npm install
+RUN npm run prod
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS server
+WORKDIR /src
 COPY . ./
 # restore as distinct layers
 RUN dotnet restore
@@ -15,10 +16,11 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o /app
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:${DOTNET_SDK_VERSION}
+FROM mcr.microsoft.com/dotnet/aspnet:7.0
 ENV ASPNETCORE_URLS http://+:8080
 ENV ASPNETCORE_ENVIRONMENT Production
 EXPOSE 8080
 WORKDIR /app
-COPY --from=build /app .
+COPY --from=server /app .
+COPY --from=client /src/ClientApp/dist ./wwwroot/
 ENTRYPOINT [ "dotnet", "Blog.dll" ]
