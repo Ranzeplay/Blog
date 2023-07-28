@@ -16,4 +16,4 @@ primary_region = "hkg"
 
 [mounts]
   source = "blog_storage"
-  destination = "/Storage"
+  destination = "/app/Storage"
