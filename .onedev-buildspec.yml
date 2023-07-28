@@ -1,4 +1,4 @@
-version: 18
+version: 21
 jobs:
 - name: CI
   jobExecutor: Local
@@ -10,31 +10,33 @@ jobs:
     withSubmodules: true
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !CommandStep
-    name: Restore project
+    name: Build server
     runInContainer: false
     interpreter: !DefaultInterpreter
       commands:
+      - cd Server
       - dotnet restore
+      - dotnet publish -c Release
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !CommandStep
-    name: Build release
+    name: Build client
     runInContainer: false
     interpreter: !DefaultInterpreter
       commands:
-      - dotnet publish
+      - cd Client
+      - npm i
+      - npm run prod
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
     name: Publish artifacts
     sourcePath: bin/
     artifacts: '**'
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+    condition: NEVER
   triggers:
   - !BranchUpdateTrigger {}
   retryCondition: never
   maxRetries: 3
   retryDelay: 30
-  cpuRequirement: 250
-  memoryRequirement: 256
   timeout: 3600
