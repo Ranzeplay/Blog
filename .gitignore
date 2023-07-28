@@ -363,10 +363,10 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Angular files
-ClientApp/.angular/
+Client/.angular/
 
 # Visual Studio Code files
 **/.vscode/
 
-# Configurations
-Storage/
+# Debugging
+Server/Storage/
