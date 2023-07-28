@@ -2,6 +2,8 @@
 **/bin/
 **/obj/
 **/out/
+**/node_modules/
+**/dist/
 
 # files
 fly.toml
