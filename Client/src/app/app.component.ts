@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Location } from '@angular/common';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -9,6 +10,14 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 export class AppComponent {
   title = 'app';
   arrowUp = faArrowUp;
+
+  displayOutline = true;
+
+  constructor(location: Location){
+    location.onUrlChange((url, _) => {
+      this.displayOutline = (url != "/about");
+    })
+  }
 
   bttClassList =
     'fixed inline-block \

@@ -28,6 +28,7 @@ import { PageCardComponent } from './page/card/card.component';
 import { PageReadComponent } from './page/read/read.component';
 import { PageViewComponent } from './page/view/view.component';
 import { BlogCardComponent } from './components/blog-card/blog-card.component';
+import { FullScreenAboutComponent } from './full-screen-about/full-screen-about.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { BlogCardComponent } from './components/blog-card/blog-card.component';
     PageReadComponent,
     PageViewComponent,
     BlogCardComponent,
+    FullScreenAboutComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,6 +60,7 @@ import { BlogCardComponent } from './components/blog-card/blog-card.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'home', component: HomeComponent },
+      { path: 'about', component: FullScreenAboutComponent },
       { path: 'article/read/:id', component: ArticleReadComponent },
       { path: 'article/list', component: ArticleListComponent },
       { path: 'category/list', component: CategoryListComponent },
