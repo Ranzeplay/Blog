@@ -1,7 +1,7 @@
 <div class="container">
   <a class="title"
     [routerLink]="['/article/read', metadata.articleId]">{{ metadata.title }}</a>
-  <h5 class="time">{{ metadata.time }}</h5>
+  <h5 class="time">{{ formattedTime() }}</h5>
 
   <div class="pill-box">
     <div class="pill border-gray-800 text-gray-800">

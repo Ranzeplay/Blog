@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import dateFormat from 'dateformat';
 import { ArticleMetadata } from 'src/app/models/articleMetadata';
 
 @Component({
@@ -8,4 +9,8 @@ import { ArticleMetadata } from 'src/app/models/articleMetadata';
 })
 export class ArticleCardComponent {
   @Input() metadata: ArticleMetadata = ArticleMetadata.newEmpty();
+
+  formattedTime(): string {
+    return dateFormat(this.metadata.time, 'yyyy-mm-dd h:MM:ss') + ' UTC';
+  }
 }

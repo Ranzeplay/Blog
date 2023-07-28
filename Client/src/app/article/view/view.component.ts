@@ -1,7 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { marked } from 'marked';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { ArticleService } from 'src/app/services/article.service';
 
 @Component({

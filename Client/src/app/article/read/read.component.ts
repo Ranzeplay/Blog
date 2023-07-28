@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import dateFormat from 'dateformat';
 import { Article } from 'src/app/models/article';
 import { Comment } from 'src/app/models/comment';
 import { ArticleService } from 'src/app/services/article.service';
@@ -33,5 +34,9 @@ export class ArticleReadComponent implements OnInit {
     this.articleService.getComments(this.articleId).subscribe((val) => {
       this.comments = val;
     });
+  }
+
+  formattedTime(): string {
+    return dateFormat(this.content!.metadata.time, 'yyyy-mm-dd h:MM:ss') + ' UTC';
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleMetadata } from 'src/app/models/articleMetadata';
 import { ArticleService } from 'src/app/services/article.service';
+import dateFormat from 'dateformat';
 
 @Component({
   selector: 'app-article-list',
@@ -32,5 +33,9 @@ export class ArticleListComponent implements OnInit {
         article.category.toLowerCase().includes(lo) ||
         article.tags.some((t) => t.toLowerCase().includes(lo))
     );
+  }
+
+  formattedTime(time: Date): string {
+    return dateFormat(time, 'yyyy-mm-dd h:MM:ss') + ' UTC';
   }
 }

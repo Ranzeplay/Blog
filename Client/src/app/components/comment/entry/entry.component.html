@@ -4,5 +4,5 @@
     <small class="font-mono text-xs bg-slate-200 p-1 rounded">{{ comment!.emailAddress }}</small>
   </h4>
   <p class="body-text mx-4 my-2 paper-color p-3">{{ comment!.content }}</p>
-  <small class="font-mono">Sent at {{ comment!.time }}</small>
+  <small class="font-mono">Sent at {{ formattedTime() }}</small>
 </div>
