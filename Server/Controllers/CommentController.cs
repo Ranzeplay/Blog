@@ -15,7 +15,7 @@ namespace Blog.Controllers
         }
 
         [HttpPost("Send")]
-        public async Task<IActionResult> Send(SendCommentViewModel model)
+        public async Task<IActionResult> Send([FromBody] SendCommentViewModel model)
         {
             var comment = new Comment
             {
