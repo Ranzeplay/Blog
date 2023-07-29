@@ -35,13 +35,12 @@ namespace Blog
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200");
+                        builder.WithOrigins("http://localhost:4200")
+                            .WithMethods("POST", "GET");
                     });
             });
 
             var app = builder.Build();
-
-            app.UseCors();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsProduction())
@@ -49,14 +48,15 @@ namespace Blog
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                app.UseCors();
             }
-            else if(app.Environment.IsDevelopment()) { }
+            else if (app.Environment.IsDevelopment()) { }
             {
                 app.UseCors(options =>
                 {
                     options.AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowAnyOrigin();
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
                 });
             }
 
