@@ -16,16 +16,6 @@
       </div>
     </div>
 
-    <app-comment-send [articleId]="articleId"></app-comment-send>
-
-    <div class="w-full border-2 border-gray-200 mt-4 p-5">
-      <div>
-        <h3 class="title-text text-2xl">Comments ({{ comments.length }})</h3>
-      </div>
-
-      <div class="mt-2 p-2">
-        <app-comment-entry *ngFor="let comment of comments" [comment]="comment"></app-comment-entry>
-      </div>
-    </div>
+    <app-comment [articleId]="articleId"></app-comment>
   </div>
 </div>
