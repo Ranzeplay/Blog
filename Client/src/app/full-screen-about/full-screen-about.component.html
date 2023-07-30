@@ -1,7 +1,7 @@
 <div class="panel">
-  <img class="background-img w-full h-screen brightness-50" src="/assets/about/background.png" alt="Background image" />
+  <img class="background-img w-full h-screen bg-black brightness-50" src="/assets/about/background.png" alt="Background image" />
 
-  <div class="backdrop-blur-md">
+  <div class="backdrop-blur-sm">
     <div class="flex relative h-screen w-5/6">
       <div class="flex flex-col w-full content-between items-between relative my-auto">
         <img class="p-4 mx-auto w-2/5 aspect-auto rounded-full bg-white drop-shadow-xl outline-8 outline-gray-300" src="/assets/about/avatar.svg" alt="Jeb Feng's avatar" />
@@ -12,14 +12,14 @@
           <h2 class="text-right text-6xl font-bold title-text text-white">Jeb Feng</h2>
 
           <div class="grid grid-cols-2 text-center gap-2 mt-8 font-mono ml-12 text-lg">
-            <div class="px-1 py-2 bg-gray-300 rounded-md shadow-inner">&lt;Developer /&gt;</div>
-            <div class="p-1 py-2 bg-gray-300 rounded-md shadow-inner">&lt;Senior High /&gt;</div>
-            <div class="p-1 py-2 bg-gray-300 rounded-md shadow-inner">&lt;INFP-T /&gt;</div>
-            <div class="p-1 py-2 bg-gray-300 rounded-md shadow-inner">&lt;Gen Z /&gt;</div>
+            <div class="my-tag">&lt;Developer /&gt;</div>
+            <div class="my-tag">&lt;Senior High /&gt;</div>
+            <div class="my-tag">&lt;INFP-T /&gt;</div>
+            <div class="my-tag">&lt;Gen Z /&gt;</div>
           </div>
 
           <div class="text-right mt-6 text-lg text-white">
-            <a [routerLink]="['/home']" class="hover-underline-animation">Continue >></a>
+            <a [routerLink]="['/home']" class="hover-underline-animation">Continue <fa-icon [icon]="arrowRight" class="ml-2"></fa-icon></a>
           </div>
         </div>
       </div>

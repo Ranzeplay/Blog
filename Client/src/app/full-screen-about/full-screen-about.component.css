@@ -36,3 +36,7 @@
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+.my-tag {
+  @apply px-1 py-2 rounded-md shadow-inner mix-blend-darken text-white bg-black bg-opacity-20 backdrop-blur-xl bg-blend-exclusion;
+}

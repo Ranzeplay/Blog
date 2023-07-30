@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-full-screen-about',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./full-screen-about.component.css']
 })
 export class FullScreenAboutComponent {
-
+  arrowRight = faArrowRight;
 }
