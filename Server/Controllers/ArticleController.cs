@@ -44,9 +44,22 @@ namespace Blog.Controllers
             return Json(model);
         }
 
+        [HttpGet("HeadImage/{id}")]
+        public IActionResult GetHeadImage([FromRoute] string id)
+        {
+            var asset = _articleManager.GetHeadImage(id);
+
+            if (asset != null)
+            {
+                return File(asset.Content, asset.ContentType);
+            }
+
+            return NotFound("Coudn't acquire the head image!");
+        }
+
         [HttpGet("List/{query}")]
         [HttpGet("List")]
-        public IActionResult List(string? query) 
+        public IActionResult List(string? query)
         {
             var articles = _articleManager.GetArticleMetadata();
             return Json(articles);

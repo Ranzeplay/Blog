@@ -9,11 +9,11 @@
 }
 
 .blog-container {
-  @apply mt-4 mb-4
+  @apply mt-4 mb-4 rounded-xl
 }
 
 .blog-container-inner {
-  @apply shadow-xl m-auto rounded-xl p-8
+  @apply shadow-xl m-auto p-8
 }
 
 .blog-title {

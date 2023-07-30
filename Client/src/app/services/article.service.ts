@@ -25,4 +25,8 @@ export class ArticleService {
   public getComments(id: string): Observable<Comment[]> {
     return this.http.get<Comment[]>(this.baseUrl + '/Comment/GetArticleComments/' + id);
   }
+
+  public getHeadImagePath(id: string): string {
+    return this.baseUrl + '/Article/HeadImage/' + id;
+  }
 }

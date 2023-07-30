@@ -13,11 +13,13 @@ namespace Blog.Managers
         private readonly string _articleDirectory;
         private readonly IMemoryCache _memoryCache;
         private readonly ILogger _logger;
+        private readonly AppSettings _appSettings;
         private IEnumerable<ArticleMetadataViewModel> IndexedArticles { get; set; }
 
         public ArticleManager(IOptions<AppSettings> options, IMemoryCache memoryCache, ILogger<ArticleManager> logger)
         {
-            _articleDirectory = Path.Combine(Environment.CurrentDirectory, options.Value.BlogStorageRootDirectory, "Articles");
+            _appSettings = options.Value;
+            _articleDirectory = Path.Combine(Environment.CurrentDirectory, _appSettings.BlogStorageRootDirectory, "Articles");
             IndexedArticles = Array.Empty<ArticleMetadataViewModel>();
             _memoryCache = memoryCache;
             _logger = logger;
@@ -58,6 +60,30 @@ namespace Blog.Managers
                 -1 => IndexedArticles,
                 _ => IndexedArticles.TakeLast(maxCount)
             };
+        }
+
+        public BlogAsset? GetHeadImage(string articleId)
+        {
+            var key = $"{articleId}";
+            if (_memoryCache.TryGetValue<BlogAsset>(key, out var asset))
+            {
+                return asset;
+            }
+            else
+            {
+                var targetArticleDirectory = Path.Combine(_articleDirectory, articleId);
+                var assetFile = Path.Combine(targetArticleDirectory, "head.png");
+                if (!File.Exists(assetFile))
+                {
+                    assetFile = Path.Combine(Environment.CurrentDirectory, _appSettings.BlogStorageRootDirectory, "fallback.png");
+                }
+
+                var item = new BlogAsset(assetFile);
+                _memoryCache.Set(key, item, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(2)));
+                _logger.LogInformation($"Cache head image asset in page, whose id is {key}");
+
+                return item;
+            }
         }
 
         public IEnumerable<CategoryIndexViewModel> GetCategoriesWithCount()

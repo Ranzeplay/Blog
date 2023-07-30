@@ -16,6 +16,8 @@ export class ArticleReadComponent implements OnInit {
   text: string = '';
   comments: Comment[] = [];
 
+  headImageUrl: string = '';
+
   constructor(
     public route: ActivatedRoute,
     private articleService: ArticleService,
@@ -34,6 +36,8 @@ export class ArticleReadComponent implements OnInit {
     this.articleService.getComments(this.articleId).subscribe((val) => {
       this.comments = val;
     });
+
+    this.headImageUrl = this.articleService.getHeadImagePath(this.articleId);
   }
 
   formattedTime(): string {
