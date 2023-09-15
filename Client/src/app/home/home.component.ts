@@ -34,7 +34,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.articleService.indexArticles().subscribe(articles => {
-      this.latestArticles = articles.slice(0, 5);
+      // Sort article publish time latest at top, 5 articles max
+      this.latestArticles = articles.slice(0, 5).sort((a, b) => {
+        return b.time.getTime() - a.time.getTime();
+      });
     });
 
     this.categoryService.indexCategories().subscribe(categories => {
