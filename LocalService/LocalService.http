@@ -1,0 +1,11 @@
+@LocalService_HostAddress = http://localhost:5167
+
+GET {{LocalService_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{LocalService_HostAddress}}/todos/1
+Accept: application/json
+
+###

@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "y04lFo6ic2b3kWZ5hcjgpvlNApwWfS9HulrhX79ljDjB1TB3ORkDECsztvdP6eR+Wa4NefHwk/Mn0h5512GZtw==",
+  "success": true,
+  "projectFilePath": "D:\\Dev\\Blog\\LocalService\\LocalService.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\如果\\.nuget\\packages\\microsoft.dotnet.ilcompiler\\8.0.0\\microsoft.dotnet.ilcompiler.8.0.0.nupkg.sha512",
+    "C:\\Users\\如果\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.0\\microsoft.net.illink.tasks.8.0.0.nupkg.sha512",
+    "C:\\Users\\如果\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.4\\microsoft.visualstudio.azure.containers.tools.targets.1.19.4.nupkg.sha512",
+    "C:\\Users\\如果\\.nuget\\packages\\runtime.win-x64.microsoft.dotnet.ilcompiler\\8.0.0\\runtime.win-x64.microsoft.dotnet.ilcompiler.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
