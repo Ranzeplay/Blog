@@ -1,0 +1,15 @@
+.navbar {
+  @apply bg-white w-full flex flex-wrap items-center justify-between py-3 shadow-md m-auto;
+}
+
+.navbarContainer {
+  @apply w-full flex flex-wrap items-center justify-between px-6;
+}
+
+.siteName {
+  @apply text-xl text-black font-serif font-bold mr-8;
+}
+
+.siteEntry {
+  @apply px-4 py-2 text-black;
+}

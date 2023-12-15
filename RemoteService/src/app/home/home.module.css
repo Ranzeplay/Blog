@@ -1,0 +1,7 @@
+.card {
+	@apply bg-white w-full p-8 my-6 shadow-sm;
+}
+
+.cardTitle {
+	@apply font-serif font-bold text-3xl;
+}
