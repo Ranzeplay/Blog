@@ -1,7 +1,10 @@
+'use client';
+
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import NavBarComponent from './components/nav/nav.module'
+import { usePathname, useRouter } from 'next/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,13 +18,18 @@ export default function Layout({
 }: {
   children: React.ReactNode
 }) {
+  const path = usePathname();
+
   return (
     <html lang="en">
       <body className={inter.className + " background"}>
-        <header className="root-container">
-          <NavBarComponent></NavBarComponent>
-        </header>
-        <main className="root-container">
+        {path !== '/welcome' && (
+          <header className="root-container">
+            <NavBarComponent></NavBarComponent>
+          </header>
+        )}
+
+        <main className={`${path !== '/welcome' && 'root-container'}`}>
           {children}
         </main>
       </body>

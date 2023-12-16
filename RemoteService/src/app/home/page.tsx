@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <div className={styles.card}>
-        <h2 className={styles.cardTitle}>About Me</h2>
+        <h2 className={styles.cardTitle}>Pinned Page</h2>
       </div>
       <div className={styles.card}>
         <h2 className={styles.cardTitle}>Latest Posts</h2>

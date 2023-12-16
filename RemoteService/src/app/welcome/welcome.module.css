@@ -1,0 +1,42 @@
+.backgroundImg {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0);
+  filter: brightness(50%);
+}
+
+.panel {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.hoverUnderlineAnimation {
+  position: relative;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.hoverUnderlineAnimation::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.hoverUnderlineAnimation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.myTag {
+  @apply px-1 py-2 rounded-md shadow-inner mix-blend-darken text-white bg-black bg-opacity-20 backdrop-blur-xl bg-blend-exclusion;
+}
