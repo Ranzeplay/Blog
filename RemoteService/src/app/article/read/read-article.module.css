@@ -1,25 +1,25 @@
 .content h1 {
-  @apply text-6xl font-semibold mt-4;
+  @apply text-3xl font-semibold mt-3;
 }
 
 .content h2 {
-  @apply text-5xl font-semibold mt-3;
-}
-
-.content h3 {
-  @apply text-4xl font-semibold mt-3;
-}
-
-.content h4 {
   @apply text-3xl font-semibold mt-2;
 }
 
-.content h5 {
+.content h3 {
   @apply text-2xl font-semibold mt-1;
 }
 
-.content h6 {
+.content h4 {
   @apply text-xl font-semibold mt-1;
+}
+
+.content h5 {
+  @apply font-semibold mt-1;
+}
+
+.content h6 {
+  @apply font-semibold mt-1;
 }
 
 .content ul {
@@ -51,13 +51,13 @@
 }
 
 .content blockquote {
-  @apply p-4 my-4 border-l-4 border-gray-300 bg-gray-50;
+  @apply p-3 my-4 border-l-4 border-gray-300 bg-gray-50;
 }
 
 .content blockquote > p {
-  @apply ml-3 bg-gray-50;
+  @apply bg-gray-50;
 }
 
 .content img {
-  @apply mt-2 rounded-xl drop-shadow-lg border-2;
+  @apply mt-2 rounded-2xl drop-shadow-lg border-2;
 }
