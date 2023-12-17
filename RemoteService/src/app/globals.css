@@ -9,3 +9,7 @@
 .background {
 	@apply bg-neutral-200;
 }
+
+.card {
+	@apply bg-white w-full p-6 my-6 shadow-sm;
+}

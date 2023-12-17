@@ -1,0 +1,63 @@
+.content h1 {
+  @apply text-6xl font-semibold mt-4;
+}
+
+.content h2 {
+  @apply text-5xl font-semibold mt-3;
+}
+
+.content h3 {
+  @apply text-4xl font-semibold mt-3;
+}
+
+.content h4 {
+  @apply text-3xl font-semibold mt-2;
+}
+
+.content h5 {
+  @apply text-2xl font-semibold mt-1;
+}
+
+.content h6 {
+  @apply text-xl font-semibold mt-1;
+}
+
+.content ul {
+  @apply mt-1 ml-4 list-disc;
+}
+
+.content ol {
+  @apply mt-1 ml-4 list-decimal;
+}
+
+.content p {
+  @apply mt-1;
+}
+
+.content a {
+  @apply mt-1 text-blue-600 hover:underline;
+}
+
+.content code {
+  @apply bg-gray-100 text-red-800;
+}
+
+.content em {
+  @apply italic;
+}
+
+.content strong {
+  @apply font-semibold;
+}
+
+.content blockquote {
+  @apply p-4 my-4 border-l-4 border-gray-300 bg-gray-50;
+}
+
+.content blockquote > p {
+  @apply ml-3 bg-gray-50;
+}
+
+.content img {
+  @apply mt-2 rounded-xl drop-shadow-lg border-2;
+}

@@ -9,9 +9,9 @@ export default function NavBarComponent() {
 			<div className="container-fluid">
 			  <Link href="/" className={styles.siteName}>Blog</Link>
 	
-			  <a className={styles.siteEntry}>Home</a>
+			  <Link href="/" className={styles.siteEntry}>Home</Link>
 			  <a className={styles.siteEntry}>Categories</a>
-			  <a className={styles.siteEntry}>Articles</a>
+			  <a href='/article/list' className={styles.siteEntry}>Articles</a>
 			  <a className={styles.siteEntry}>Tags</a>
 			  <a className={styles.siteEntry}>Pages</a>
 			</div>

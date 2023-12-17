@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div>
-      <div className={styles.card}>
+      <div className={`card`}>
         <h2 className={styles.cardTitle}>Pinned Page</h2>
       </div>
-      <div className={styles.card}>
+      <div className={`card`}>
         <h2 className={styles.cardTitle}>Latest Posts</h2>
       </div>
-      <div className={styles.card}>
+      <div className={`card`}>
         <h2 className={styles.cardTitle}>Links</h2>
       </div>
     </div>
