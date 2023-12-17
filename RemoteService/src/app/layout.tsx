@@ -35,7 +35,7 @@ export default function Layout({
           </header>
         )}
 
-        <main className={`${!hiddenPath.includes(path) && 'root-container'}`}>
+        <main className={`${!hiddenPath.includes(path) && 'root-container min-h-screen'}`}>
           {children}
         </main>
 
