@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 }
 
 const hiddenPath: Array<string> = [
-  '/',
-  '/whoami'
+  '/whoami',
+  '/article/read'
 ]
 
 export default function Layout({
@@ -29,20 +29,24 @@ export default function Layout({
   return (
     <html lang="en">
       <body className={inter.className + " background"}>
-        {!hiddenPath.includes(path) && (
+        {shouldShowOutline(path) && (
           <header className="root-container">
             <NavBarComponent></NavBarComponent>
           </header>
         )}
 
-        <main className={`${!hiddenPath.includes(path) && 'root-container min-h-screen'}`}>
+        <main className={`${shouldShowOutline(path) && 'root-container min-h-screen'}`}>
           {children}
         </main>
 
-        {!hiddenPath.includes(path) && (
+        {shouldShowOutline(path) && (
           <FooterComponent></FooterComponent>
         )}
       </body>
     </html>
   )
+}
+
+function shouldShowOutline(path: string): boolean {
+  return !hiddenPath.some(p => path.startsWith(p));
 }
