@@ -1,6 +1,11 @@
+import { Metadata } from 'next';
 import styles from './home.module.css';
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: 'Home - Blog'
+};
+
+export default function Page() {
   return (
     <div>
       <div className={styles.card}>

@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   description: 'Welcome to my blog website.',
 }
 
+const hiddenPath: Array<string> = [
+  '/',
+  '/whoami'
+]
+
 export default function Layout({
   children,
 }: {
@@ -23,13 +28,13 @@ export default function Layout({
   return (
     <html lang="en">
       <body className={inter.className + " background"}>
-        {path !== '/welcome' && (
+        {!hiddenPath.includes(path) && (
           <header className="root-container">
             <NavBarComponent></NavBarComponent>
           </header>
         )}
 
-        <main className={`${path !== '/welcome' && 'root-container'}`}>
+        <main className={`${!hiddenPath.includes(path) && 'root-container'}`}>
           {children}
         </main>
       </body>

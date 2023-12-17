@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './nav.module.css';
 
 export default function NavBarComponent() {
@@ -6,7 +7,7 @@ export default function NavBarComponent() {
 		<nav className={styles.navbar}>
 		  <div className={styles.navbarContainer}>
 			<div className="container-fluid">
-			  <a className={styles.siteName}>Blog</a>
+			  <Link href="/" className={styles.siteName}>Blog</Link>
 	
 			  <a className={styles.siteEntry}>Home</a>
 			  <a className={styles.siteEntry}>Categories</a>
