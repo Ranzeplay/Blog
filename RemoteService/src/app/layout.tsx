@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import NavBarComponent from './components/nav/nav.module'
 import { usePathname, useRouter } from 'next/navigation'
+import FooterComponent from './components/footer/footer.module';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,6 +38,10 @@ export default function Layout({
         <main className={`${!hiddenPath.includes(path) && 'root-container'}`}>
           {children}
         </main>
+
+        {!hiddenPath.includes(path) && (
+          <FooterComponent></FooterComponent>
+        )}
       </body>
     </html>
   )
