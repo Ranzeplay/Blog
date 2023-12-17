@@ -5,8 +5,10 @@ import * as prod from 'react/jsx-runtime';
 import rehypeReact from "rehype-react";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
+import remarkMath from "remark-math";
 import { unified } from "unified";
 import { readingTime } from 'reading-time-estimator'
+import rehypeKatex from "rehype-katex";
 
 export const metadata: Metadata = {
 	title: 'Read - Blog'
@@ -21,21 +23,23 @@ export default async function Page() {
 
 	const content = unified()
 		.use(remarkParse)
+		.use(remarkMath)
 		.use(remarkRehype)
+		.use(rehypeKatex)
 		.use(rehypeReact, production)
 		.processSync(articleMarkdown).result;
 
 	return (
 		<div className="card">
 			<div className="m-6">
-				<h1 className="font-serif font-bold text-4xl">Title</h1>
+				<h1 className="font-serif font-bold text-4xl mb-2">Title</h1>
 				<div className="font-mono font-light text-gray-500">
 					<span>Publish time</span>
 					<span className="mx-2">|</span>
 					<span>{timeToRead.text}</span>
 				</div>
 
-				<div className={styles.content + " mt-12"}>
+				<div className={styles.content + " mt-8"}>
 					{content}
 				</div>
 			</div>
