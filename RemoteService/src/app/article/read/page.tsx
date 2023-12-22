@@ -44,7 +44,7 @@ export default async function Page() {
 			<div className="backdrop-filter backdrop-blur-md fixed top-0 w-full bg-white/60 h-16 shadow-lg z-10 content-center py-auto">
 				<div className="w-full put-center mx-14">
 					<div className="flex my-auto h-full w-full">
-						<img className="flex p-2 rounded-full bg-white drop-shadow-xl outline-2 outline-gray-300 h-4/5" src="https://ranzeplay.me/assets/about/avatar.svg" alt="Jeb Feng's avatar" />
+						<img className="flex p-2 rounded-full bg-white drop-shadow-xl outline-2 outline-gray-300 h-4/5" src="https://ranzeplay.space/assets/about/avatar.svg" alt="Jeb Feng's avatar" />
 						<div className="flex ml-4 flex-grow">
 							<div className="block mt-1">
 								<h5 className="text-xs text-gray-600 font-mono">Article ID</h5>
