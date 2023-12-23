@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LocalService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27caf83f1ca2ee4f17355e226c9da944da0f77f7")]
 [assembly: System.Reflection.AssemblyProductAttribute("LocalService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LocalService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

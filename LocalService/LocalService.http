@@ -1,11 +1,11 @@
 @LocalService_HostAddress = http://localhost:5167
 
-GET {{LocalService_HostAddress}}/todos/
+GET {{LocalService_HostAddress}}/api/article/index
 Accept: application/json
-
+Authorization: ExampleAccessToken
 ###
 
-GET {{LocalService_HostAddress}}/todos/1
+GET {{LocalService_HostAddress}}/api/article/entry?articleId=2022-annual-summary
 Accept: application/json
-
+Authorization: ExampleAccessToken
 ###

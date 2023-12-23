@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "y04lFo6ic2b3kWZ5hcjgpvlNApwWfS9HulrhX79ljDjB1TB3ORkDECsztvdP6eR+Wa4NefHwk/Mn0h5512GZtw==",
+  "dgSpecHash": "dFRtK+gV8QsPWJMHfuhucINyO4wDc/6iEF288wXA2sn56E8d7N7187U1OUf9LZo6mvBtXqzq9WFrVT9hrssxeA==",
   "success": true,
   "projectFilePath": "D:\\Dev\\Blog\\LocalService\\LocalService.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\如果\\.nuget\\packages\\markdig\\0.34.0\\markdig.0.34.0.nupkg.sha512",
     "C:\\Users\\如果\\.nuget\\packages\\microsoft.dotnet.ilcompiler\\8.0.0\\microsoft.dotnet.ilcompiler.8.0.0.nupkg.sha512",
     "C:\\Users\\如果\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.0\\microsoft.net.illink.tasks.8.0.0.nupkg.sha512",
-    "C:\\Users\\如果\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.4\\microsoft.visualstudio.azure.containers.tools.targets.1.19.4.nupkg.sha512",
+    "C:\\Users\\如果\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
+    "C:\\Users\\如果\\.nuget\\packages\\yamldotnet\\13.7.1\\yamldotnet.13.7.1.nupkg.sha512",
     "C:\\Users\\如果\\.nuget\\packages\\runtime.win-x64.microsoft.dotnet.ilcompiler\\8.0.0\\runtime.win-x64.microsoft.dotnet.ilcompiler.8.0.0.nupkg.sha512"
   ],
   "logs": []
