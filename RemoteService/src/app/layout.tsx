@@ -9,14 +9,9 @@ import FooterComponent from './components/footer/footer.module';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Welcome to my blog website.',
-}
-
 const hiddenPath: Array<string> = [
   '/whoami',
-  '/article/read'
+  '/article'
 ]
 
 export default function Layout({

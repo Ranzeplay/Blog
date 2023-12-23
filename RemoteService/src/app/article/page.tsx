@@ -21,6 +21,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-rust';
 import 'prismjs/components/prism-java';
+import Head from "next/head";
 
 // @ts-expect-error: the react types are missing.
 const production = { Fragment: prod.Fragment, jsx: prod.jsx, jsxs: prod.jsxs }
@@ -41,6 +42,7 @@ export default async function Page() {
 	return (
 		<div className="bg-white">
 			<title>Read - Blog</title>
+
 			<div className="backdrop-filter backdrop-blur-md fixed top-0 w-full bg-white/60 h-16 shadow-lg z-10 content-center py-auto">
 				<div className="w-full put-center mx-14">
 					<div className="flex my-auto h-full w-full">
@@ -54,6 +56,7 @@ export default async function Page() {
 					</div>
 				</div>
 			</div>
+
 			<div className="pt-24 grid grid-cols-5 gap-12 w-3/4 mx-auto py-8 text-left">
 				<div className="col-span-4">
 					<div className="mx-auto">
