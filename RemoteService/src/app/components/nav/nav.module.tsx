@@ -10,7 +10,8 @@ export default function NavBarComponent() {
 			  <Link href="/" className={styles.siteName}>Blog</Link>
 	
 			  <Link href="/home" className={styles.siteEntry}>Home</Link>
-			  <a href='/browse' className={styles.siteEntry}>Browse</a>
+			  <a href='/browse' className={styles.siteEntry}>Articles</a>
+			  <a href='/projects' className={styles.siteEntry}>Projects</a>
 			  <a className={styles.siteEntry}>Pages</a>
 			</div>
 		  </div>

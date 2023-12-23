@@ -155,3 +155,7 @@ $$I = \int \rho R^{2} dV$$
 
 And note that you can backslash-escape any punctuation characters
 which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
+
+# Chinese
+
+这里是一些中文字符，用于测试字体。
