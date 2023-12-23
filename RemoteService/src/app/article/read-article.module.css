@@ -1,46 +1,56 @@
 @font-face {
-  src: url('/article-font.ttf') format('truetype');
+  src: url('/article-heading-font.ttf') format('truetype');
   font-family: "NotoSans"
 }
 
-.content {
-  font-family: 'NotoSans'
+@font-face {
+  src: url('/article-body-font.otf') format('opentype');
+  font-family: "NotoSerif"
 }
 
 .content h1 {
   @apply text-3xl font-semibold mt-3;
+  font-family: 'NotoSans';
 }
 
 .content h2 {
   @apply text-3xl font-semibold mt-2;
+  font-family: 'NotoSans';
 }
 
 .content h3 {
   @apply text-2xl font-semibold mt-1;
+  font-family: 'NotoSans';
 }
 
 .content h4 {
   @apply text-xl font-semibold mt-1;
+  font-family: 'NotoSans';
 }
 
 .content h5 {
   @apply font-semibold mt-1;
+  font-family: 'NotoSans';
 }
 
 .content h6 {
   @apply font-semibold mt-1;
+  font-family: 'NotoSans';
 }
 
 .content ul {
   @apply mt-1 ml-4 list-disc;
+  font-family: 'NotoSerif';
 }
 
 .content ol {
   @apply mt-1 ml-4 list-decimal;
+  font-family: 'NotoSerif';
 }
 
 .content p {
   @apply mt-1;
+  font-family: 'NotoSerif';
 }
 
 .content a {
@@ -61,10 +71,12 @@
 
 .content blockquote {
   @apply p-3 my-4 border-l-4 border-gray-300 bg-gray-50;
+  font-family: 'NotoSerif';
 }
 
 .content blockquote > p {
   @apply bg-gray-50;
+  font-family: 'NotoSerif';
 }
 
 .content img {
