@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./read-article.module.css";
+import styles from "./article.module.css";
 import React from "react";
 import * as prod from 'react/jsx-runtime';
 import rehypeReact from "rehype-react";

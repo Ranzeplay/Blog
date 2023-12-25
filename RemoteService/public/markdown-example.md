@@ -159,3 +159,11 @@ which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
 # Chinese
 
 这里是一些中文字符，用于测试字体。
+
+# Headings
+
+## h2
+### h3
+#### h4
+##### h5
+###### h6

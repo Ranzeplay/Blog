@@ -8,34 +8,38 @@
   font-family: "NotoSerif"
 }
 
+.content {
+  @apply my-2;
+}
+
 .content h1 {
-  @apply text-3xl font-semibold mt-3;
+  @apply text-3xl font-semibold mt-3 before:border-l-8 before:border-l-black before:-ml-4 before:mr-2;
   font-family: 'NotoSans';
 }
 
 .content h2 {
-  @apply text-3xl font-semibold mt-2;
+  @apply text-2xl font-semibold mt-2 before:border-l-8 before:border-l-black before:-ml-4 before:mr-2;
   font-family: 'NotoSans';
 }
 
 .content h3 {
-  @apply text-2xl font-semibold mt-1;
+  @apply text-xl font-semibold mt-1 before:border-l-4 before:border-l-black before:-ml-4 before:mr-2.5;
   font-family: 'NotoSans';
 }
 
 .content h4 {
-  @apply text-xl font-semibold mt-1;
-  font-family: 'NotoSans';
+  @apply text-lg font-semibold mt-1 before:border-l-4 before:border-l-black before:-ml-4 before:mr-2.5;
+  font-family: 'NotoSerif';
 }
 
 .content h5 {
-  @apply font-semibold mt-1;
-  font-family: 'NotoSans';
+  @apply font-semibold mt-1 before:border-l-2 before:border-l-black before:-ml-4 before:mr-3;
+  font-family: 'NotoSerif';
 }
 
 .content h6 {
-  @apply font-semibold mt-1;
-  font-family: 'NotoSans';
+  @apply font-medium mt-1 before:border-l-2 before:border-l-black before:-ml-4 before:mr-3;
+  font-family: 'NotoSerif';
 }
 
 .content ul {
