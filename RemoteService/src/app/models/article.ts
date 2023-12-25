@@ -11,7 +11,7 @@ export class ArticleMetadata {
     public title: string,
     public shortContent: string,
     public publishTime: Date,
-    public categoryName: string,
+    public category: string,
     public tags: string[]
   ) {}
 }

@@ -1,18 +1,14 @@
 import { Metadata } from "next";
 import React from "react";
-import { ArticleMetadata } from "../models/article";
+import { ArticleService } from "../services/articleService";
 
 export const metadata: Metadata = {
 	title: 'Browse - Blog'
 };
 
-const articles: ArticleMetadata[] = [
-	new ArticleMetadata('a1', 'Lorem ipsum', 'hello, world', new Date(), "demo", ["t1"]),
-	new ArticleMetadata('a2', 'Some title', 'some description', new Date(), "demo2", ["t1", "t2", "t3"]),
-	new ArticleMetadata('a3', '2023 a3', 'aa2', new Date(), "demo", ["t2"]),
-]
+export default async function Page() {
+	const articles = (await ArticleService.getInstance().getArticleIndex())!;
 
-export default function Page() {
 	return (
 		<div className="card">
 			<h2 className="font-serif text-2xl">Browse articles</h2>
@@ -35,7 +31,7 @@ export default function Page() {
 							<p className="text-sm text-gray-400 font-mono">{article.publishTime.toLocaleString()}</p>
 							<p className="mx-2 mt-2 text-gray-700 truncate">{article.shortContent}</p>
 							<div className="flex flex-row gap-2 text-sm mt-2 divide-x-2">
-								<p className="text-gray-500">{article.categoryName}</p>
+								<p className="text-gray-500">{article.category}</p>
 								<div className="px-2 flex flex-row gap-2">
 									{article.tags.map(tag => <p className="text-gray-400">{tag}</p>)}
 								</div>
