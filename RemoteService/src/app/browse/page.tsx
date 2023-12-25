@@ -1,15 +1,15 @@
 import { Metadata } from "next";
 import React from "react";
-import { ArticleOverviewViewModel } from "./articleOverviewViewModel";
+import { ArticleMetadata } from "../models/article";
 
 export const metadata: Metadata = {
 	title: 'Browse - Blog'
 };
 
-const articles: ArticleOverviewViewModel[] = [
-	new ArticleOverviewViewModel('a1', 'Lorem ipsum', 'hello, world', new Date(), "demo", ["t1"]),
-	new ArticleOverviewViewModel('a2', 'Some title', 'some description', new Date(), "demo2", ["t1", "t2", "t3"]),
-	new ArticleOverviewViewModel('a3', '2023 a3', 'aa2', new Date(), "demo", ["t2"]),
+const articles: ArticleMetadata[] = [
+	new ArticleMetadata('a1', 'Lorem ipsum', 'hello, world', new Date(), "demo", ["t1"]),
+	new ArticleMetadata('a2', 'Some title', 'some description', new Date(), "demo2", ["t1", "t2", "t3"]),
+	new ArticleMetadata('a3', '2023 a3', 'aa2', new Date(), "demo", ["t2"]),
 ]
 
 export default function Page() {

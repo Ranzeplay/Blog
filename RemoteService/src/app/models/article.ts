@@ -1,5 +1,12 @@
-export class ArticleOverviewViewModel {
-  constructor(
+export class Article {
+  public constructor(
+    public metadata: ArticleMetadata,
+    public content: string
+  ) {}
+}
+
+export class ArticleMetadata {
+  public constructor(
     public id: string,
     public title: string,
     public shortContent: string,

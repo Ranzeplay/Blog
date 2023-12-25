@@ -10,8 +10,8 @@ namespace LocalService
         {
             var builder = WebApplication.CreateSlimBuilder(args);
 
-            builder.Services.AddScoped<ArticleService>();
-            builder.Services.AddScoped<MarkdownService>();
+            builder.Services.AddSingleton<ArticleService>();
+            builder.Services.AddSingleton<MarkdownService>();
             builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
             builder.Services.AddTransient<RequireAccessToken>();

@@ -5,7 +5,12 @@ Accept: application/json
 Authorization: ExampleAccessToken
 ###
 
-GET {{LocalService_HostAddress}}/api/article/entry?articleId=2022-annual-summary
+GET {{LocalService_HostAddress}}/api/article/entry/2022-annual-summary
+Accept: application/json
+Authorization: ExampleAccessToken
+###
+
+GET {{LocalService_HostAddress}}/api/article/asset/2022-annual-summary/IMG_3702.PNG
 Accept: application/json
 Authorization: ExampleAccessToken
 ###

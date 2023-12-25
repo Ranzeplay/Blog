@@ -21,7 +21,6 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-rust';
 import 'prismjs/components/prism-java';
-import Head from "next/head";
 
 // @ts-expect-error: the react types are missing.
 const production = { Fragment: prod.Fragment, jsx: prod.jsx, jsxs: prod.jsxs }
@@ -81,17 +80,17 @@ export default async function Page() {
 				<div className="col-span-1">
 					<div className="fixed grid mt-4 gap-6">
 						<div className="grid-row">
-							<h3 className="text-xl font-serif">Operations</h3>
+							<h3 className="text-xl">Operations</h3>
 							<div className="grid mt-1">
 								<a className={styles.operationLink}>Back</a>
 								<a onClick={scrollToTop} className={styles.operationLink}>Go to top</a>
 							</div>
 						</div>
 						<div className="grid-row">
-							<h3 className="text-xl font-serif">Topic of contents</h3>
+							<h3 className="text-xl">Topic of contents</h3>
 						</div>
 						<div className="grid-row">
-							<h3 className="text-xl font-serif">View these articles also</h3>
+							<h3 className="text-xl">View these articles also</h3>
 						</div>
 					</div>
 				</div>

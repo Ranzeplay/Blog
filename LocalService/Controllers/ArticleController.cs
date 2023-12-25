@@ -18,7 +18,7 @@ namespace LocalService.Controllers
             return new JsonResult(_articleService.GetArticles() ?? []);
         }
 
-        [HttpGet("entry")]
+        [HttpGet("entry/{articleId}")]
         public IActionResult GetEntry(string articleId)
         {
             var article = _articleService.GetArticle(articleId);
@@ -32,7 +32,7 @@ namespace LocalService.Controllers
             }
         }
 
-        [HttpGet("asset")]
+        [HttpGet("asset/{articleId}/{name}")]
         public IActionResult Asset(string articleId, string name)
         {
             var asset = _articleService.GetAsset(articleId, name);
@@ -42,7 +42,7 @@ namespace LocalService.Controllers
             }
             else
             {
-                return File(asset.Content, name);
+                return File(asset.Content, asset.ContentType);
             }
         }
     }

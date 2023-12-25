@@ -30,9 +30,7 @@ namespace LocalService.Services
 
             _indexedArticles = [];
 
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            RefreshCacheAsync();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            RefreshCacheAsync().Wait();
         }
 
         public IEnumerable<ArticleMetadata> GetArticles()
@@ -68,6 +66,11 @@ namespace LocalService.Services
 
         public ContentAsset? GetAsset(string id, string name)
         {
+            if(!_indexedArticles.ContainsKey(id))
+            {
+                return null;
+            }
+
             var path = Path.Combine(_articleStoreDirectory, id, "assets", name);
             var content = File.ReadAllBytes(path);
             _fileExtensionContentTypeProvider.TryGetContentType(name, out var contentType);
