@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import React from "react";
 import { ArticleService } from "../services/articleService";
+import Link from "next/link";
 
 export const metadata: Metadata = {
 	title: 'Browse - Blog'
@@ -27,7 +28,9 @@ export default async function Page() {
 				{articles.map(article => {
 					return (
 						<div key={article.id} className="py-2 w-full">
-							<h3 className="text-2xl font-semibold hover:underline hover:cursor-pointer">{article.title}</h3>
+							<Link href={`/article/${article.id}`}>
+								<h3 className="text-2xl font-semibold hover:underline hover:cursor-pointer">{article.title}</h3>
+							</Link>
 							<p className="text-sm text-gray-400 font-mono">{article.publishTime.toLocaleString()}</p>
 							<p className="mx-2 mt-2 text-gray-700 truncate">{article.shortContent}</p>
 							<div className="flex flex-row gap-2 text-sm mt-2 divide-x-2">

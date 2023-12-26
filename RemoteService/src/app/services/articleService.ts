@@ -30,7 +30,7 @@ export class ArticleService {
 
   public async getArticle(id: string): Promise<Article | undefined> {
     const response = await fetch(
-      `${ConfigService.getBackendExchangeServerAddress()}/api/article/detail?id=${id}`,
+      `${ConfigService.getBackendExchangeServerAddress()}/api/article/entry/${id}`,
       {
         headers: {
           Authorization: ConfigService.getAccessToken(),
