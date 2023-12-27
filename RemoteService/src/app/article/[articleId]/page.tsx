@@ -1,5 +1,5 @@
 import styles from "./article.module.css";
-import React, { use, useEffect } from "react";
+import React from "react";
 import * as prod from 'react/jsx-runtime';
 import rehypeReact from "rehype-react";
 import remarkParse from "remark-parse";
@@ -21,6 +21,7 @@ import 'prismjs/components/prism-rust';
 import 'prismjs/components/prism-java';
 import { Article } from "@/app/models/article";
 import { ArticleService } from "@/app/services/articleService";
+import ScrollToTopText from "@/app/components/pageTop/goToTopText";
 
 
 // @ts-expect-error: the react types are missing.
@@ -91,7 +92,7 @@ export default async function Page({ params }: { params: { articleId: string } }
 							<h3 className="text-xl">Operations</h3>
 							<div className="grid mt-1">
 								<a className={styles.operationLink}>Back</a>
-								{/* <a onClick={scrollToTop} className={styles.operationLink}>Go to top</a> */}
+								<ScrollToTopText></ScrollToTopText>
 							</div>
 						</div>
 						<div className="grid-row">
@@ -106,8 +107,3 @@ export default async function Page({ params }: { params: { articleId: string } }
 		</div>
 	)
 }
-
-const scrollToTop = (() => {
-	"use client"
-	window.scrollTo({ top: 0, behavior: 'smooth' });
-});
