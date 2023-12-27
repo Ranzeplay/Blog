@@ -28,7 +28,7 @@ export default async function Page() {
 				{articles.map(article => {
 					return (
 						<div key={article.id} className="py-2 w-full">
-							<Link href={`/article/${article.id}`}>
+							<Link href={`/article/${article.id}/read`}>
 								<h3 className="text-2xl font-semibold hover:underline hover:cursor-pointer">{article.title}</h3>
 							</Link>
 							<p className="text-sm text-gray-400 font-mono">{article.publishTime.toLocaleString()}</p>

@@ -13,7 +13,7 @@ const nextConfig = {
 	async rewrites() {
 		return [
 			{
-				source: '/article/:articleId/asset/:assetName',
+				source: '/article/:articleId/assets/:assetName',
 				destination: '/api/article/:articleId/asset/:assetName',
 			}
 		]

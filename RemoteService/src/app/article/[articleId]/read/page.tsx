@@ -1,4 +1,4 @@
-import styles from "./article.module.css";
+import styles from "./read-article.module.css";
 import React from "react";
 import * as prod from 'react/jsx-runtime';
 import rehypeReact from "rehype-react";
@@ -22,6 +22,7 @@ import 'prismjs/components/prism-java';
 import { Article } from "@/app/models/article";
 import { ArticleService } from "@/app/services/articleService";
 import ScrollToTopText from "@/app/components/pageTop/goToTopText";
+import { useRouter } from "next/navigation";
 
 
 // @ts-expect-error: the react types are missing.
@@ -69,10 +70,9 @@ export default async function Page({ params }: { params: { articleId: string } }
 				<div className="col-span-4">
 					<div className="mx-auto">
 						<h1 className="font-serif font-bold text-4xl mb-2">{article?.metadata.title}</h1>
-						<div className="font-mono font-light text-gray-500">
-							<span>Published at {article?.metadata.publishTime.toLocaleString()}</span>
-							<span className="mx-2">|</span>
-							<span>{timeToRead.text}</span>
+						<div className="font-mono font-light text-gray-500 flex flex-row gap-2 divide-y-2">
+							<p>Published at {article?.metadata.publishTime.toLocaleString()}</p>
+							<p>{timeToRead.text}</p>
 						</div>
 
 						<div className={styles.content + " mt-8"}>

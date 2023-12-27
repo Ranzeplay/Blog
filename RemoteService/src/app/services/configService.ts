@@ -13,7 +13,7 @@ export class ConfigService {
 	public static getBackendExchangeServerAddress(): string {
 		const { serverRuntimeConfig } = getConfig();
 
-		console.log('Backend url: ' + serverRuntimeConfig.backendExchangeServerAddress)
+		// console.log('Backend url: ' + serverRuntimeConfig.backendExchangeServerAddress)
 
 		return serverRuntimeConfig.backendExchangeServerAddress;
 	}
