@@ -22,7 +22,7 @@ import 'prismjs/components/prism-java';
 import { Article } from "@/app/models/article";
 import { ArticleService } from "@/app/services/articleService";
 import ScrollToTopText from "@/app/components/pageTop/goToTopText";
-import { useRouter } from "next/navigation";
+import { Metadata } from "next";
 
 
 // @ts-expect-error: the react types are missing.
@@ -35,9 +35,15 @@ async function getArticle(articleId: string): Promise<Article | undefined> {
 	return await ArticleService.getInstance().getArticle(articleId);
 }
 
+export const metadata: Metadata = {
+	title: 'Read - Blog',
+};
+
 export default async function Page({ params }: { params: { articleId: string } }) {
 	const article = await getArticle(params.articleId);
 	const timeToRead = readingTime(article?.content!);
+
+	metadata.title = `${article?.metadata.title} - Blog`;
 
 	const content = (await unified()
 		.use(remarkParse)
@@ -50,15 +56,13 @@ export default async function Page({ params }: { params: { articleId: string } }
 
 	return (
 		<div className="bg-white">
-			<title>Read - Blog</title>
-
 			<div className="backdrop-filter backdrop-blur-md fixed top-0 w-full bg-white/60 h-16 shadow-lg z-10 content-center py-auto">
 				<div className="w-full put-center mx-14">
 					<div className="flex my-auto h-full w-full">
 						<img className="flex p-2 rounded-full bg-white drop-shadow-xl outline-2 outline-gray-300 h-4/5" src="https://ranzeplay.space/assets/about/avatar.svg" alt="Jeb Feng's avatar" />
 						<div className="flex ml-4 flex-grow">
 							<div className="block mt-1">
-								<h5 className="text-xs text-gray-600 font-mono">{article?.metadata.id}</h5>
+								<h5 className="text-xs text-gray-500 font-mono">{article?.metadata.id}</h5>
 								<h3 className="text-xl font-bold">{article?.metadata.title}</h3>
 							</div>
 						</div>
@@ -70,9 +74,9 @@ export default async function Page({ params }: { params: { articleId: string } }
 				<div className="col-span-4">
 					<div className="mx-auto">
 						<h1 className="font-serif font-bold text-4xl mb-2">{article?.metadata.title}</h1>
-						<div className="font-mono font-light text-gray-500 flex flex-row gap-2 divide-y-2">
-							<p>Published at {article?.metadata.publishTime.toLocaleString()}</p>
-							<p>{timeToRead.text}</p>
+						<div className="font-mono font-light text-gray-500 flex flex-row divide-x-2">
+							<p className="pr-2">Published at {article?.metadata.publishTime.toLocaleString()}</p>
+							<p className="pl-2">{timeToRead.text}</p>
 						</div>
 
 						<div className={styles.content + " mt-8"}>

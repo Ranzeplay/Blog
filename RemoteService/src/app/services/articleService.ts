@@ -8,16 +8,12 @@ export class ArticleService {
     return ArticleService.instance;
   }
 
-  public constructor() {
-    console.log("Initializing ArticleService");
-  }
-
   public async getArticleIndex(): Promise<ArticleMetadata[] | undefined> {
     const response = await fetch(
       `${ConfigService.getBackendExchangeServerAddress()}/api/article/index`,
       {
         headers: {
-          Authorization: ConfigService.getAccessToken(),
+          Authorization: ConfigService.getAccessToken() ?? "",
         },
       }
     );
@@ -33,7 +29,7 @@ export class ArticleService {
       `${ConfigService.getBackendExchangeServerAddress()}/api/article/entry/${id}`,
       {
         headers: {
-          Authorization: ConfigService.getAccessToken(),
+          Authorization: ConfigService.getAccessToken() ?? "",
         },
       }
     );
@@ -48,7 +44,7 @@ export class ArticleService {
       `${ConfigService.getBackendExchangeServerAddress()}/api/article/asset/${id}/${name}`,
       {
         headers: {
-          Authorization: ConfigService.getAccessToken(),
+          Authorization: ConfigService.getAccessToken() ?? "",
         },
       }
     );

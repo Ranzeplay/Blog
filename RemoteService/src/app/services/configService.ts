@@ -6,20 +6,11 @@ export class ConfigService {
 		return ConfigService.instance;
 	}
 
-	public constructor() {
-		console.log("Initializing ConfigService");
+	public static getBackendExchangeServerAddress(): string | undefined {
+		return process.env.BACKEND_URL;
 	}
 
-	public static getBackendExchangeServerAddress(): string {
-		const { serverRuntimeConfig } = getConfig();
-
-		// console.log('Backend url: ' + serverRuntimeConfig.backendExchangeServerAddress)
-
-		return serverRuntimeConfig.backendExchangeServerAddress;
-	}
-
-	public static getAccessToken(): string {
-		const { serverRuntimeConfig } = getConfig();
-		return serverRuntimeConfig.accessToken;
+	public static getAccessToken(): string | undefined {
+		return process.env.BACKEND_ACCESS_TOKEN;
 	}
 }

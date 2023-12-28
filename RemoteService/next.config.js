@@ -18,11 +18,6 @@ const nextConfig = {
 			}
 		]
 	},
-
-	serverRuntimeConfig: {
-		backendExchangeServerAddress: 'http://localhost:5167',
-		accessToken: 'ExampleAccessToken'
-	}
 }
 
 module.exports = nextConfig
