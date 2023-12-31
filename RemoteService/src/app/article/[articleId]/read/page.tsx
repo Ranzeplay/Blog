@@ -24,6 +24,7 @@ import { Article } from "@/app/models/article";
 import { ArticleService } from "@/app/services/articleService";
 import ScrollToTopText from "@/app/components/pageTop/goToTopText";
 import { Metadata } from "next";
+import remarkGfm from "remark-gfm";
 
 
 // @ts-expect-error: the react types are missing.
@@ -48,6 +49,7 @@ export default async function Page({ params }: { params: { articleId: string } }
 
 	const content = (await unified()
 		.use(remarkParse)
+		.use(remarkGfm)
 		.use(remarkMath)
 		.use(remarkRehype)
 		.use(rehypePrism, { plugins: ["line-numbers", 'copy-to-clipboard'] })

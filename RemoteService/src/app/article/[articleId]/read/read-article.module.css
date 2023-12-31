@@ -9,7 +9,7 @@
 }
 
 .content {
-  @apply my-2;
+  @apply mb-2 mt-8;
 }
 
 .content h1 {
@@ -85,6 +85,30 @@
 
 .content img {
   @apply mt-2 rounded-2xl drop-shadow-lg border-2;
+}
+
+.content table {
+  @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
+}
+
+.content thead {
+  @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400;
+}
+
+.content thead > tr > th {
+  @apply px-6 py-3;
+}
+
+.content tbody > tr {
+  @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700;
+}
+
+.content tbody > tr > th {
+  @apply px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white;
+}
+
+.content tbody > tr > td {
+  @apply px-6 py-4;
 }
 
 .link {
