@@ -1,6 +1,8 @@
 import { MetadataRoute } from "next";
 import { ArticleService } from "./services/articleService";
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	var articles = await ArticleService.getInstance().getArticleIndex();
 

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from "./read-article.module.css";
 import React from "react";
 import * as prod from 'react/jsx-runtime';

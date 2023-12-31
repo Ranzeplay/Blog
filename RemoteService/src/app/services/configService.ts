@@ -1,5 +1,3 @@
-import getConfig from "next/config";
-
 export class ConfigService {
 	private static instance: ConfigService = new ConfigService();
 	public static getInstance(): ConfigService {

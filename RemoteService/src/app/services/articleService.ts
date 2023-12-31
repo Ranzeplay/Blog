@@ -2,6 +2,8 @@ import { Article, ArticleMetadata } from "../models/article";
 import { Asset } from "../models/asset";
 import { ConfigService } from "./configService";
 
+export const dynamic = "force-dynamic";
+
 export class ArticleService {
   private static instance: ArticleService = new ArticleService();
   public static getInstance(): ArticleService {

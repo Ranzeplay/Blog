@@ -3,6 +3,8 @@ import React from "react";
 import { ArticleService } from "../services/articleService";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
 	title: 'Browse - Blog'
 };
@@ -36,7 +38,7 @@ export default async function Page() {
 							<div className="flex flex-row gap-2 text-sm mt-2 divide-x-2">
 								<p className="text-gray-500">{article.category}</p>
 								<div className="px-2 flex flex-row gap-2">
-									{article.tags.map(tag => <p className="text-gray-400">{tag}</p>)}
+									{article.tags.map(tag => <p key={`${article.id}#${tag}`} className="text-gray-400">{tag}</p>)}
 								</div>
 							</div>
 						</div>
