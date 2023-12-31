@@ -15,7 +15,10 @@ namespace LocalService.Controllers
         {
             _articleService.RefreshCacheAsync().Wait();
 
-            return new JsonResult(_articleService.GetArticles() ?? []);
+            var articles = _articleService.GetArticles();
+            articles = articles.OrderByDescending(a => a.PublishTime);
+
+            return new JsonResult(articles ?? []);
         }
 
         [HttpGet("entry/{articleId}")]
