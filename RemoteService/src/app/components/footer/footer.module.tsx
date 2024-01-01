@@ -1,9 +1,11 @@
+'use client';
+
 import Link from 'next/link';
 import styles from './footer.module.css';
 
 export default function FooterComponent() {
 	return (
-		<footer className="sm:flex sm:items-center sm:justify-between px-8 py-2 dark:bg-gray-800 antialiased w-full -mt-6">
+		<footer className="sm:flex sm:items-center sm:justify-between px-8 py-2 dark:bg-gray-800 antialiased w-full -mt-12">
 			<p className="mb-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:mb-0">
 				&copy; 2023 <a href="https://ranzeplay.me/" className="hover:underline" target="_blank" rel="noopener">Jeb Feng</a>. All rights reserved.
 			</p>
