@@ -7,15 +7,18 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div>
-      <div className={`card`}>
+    <div className='grid grid-cols-3 gap-x-12'>
+      <div className={`card col-span-2`}>
         <h2 className={styles.cardTitle}>Pinned Page</h2>
       </div>
-      <div className={`card`}>
-        <h2 className={styles.cardTitle}>Latest Posts</h2>
+      <div className={`card col-span-1`}>
+        <h2 className={styles.cardTitle}>Hello</h2>
       </div>
-      <div className={`card`}>
+      <div className={`card col-span-1`}>
         <h2 className={styles.cardTitle}>Links</h2>
+      </div>
+      <div className={`card col-span-2`}>
+        <h2 className={styles.cardTitle}>Latest Posts</h2>
       </div>
     </div>
   )
