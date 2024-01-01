@@ -3,6 +3,8 @@ import React from "react";
 import { ArticleService } from "../services/articleService";
 import Link from "next/link";
 
+import styles from './browse.module.css';
+
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
@@ -17,16 +19,16 @@ export default async function Page() {
 			<h2 className="font-serif text-2xl">Browse articles</h2>
 			<h5 className="text-gray-500">{articles.length} {(articles.length > 1) ? 'entries' : 'entry'} in total</h5>
 
-			<div className="flex my-4 divide-y-2 w-4/5 mx-auto">
-				<span className="isolate inline-flex shadow-sm">
-					<button type="button" className="shadow relative border inline-flex items-center bg-gray-200 px-3 py-2 text-sm text-gray-900 ring-gray-300 hover:bg-gray-50 focus:z-10">Article</button>
-					<button type="button" className="shadow relative border -ml-px inline-flex items-center bg-white px-3 py-2 text-sm text-gray-900 ring-gray-300 hover:bg-gray-50 focus:z-10">Category</button>
-					<button type="button" className="shadow relative border -ml-px inline-flex items-center bg-white px-3 py-2 text-sm text-gray-900 ring-gray-300 hover:bg-gray-50 focus:z-10">Tag</button>
+			<div className={styles.filterBoxContainer}>
+				<span className={styles.filterCriteriaContainer}>
+					<button type="button" className={styles.filterButtonSelected}>Article</button>
+					<button type="button" className={styles.filterButton}>Category</button>
+					<button type="button" className={styles.filterButton}>Tag</button>
 				</span>
-				<input className="flex-grow shadow appearance-none border w-fit py-2 px-3 ml-0.5 text-gray-700 leading-tight focus:outline-1 focus:shadow-outline" type="text" placeholder="Search" />
+				<input className={styles.filterTextBox} type="text" placeholder="Search" />
 			</div>
 
-			<div className="mt-4 divide-y-2 w-4/5 mx-auto">
+			<div className="mt-4 divide-y-2 w-8/9 lg:w-4/5 mx-auto">
 				{articles.map(article => {
 					return (
 						<div key={article.id} className="py-2 w-full">

@@ -1,0 +1,19 @@
+.filterBoxContainer {
+	@apply flex flex-col lg:flex-row gap-y-2 my-4 divide-y-2 w-4/5 mx-auto;
+}
+
+.filterCriteriaContainer {
+	@apply isolate inline-flex shadow-sm max-lg:grow;
+}
+
+.filterButtonSelected {
+	@apply shadow relative border inline-flex items-center bg-gray-200 px-3 py-2 text-sm text-gray-900 ring-gray-300 hover:bg-gray-50 focus:z-10;
+}
+
+.filterButton {
+	@apply shadow relative border -ml-px inline-flex items-center bg-white px-3 py-2 text-sm text-gray-900 ring-gray-300 hover:bg-gray-50 focus:z-10;
+}
+
+.filterTextBox {
+	@apply flex-grow max-lg:grow shadow appearance-none border w-fit py-2 px-3 ml-0.5 text-gray-700 leading-tight focus:outline-1;
+}
