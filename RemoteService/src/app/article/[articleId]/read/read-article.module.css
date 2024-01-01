@@ -9,7 +9,7 @@
 }
 
 .content {
-  @apply mb-2 mt-8;
+  @apply mb-2 mt-8 w-full;
 }
 
 .content h1 {
@@ -53,7 +53,7 @@
 }
 
 .content p {
-  @apply mt-1;
+  @apply mt-1 w-full;
   font-family: 'NotoSerif';
 }
 
@@ -88,27 +88,28 @@
 }
 
 .content table {
-  @apply w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400;
+  @apply w-full my-3 text-sm text-left rtl:text-right text-gray-700 overflow-scroll;
+  font-family: 'NotoSerif';
 }
 
 .content thead {
-  @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400;
+  @apply text-sm text-gray-900 uppercase bg-gray-50;
 }
 
 .content thead > tr > th {
-  @apply px-6 py-3;
+  @apply px-3 py-2;
 }
 
 .content tbody > tr {
-  @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700;
+  @apply bg-white border-b;
 }
 
 .content tbody > tr > th {
-  @apply px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white;
+  @apply px-3 py-2 font-medium text-gray-900 whitespace-nowrap;
 }
 
 .content tbody > tr > td {
-  @apply px-6 py-4;
+  @apply px-3 py-2;
 }
 
 .link {

@@ -60,7 +60,7 @@ export default async function Page({ params }: { params: { articleId: string } }
 	return (
 		<div className="bg-white">
 			<div className="backdrop-filter backdrop-blur-md fixed top-0 w-full bg-white/60 h-16 shadow-lg z-10 content-center py-auto">
-				<div className="w-full put-center mx-14">
+				<div className="w-full put-center mx-1 lg:mx-14">
 					<div className="flex my-auto h-full w-full">
 						<img className="flex p-2 rounded-full bg-white drop-shadow-xl outline-2 outline-gray-300 h-4/5" src="https://ranzeplay.space/assets/about/avatar.svg" alt="Jeb Feng's avatar" />
 						<div className="flex ml-4 flex-grow">
@@ -73,13 +73,13 @@ export default async function Page({ params }: { params: { articleId: string } }
 				</div>
 			</div>
 
-			<div className="pt-24 grid grid-cols-5 gap-12 w-3/4 mx-auto py-8 text-left">
-				<div className="col-span-4">
+			<div className="pt-24 lg:grid lg:grid-cols-5 gap-12 max-lg:w-5/6 max-lg:mx-auto lg:w-3/4 mx-auto py-8 text-left">
+				<div className="lg:col-span-4">
 					<div className="mx-auto">
 						<h1 className="font-serif font-bold text-4xl mb-2">{article?.metadata.title}</h1>
-						<div className="font-mono font-light text-gray-500 flex flex-row divide-x-2">
-							<p className="pr-2">Published at {article?.metadata.publishTime.toLocaleString()}</p>
-							<p className="pl-2">{timeToRead.text}</p>
+						<div className="font-mono font-light text-gray-500 flex flex-col lg:flex-row lg:divide-x-2">
+							<p className="lg:pr-2">Published at {article?.metadata.publishTime.toLocaleString()}</p>
+							<p className="lg:pl-2">{timeToRead.text}</p>
 						</div>
 
 						<div className={styles.content + " mt-8"}>
@@ -93,7 +93,8 @@ export default async function Page({ params }: { params: { articleId: string } }
 						</div>
 					</div>
 				</div>
-				<div className="col-span-1">
+
+				<div className="max-lg:hidden max-lg:col-span-1">
 					<div className="fixed grid mt-4 gap-6">
 						<div className="grid-row">
 							<h3 className="text-xl">Operations</h3>
