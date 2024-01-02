@@ -7,19 +7,79 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <div className='grid grid-cols-3 gap-x-12'>
+    <>
+      <WideContent></WideContent>
+      <NarrowContent></NarrowContent>
+    </>
+  )
+}
+
+function WideContent() {
+  return (
+    <div className='max-md:hidden grid grid-cols-3 gap-x-12'>
       <div className={`card col-span-2`}>
-        <h2 className={styles.cardTitle}>Pinned Page</h2>
+        <PinnedPageComponent />
       </div>
       <div className={`card col-span-1`}>
-        <h2 className={styles.cardTitle}>Hello</h2>
+        <HelloComponent />
       </div>
       <div className={`card col-span-1`}>
-        <h2 className={styles.cardTitle}>Links</h2>
+        <LinksComponent />
       </div>
       <div className={`card col-span-2`}>
-        <h2 className={styles.cardTitle}>Latest Posts</h2>
+        <LatestPostsComponent />
       </div>
     </div>
+  )
+}
+
+function NarrowContent() {
+  return (
+    <div className='md:hidden max-w-lg mx-auto mt-6'>
+      <div className='mb-4'>
+        <HelloComponent />
+      </div>
+      <div className='mb-4'>
+        <PinnedPageComponent />
+      </div>
+      <div className='mb-4'>
+        <LatestPostsComponent />
+      </div>
+      <div className='mb-4'>
+        <LinksComponent />
+      </div>
+    </div>
+  )
+}
+
+function HelloComponent() {
+  return (
+    <>
+      <h2 className={styles.cardTitle}>Hello</h2>
+    </>
+  )
+}
+
+function PinnedPageComponent() {
+  return (
+    <>
+      <h2 className={styles.cardTitle}>Pinned page</h2>
+    </>
+  )
+}
+
+function LatestPostsComponent() {
+  return (
+    <>
+      <h2 className={styles.cardTitle}>Latest posts</h2>
+    </>
+  )
+}
+
+function LinksComponent() {
+  return (
+    <>
+      <h2 className={styles.cardTitle}>Links</h2>
+    </>
   )
 }
