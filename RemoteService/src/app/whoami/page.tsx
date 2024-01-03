@@ -27,7 +27,7 @@ export default function Page() {
 							<h5 className="font-mono text-right text-white">$ whoami</h5>
 							<h2 className="text-right text-6xl font-bold title-text text-white drop-shadow-md">Jeb Feng</h2>
 
-							<div className="grid grid-cols-1 xl:grid-cols-2 text-center gap-1 mt-8 font-mono text-lg">
+							<div className="grid grid-cols-1 xl:grid-cols-2 text-center gap-1 mt-8 font-mono text-lg text-white">
 								<div className={styles.myTag}>&lt;Developer /&gt;</div>
 								<div className={styles.myTag}>&lt;Senior High /&gt;</div>
 								<div className={styles.myTag}>&lt;INFP-T /&gt;</div>
