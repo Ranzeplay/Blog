@@ -1,17 +1,12 @@
-﻿using LocalService.Models;
-using LocalService.Services;
+﻿using Backend.Services;
+using LocalService.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LocalService.Controllers
+namespace Backend.Controllers
 {
-    public class OverviewController : Controller
+    public class OverviewController(ArticleService articleService) : Controller
     {
-        private readonly ArticleService _articleService;
-
-        public OverviewController(ArticleService articleService)
-        {
-            _articleService = articleService;
-        }
+        private readonly ArticleService _articleService = articleService;
 
         [HttpGet]
         [Route("/api/overview")]
@@ -23,7 +18,8 @@ namespace LocalService.Controllers
 
             var tagArray = articles.Select(x => x.Tags);
             var tagWithDuplication = new List<string>();
-            foreach (var tagArrayEntry in tagArray) {
+            foreach (var tagArrayEntry in tagArray)
+            {
                 tagWithDuplication.AddRange(tagArrayEntry);
             }
             var tags = tagWithDuplication.Distinct();

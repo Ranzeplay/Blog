@@ -1,8 +1,8 @@
-﻿using LocalService.Attributes;
-using LocalService.Services;
+﻿using Backend.Attributes;
+using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LocalService.Controllers
+namespace Backend.Controllers
 {
     [ServiceFilter(typeof(RequireAccessToken))]
     [Route("/api/article")]

@@ -1,8 +1,8 @@
-﻿using LocalService.Models;
+﻿using Backend.Models;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
 
-namespace LocalService.Services
+namespace Backend.Services
 {
     public class ArticleService
     {
@@ -66,7 +66,7 @@ namespace LocalService.Services
 
         public ContentAsset? GetAsset(string id, string name)
         {
-            if(!_indexedArticles.ContainsKey(id))
+            if (!_indexedArticles.ContainsKey(id))
             {
                 return null;
             }
@@ -82,7 +82,7 @@ namespace LocalService.Services
         {
             var directory = Path.Combine(_articleStoreDirectory, id);
             var path = Directory.GetFiles(directory, "head.*").FirstOrDefault();
-            if(path == null)
+            if (path == null)
             {
                 return null;
             }
@@ -97,7 +97,7 @@ namespace LocalService.Services
         {
             _indexedArticles.Clear();
 
-            foreach(var articleEntryDirectory in Directory.GetDirectories(_articleStoreDirectory))
+            foreach (var articleEntryDirectory in Directory.GetDirectories(_articleStoreDirectory))
             {
                 var textFile = await File.ReadAllTextAsync(Path.Combine(articleEntryDirectory, "text.md"));
                 var article = _markdownService.ParseArticle(textFile)!;

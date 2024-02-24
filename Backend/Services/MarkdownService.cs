@@ -1,4 +1,4 @@
-﻿using LocalService.Models;
+﻿using Backend.Models;
 using Markdig;
 using Markdig.Extensions.Yaml;
 using Markdig.Syntax;
@@ -7,7 +7,7 @@ using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace LocalService.Services
+namespace Backend.Services
 {
     public class MarkdownService
     {

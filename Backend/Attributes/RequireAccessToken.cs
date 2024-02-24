@@ -1,10 +1,10 @@
-﻿using LocalService.Models;
+﻿using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
 using System.Net;
 
-namespace LocalService.Attributes
+namespace Backend.Attributes
 {
     public class RequireAccessToken : ActionFilterAttribute
     {

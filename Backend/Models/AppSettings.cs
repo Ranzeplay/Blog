@@ -1,4 +1,4 @@
-﻿namespace LocalService.Models
+﻿namespace Backend.Models
 {
     public class AppSettings
     {

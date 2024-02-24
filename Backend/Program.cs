@@ -1,8 +1,8 @@
-using LocalService.Attributes;
-using LocalService.Models;
-using LocalService.Services;
+using Backend.Attributes;
+using Backend.Models;
+using Backend.Services;
 
-namespace LocalService
+namespace Backend
 {
     public class Program
     {
