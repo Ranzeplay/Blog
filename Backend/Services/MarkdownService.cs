@@ -26,7 +26,7 @@ namespace Backend.Services
                .Build();
         }
 
-        public Article? ParseArticle(string text)
+        public ArticleDeprecated? ParseArticle(string text)
         {
             var document = Markdown.Parse(text, _markdownPipeline);
 

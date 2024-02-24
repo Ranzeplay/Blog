@@ -11,7 +11,7 @@ namespace Backend.Services
 
         private readonly MarkdownService _markdownService;
 
-        private readonly Dictionary<string, Article> _indexedArticles;
+        private readonly Dictionary<string, ArticleDeprecated> _indexedArticles;
 
         private readonly FileExtensionContentTypeProvider _fileExtensionContentTypeProvider = new();
 
@@ -59,7 +59,7 @@ namespace Backend.Services
                 .Where(article => article.Tags.All(t => tags.Contains(t)));
         }
 
-        public Article? GetArticle(string id)
+        public ArticleDeprecated? GetArticle(string id)
         {
             return _indexedArticles.GetValueOrDefault(id);
         }

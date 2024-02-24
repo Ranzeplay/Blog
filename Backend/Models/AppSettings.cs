@@ -4,6 +4,8 @@
     {
         public string ContentDirectory { get; set; }
 
-        public string AccessToken { get; set; }
+        public string FrontEndAccessToken { get; set; }
+
+        public string ManagementToolAccessToken { get; set; }
     }
 }
