@@ -1,9 +1,7 @@
 ﻿using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System.Net;
 
 namespace Backend.Attributes
 {
@@ -13,7 +11,7 @@ namespace Backend.Attributes
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
             {
                 logger.LogInformation("Skipped authentication.");
                 base.OnActionExecuting(context);

@@ -5,66 +5,73 @@ using Backend.Models.Tag;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-[Route("/api/tag")]
-public class TagController(PersistentDbContext dbContext) : Controller
+namespace Backend.Controllers
 {
-    private readonly PersistentDbContext _dbContext = dbContext;
-
-    [HttpGet("index")]
-    [ServiceFilter(typeof(RequireFrontEndAccessToken))]
-    public IActionResult Index()
+    [Route("/api/tag")]
+    public class TagController(PersistentDbContext dbContext) : Controller
     {
-        var tags = _dbContext.Tags.Select(t => new TagViewModel(t)).ToList();
-        return Ok(tags);
-    }
+        private readonly PersistentDbContext _dbContext = dbContext;
 
-    [HttpGet("entry/{slug}")]
-    [ServiceFilter(typeof(RequireFrontEndAccessToken))]
-    public IActionResult GetEntry(string slug)
-    {
-        var tag = _dbContext.Tags.FirstOrDefault(t => t.Slug == slug);
-
-        if (tag == null)
+        [HttpGet("index")]
+        [ServiceFilter(typeof(RequireFrontEndAccessToken))]
+        public IActionResult Index()
         {
-            return NotFound();
+            var tags = _dbContext.Tags
+                .Include(t => t.Posts)
+                .Include(t => t.Articles)
+                .Select(t => new TagViewModel(t))
+                .ToList();
+            return Ok(tags);
         }
-        else
+
+        [HttpGet("entry/{slug}")]
+        [ServiceFilter(typeof(RequireFrontEndAccessToken))]
+        public IActionResult GetEntry(string slug)
         {
-            return Ok(new TagViewModel(tag));
+            var tag = _dbContext.Tags
+                .FirstOrDefault(t => t.Slug == slug);
+
+            if (tag == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(new TagViewModel(tag));
+            }
         }
-    }
 
-    [HttpGet("entry/{slug}/articles")]
-    [ServiceFilter(typeof(RequireFrontEndAccessToken))]
-    public async Task<IActionResult> GetArticlesAsync(string slug)
-    {
-        var tag = _dbContext.Tags.FirstOrDefault(t => t.Slug == slug);
-
-        if (tag == null)
+        [HttpGet("entry/{slug}/articles")]
+        [ServiceFilter(typeof(RequireFrontEndAccessToken))]
+        public async Task<IActionResult> GetArticlesAsync(string slug)
         {
-            return NotFound();
+            var tag = _dbContext.Tags.FirstOrDefault(t => t.Slug == slug);
+
+            if (tag == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var articles = _dbContext.Articles.Where(a => a.Tags.Any(t => t.Slug == slug));
+                await articles.ForEachAsync(a => a.Content = string.Empty);
+                return Ok(articles.Select(a => new ArticleViewModel(a)));
+            }
         }
-        else
+
+        [HttpPost("create")]
+        [ServiceFilter(typeof(RequireManagementToken))]
+        public async Task<IActionResult> CreateAsync([FromBody] CreateTagViewModel model)
         {
-            var articles = _dbContext.Articles.Where(a => a.Tags.Any(t => t.Slug == slug));
-            await articles.ForEachAsync(a => a.Content = string.Empty);
-            return Ok(articles.Select(a => new ArticleViewModel(a)));
+            var tag = new DbTag
+            {
+                Name = model.Name,
+                Slug = model.Slug,
+            };
+
+            await _dbContext.Tags.AddAsync(tag);
+            await _dbContext.SaveChangesAsync();
+            return Created($"entry/{tag.Slug}", null);
         }
-    }
-
-    [HttpPost("create")]
-    [ServiceFilter(typeof(RequireManagementToken))]
-    public async Task<IActionResult> CreateAsync([FromBody] CreateTagViewModel model)
-    {
-        var tag = new DbTag
-        {
-            Name = model.Name,
-            Slug = model.Slug,
-        };
-
-        await _dbContext.Tags.AddAsync(tag);
-        await _dbContext.SaveChangesAsync();
-        return Created($"entry/{tag.Slug}", null);
     }
 }
-

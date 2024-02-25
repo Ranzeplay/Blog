@@ -1,9 +1,7 @@
-﻿
-using Backend.Attributes;
+﻿using Backend.Attributes;
 using Backend.Data;
 using Backend.Models.Article;
 using Backend.Models.Category;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +16,10 @@ namespace Backend.Controllers
         [ServiceFilter(typeof(RequireFrontEndAccessToken))]
         public IActionResult Index()
         {
-            var categories = _dbContext.Categories.Select(c => new CategoryViewModel(c)).ToList();
+            var categories = _dbContext.Categories
+                .Include(c => c.Articles)
+                .Select(c => new CategoryViewModel(c))
+                .ToList();
             return Ok(categories);
         }
 

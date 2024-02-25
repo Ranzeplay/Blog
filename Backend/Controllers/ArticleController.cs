@@ -4,9 +4,6 @@ using Backend.Models.Article;
 using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text.Json;
 
 namespace Backend.Controllers
 {
@@ -21,9 +18,9 @@ namespace Backend.Controllers
         public IActionResult Index()
         {
             var articles = _dbContext.Articles
-                .Select(a => new ArticleViewModel(a))
                 .Include(a => a.Category)
-                .Include(a => a.Tags);
+                .Include(a => a.Tags)
+                .Select(a => new ArticleViewModel(a));
 
             return Ok(articles);
         }

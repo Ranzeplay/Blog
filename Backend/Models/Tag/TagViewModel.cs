@@ -8,5 +8,6 @@ namespace Backend.Models.Tag
         public string Name { get; set; } = tag.Name;
 
         public IEnumerable<string> ArticleSlugs { get; set; } = tag.Articles.Select(a => a.Slug);
+        public IEnumerable<string> PostSlugs { get; set; } = tag.Posts.Select(p => p.Slug);
     }
 }

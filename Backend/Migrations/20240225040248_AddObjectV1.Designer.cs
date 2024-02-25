@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(PersistentDbContext))]
-    [Migration("20240224150319_ModifyDefaultValueOnArticleV1")]
-    partial class ModifyDefaultValueOnArticleV1
+    [Migration("20240225040248_AddObjectV1")]
+    partial class AddObjectV1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,10 @@ namespace Backend.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("HeadImageUrl")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -64,30 +68,7 @@ namespace Backend.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("Backend.Data.DbCategory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Slug")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Backend.Data.DbComment", b =>
+            modelBuilder.Entity("Backend.Data.DbArticleComment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,7 +93,173 @@ namespace Backend.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("ArticleComments");
+                });
+
+            modelBuilder.Entity("Backend.Data.DbCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Slug");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Backend.Data.DbDiary", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Mood")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Weather")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Date");
+
+                    b.ToTable("Diaries");
+                });
+
+            modelBuilder.Entity("Backend.Data.DbPost", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("HeadImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("LastModifiedTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("Public")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("PublishTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("Backend.Data.DbPostComment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ArticleId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("PublishTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("PostComments");
+                });
+
+            modelBuilder.Entity("Backend.Data.DbProject", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ExternalUrls")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
+                    b.Property<string>("HeadImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("IconUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Introduction")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SiteUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Slug");
+
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Backend.Data.DbTag", b =>
@@ -134,6 +281,8 @@ namespace Backend.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Slug");
 
                     b.ToTable("Tags");
                 });
@@ -161,6 +310,8 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Username");
+
                     b.ToTable("Users");
                 });
 
@@ -176,7 +327,22 @@ namespace Backend.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("DbArticleDbTag");
+                    b.ToTable("ArticleTag", (string)null);
+                });
+
+            modelBuilder.Entity("DbPostDbTag", b =>
+                {
+                    b.Property<Guid>("PostsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TagsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("PostsId", "TagsId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("PostTag", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Data.DbArticle", b =>
@@ -190,7 +356,7 @@ namespace Backend.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Backend.Data.DbComment", b =>
+            modelBuilder.Entity("Backend.Data.DbArticleComment", b =>
                 {
                     b.HasOne("Backend.Data.DbArticle", "Article")
                         .WithMany("Comments")
@@ -199,7 +365,26 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.HasOne("Backend.Data.DbUser", "Sender")
+                        .WithMany("ArticleComments")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+
+                    b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("Backend.Data.DbPostComment", b =>
+                {
+                    b.HasOne("Backend.Data.DbPost", "Article")
                         .WithMany("Comments")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Data.DbUser", "Sender")
+                        .WithMany("PostComments")
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -224,6 +409,21 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DbPostDbTag", b =>
+                {
+                    b.HasOne("Backend.Data.DbPost", null)
+                        .WithMany()
+                        .HasForeignKey("PostsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Data.DbTag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Backend.Data.DbArticle", b =>
                 {
                     b.Navigation("Comments");
@@ -234,9 +434,16 @@ namespace Backend.Migrations
                     b.Navigation("Articles");
                 });
 
-            modelBuilder.Entity("Backend.Data.DbUser", b =>
+            modelBuilder.Entity("Backend.Data.DbPost", b =>
                 {
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("Backend.Data.DbUser", b =>
+                {
+                    b.Navigation("ArticleComments");
+
+                    b.Navigation("PostComments");
                 });
 #pragma warning restore 612, 618
         }

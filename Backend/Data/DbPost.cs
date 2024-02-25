@@ -9,7 +9,7 @@ namespace Backend.Data
         public string Slug { get; set; }
         public string Title { get; set; }
 
-        public string HeadImageUrl { get; set; }
+        public string? HeadImageUrl { get; set; }
 
         public DateTime PublishTime { get; set; } = DateTime.UtcNow;
         public DateTime LastModifiedTime { get; set; } = DateTime.UtcNow;

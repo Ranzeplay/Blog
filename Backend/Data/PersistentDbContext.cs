@@ -5,6 +5,8 @@ namespace Backend.Data
 {
     public class PersistentDbContext(DbContextOptions<PersistentDbContext> options) : DbContext(options)
     {
+        private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.General);
+
         public DbSet<DbUser> Users { get; set; }
         public DbSet<DbArticle> Articles { get; set; }
         public DbSet<DbCategory> Categories { get; set; }
@@ -41,10 +43,14 @@ namespace Backend.Data
                 .Navigation(e => e.Category)
                 .EnableLazyLoading();
 
+            modelBuilder.Entity<DbTag>()
+                .HasMany(e => e.Articles)
+                .WithMany(e => e.Tags)
+                .UsingEntity(j => j.ToTable("R_ArticleTag"));
             modelBuilder.Entity<DbArticle>()
                 .HasMany(e => e.Tags)
                 .WithMany(e => e.Articles)
-                .UsingEntity(j => j.ToTable("ArticleTag"));
+                .UsingEntity(j => j.ToTable("R_ArticleTag"));
             modelBuilder.Entity<DbArticle>()
                 .Navigation(e => e.Tags)
                 .EnableLazyLoading();
@@ -52,10 +58,14 @@ namespace Backend.Data
                 .Navigation(e => e.Articles)
                 .EnableLazyLoading();
 
+            modelBuilder.Entity<DbTag>()
+                .HasMany(e => e.Posts)
+                .WithMany(e => e.Tags)
+                .UsingEntity(j => j.ToTable("R_PostTag"));
             modelBuilder.Entity<DbPost>()
                 .HasMany(e => e.Tags)
                 .WithMany(e => e.Posts)
-                .UsingEntity(j => j.ToTable("PostTag"));
+                .UsingEntity(j => j.ToTable("R_PostTag"));
             modelBuilder.Entity<DbPost>()
                 .Navigation(e => e.Tags)
                 .EnableLazyLoading();
@@ -67,8 +77,8 @@ namespace Backend.Data
                 .Property(e => e.ExternalUrls)
                 .HasColumnType("jsonb")
                 .HasConversion(
-                    v => JsonSerializer.Serialize(v, new JsonSerializerOptions(JsonSerializerDefaults.General)),
-                    v => JsonSerializer.Deserialize<Dictionary<string, string>>(v, new JsonSerializerOptions(JsonSerializerDefaults.General))
+                    v => JsonSerializer.Serialize(v, JsonOptions),
+                    v => JsonSerializer.Deserialize<Dictionary<string, string>>(v, JsonOptions)
                 );
         }
     }

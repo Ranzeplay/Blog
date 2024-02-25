@@ -3,6 +3,7 @@ using System;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(PersistentDbContext))]
-    partial class BackendDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240225050549_NTNRelationV1")]
+    partial class NTNRelationV1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +36,9 @@ namespace Backend.Migrations
 
                     b.Property<string>("Content")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("HeadImageUrl")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("LastModifiedTime")
@@ -156,6 +162,9 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("HeadImageUrl")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("LastModifiedTime")
                         .HasColumnType("timestamp with time zone");
 
@@ -208,11 +217,9 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Data.DbProject", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -221,6 +228,12 @@ namespace Backend.Migrations
                     b.Property<string>("ExternalUrls")
                         .IsRequired()
                         .HasColumnType("jsonb");
+
+                    b.Property<string>("HeadImageUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("IconUrl")
+                        .HasColumnType("text");
 
                     b.Property<string>("Introduction")
                         .IsRequired()
@@ -234,7 +247,13 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("Slug");
 
                     b.ToTable("Projects");
                 });
@@ -277,6 +296,9 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("IconUrl")
+                        .HasColumnType("text");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("text");
@@ -304,7 +326,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("ArticleTag", (string)null);
+                    b.ToTable("R_ArticleTag", (string)null);
                 });
 
             modelBuilder.Entity("DbPostDbTag", b =>
@@ -319,7 +341,7 @@ namespace Backend.Migrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("PostTag", (string)null);
+                    b.ToTable("R_PostTag", (string)null);
                 });
 
             modelBuilder.Entity("Backend.Data.DbArticle", b =>
