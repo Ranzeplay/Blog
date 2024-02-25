@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Backend.Migrations
 {
-    [DbContext(typeof(BackendDbContext))]
+    [DbContext(typeof(PersistentDbContext))]
     [Migration("20240224140717_ArticleMigrationV1")]
     partial class ArticleMigrationV1
     {

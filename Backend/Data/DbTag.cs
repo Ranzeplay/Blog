@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Data
 {
     [Table("Tags")]
+    [Index(nameof(Slug))]
     public class DbTag
     {
         [Key]
@@ -13,5 +15,6 @@ namespace Backend.Data
         public string Description { get; set; } = string.Empty;
 
         public ICollection<DbArticle> Articles { get; set; } = [];
+        public ICollection<DbPost> Posts { get; set; } = [];
     }
 }

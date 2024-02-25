@@ -25,9 +25,14 @@ namespace Backend
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<BackendDbContext>(options =>
+            builder.Services.AddDbContext<PersistentDbContext>(options =>
             {
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            builder.Services.AddDbContext<MemoryDbContext>(options =>
+            {
+                options.UseInMemoryDatabase("MemoryDb");
             });
 
             var app = builder.Build();

@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Backend.Migrations
 {
-    [DbContext(typeof(BackendDbContext))]
+    [DbContext(typeof(PersistentDbContext))]
     [Migration("20240224150033_AddDefaultValueOnArticleV1")]
     partial class AddDefaultValueOnArticleV1
     {

@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Backend.Controllers
 {
     [Route("/api/category")]
-    public class CategoryController(BackendDbContext dbContext) : Controller
+    public class CategoryController(PersistentDbContext dbContext) : Controller
     {
-        private readonly BackendDbContext _dbContext = dbContext;
+        private readonly PersistentDbContext _dbContext = dbContext;
 
         [HttpGet("index")]
         [ServiceFilter(typeof(RequireFrontEndAccessToken))]

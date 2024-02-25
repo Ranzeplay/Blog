@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [Route("/api/tag")]
-public class TagController(BackendDbContext dbContext) : Controller
+public class TagController(PersistentDbContext dbContext) : Controller
 {
-    private readonly BackendDbContext _dbContext = dbContext;
+    private readonly PersistentDbContext _dbContext = dbContext;
 
     [HttpGet("index")]
     [ServiceFilter(typeof(RequireFrontEndAccessToken))]

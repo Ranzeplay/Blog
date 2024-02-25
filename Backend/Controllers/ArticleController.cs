@@ -11,10 +11,10 @@ using System.Text.Json;
 namespace Backend.Controllers
 {
     [Route("/api/article")]
-    public class ArticleController(ArticleService articleService, BackendDbContext dbContext) : Controller
+    public class ArticleController(ArticleService articleService, PersistentDbContext dbContext) : Controller
     {
         private readonly ArticleService _articleService = articleService;
-        private readonly BackendDbContext _dbContext = dbContext;
+        private readonly PersistentDbContext _dbContext = dbContext;
 
         [HttpGet("index")]
         [ServiceFilter(typeof(RequireFrontEndAccessToken))]

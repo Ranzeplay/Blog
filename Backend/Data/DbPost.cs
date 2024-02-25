@@ -1,12 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Backend.Data
 {
-    [Table("Articles")]
-    [Index(nameof(Slug))]
-    public class DbArticle
+    public class DbPost
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
@@ -19,14 +15,11 @@ namespace Backend.Data
         public DateTime LastModifiedTime { get; set; } = DateTime.UtcNow;
 
         public ICollection<DbTag> Tags { get; set; } = [];
-        public DbCategory Category { get; set; }
 
-        public bool Public { get; set; } 
+        public bool Public { get; set; }
 
         public string Content { get; set; }
 
-        public ICollection<DbArticleComment> Comments { get; set; } = [];
-
-        public Guid CategoryId { get; internal set; }
+        public ICollection<DbPostComment> Comments { get; set; } = [];
     }
 }
