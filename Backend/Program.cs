@@ -1,7 +1,6 @@
 using Backend.Attributes;
 using Backend.Data;
 using Backend.Models;
-using Backend.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend
@@ -12,8 +11,6 @@ namespace Backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddSingleton<ArticleService>();
-            builder.Services.AddSingleton<MarkdownService>();
             builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
             builder.Services.AddTransient<RequireFrontEndAccessToken>();

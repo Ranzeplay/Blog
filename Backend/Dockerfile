@@ -7,16 +7,16 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["LocalService.csproj", "."]
-RUN dotnet restore "./LocalService.csproj"
+COPY ["Backend.csproj", "."]
+RUN dotnet restore "./Backend.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "LocalService.csproj" -c Release -o /app/build
+RUN dotnet build "Backend.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "LocalService.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Backend.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "LocalService.dll"]
+ENTRYPOINT ["dotnet", "Backend.dll"]

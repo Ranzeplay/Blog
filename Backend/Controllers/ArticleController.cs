@@ -1,16 +1,14 @@
 ﻿using Backend.Attributes;
 using Backend.Data;
 using Backend.Models.Article;
-using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
     [Route("/api/article")]
-    public class ArticleController(ArticleService articleService, PersistentDbContext dbContext) : Controller
+    public class ArticleController(PersistentDbContext dbContext) : Controller
     {
-        private readonly ArticleService _articleService = articleService;
         private readonly PersistentDbContext _dbContext = dbContext;
 
         [HttpGet("index")]
@@ -41,21 +39,6 @@ namespace Backend.Controllers
             else
             {
                 return Ok(new ArticleViewModel(article));
-            }
-        }
-
-        [HttpGet("asset/{articleId}/{name}")]
-        [ServiceFilter(typeof(RequireFrontEndAccessToken))]
-        public IActionResult Asset(string articleId, string name)
-        {
-            var asset = _articleService.GetAsset(articleId, name);
-            if (asset == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return File(asset.Content, asset.ContentType);
             }
         }
 
