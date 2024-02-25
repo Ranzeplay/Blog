@@ -1,3 +1,9 @@
+import ManagementLayout from "../layout";
+
 export default function Index() {
-	return <div>About</div>
-  }
+	return (
+		<ManagementLayout title="Overview" description="How's it going with your website?">
+			<></>
+		</ManagementLayout>
+	)
+}
