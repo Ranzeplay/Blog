@@ -7,7 +7,7 @@ export default function Index() {
 		<ManagementLayout title="Articles" description="Manage your articles">
 			<div className="flex flex-col gap-y-2">
 				<h3 className="font-semibold text-2xl">Operations</h3>
-				<Button variant={'link'} className="flex">
+				<Button variant={'link'} className="flex w-min text-blue-500 hover:underline">
 					<Link href={'/article/create'} className="flex">
 						Create new article
 					</Link>
