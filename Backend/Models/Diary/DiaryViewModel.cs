@@ -1,4 +1,5 @@
 ﻿using Backend.Data;
+using Backend.Models.Tag;
 
 namespace Backend.Models.Diary
 {

@@ -11,7 +11,7 @@ export default async function handler(request: NextRequest) {
       return NextResponse.next();
     }
 
-    return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+    return NextResponse.redirect("/");
   }
 }
 

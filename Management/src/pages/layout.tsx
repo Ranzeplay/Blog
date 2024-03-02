@@ -19,16 +19,18 @@ export default function ManagementLayout({
 
 				<div className="flex flex-col space-between h-full">
 					<div className="flex flex-col grow">
-						{NavEntry('Article', '/article')}
-						{NavEntry('Post', '/post')}
-						{NavEntry('Diary', '/diary')}
-						{NavEntry('Project', '/project')}
-						{NavEntry('File', '/file')}
-						{NavEntry('Comment', '/comment')}
-						{NavEntry('Metrics', '/metrics')}
+						<NavEntry title='Article' href='/article' />
+						<NavEntry title='Post' href='/post' />
+						<NavEntry title='Diary' href='/diary' />
+						<NavEntry title='Category' href='/category' />
+						<NavEntry title='Tag' href='/tag' />
+						<NavEntry title='Project' href='/project' />
+						<NavEntry title='File' href='/file' />
+						<NavEntry title='Comment' href='/comment' />
+						<NavEntry title='Metrics' href='/metrics' />
 					</div>
 					<div className="flex flex-col mb-3 w-full">
-						{NavEntry('Leave', '/')}
+						<NavEntry title="Leave" href="/" />
 					</div>
 				</div>
 
@@ -49,10 +51,10 @@ export default function ManagementLayout({
 	)
 }
 
-function NavEntry(title: string, url: string) {
+function NavEntry(props: {title: string, href: string}) {
 	return (
-		<Link href={url} className="w-full px-2 text-left rounded-md py-2 pl-4 hover:bg-accent transition font-medium">
-			{title}
+		<Link href={props.href} className="w-full px-2 text-left rounded-md py-2 pl-4 hover:bg-accent transition font-medium">
+			{props.title}
 		</Link>
 	)
 }

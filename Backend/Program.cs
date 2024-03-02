@@ -2,6 +2,7 @@ using Backend.Attributes;
 using Backend.Data;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 
 namespace Backend
 {
@@ -30,6 +31,11 @@ namespace Backend
             builder.Services.AddDbContext<MemoryDbContext>(options =>
             {
                 options.UseInMemoryDatabase("MemoryDb");
+            });
+
+            builder.Services.Configure<JsonSerializerOptions>(options =>
+            {
+                options.PropertyNameCaseInsensitive = true;
             });
 
             var app = builder.Build();
