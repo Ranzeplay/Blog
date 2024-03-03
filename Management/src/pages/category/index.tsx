@@ -1,24 +1,63 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import ManagementLayout from "../layout";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
+import { CategoryViewModel } from "@/lib/blog/category";
+import {
+	Table,
+	TableBody,
+	TableCaption,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table"
 
 export default function Index() {
-	"use client";
+	const [categories, setCategories] = useState<CategoryViewModel[]>([]);
+	useEffect(() => {
+		fetch('/api/category/list').then(async (response) => {
+			response.json().then((data) => {
+				setCategories(data);
+			})
+		});
+	}, []);
+
 	return (
 		<ManagementLayout title="Categories" description="Manage your categories">
 			<div className="flex flex-col gap-y-2">
 				<h3 className="font-semibold text-2xl">Operations</h3>
 				<CreateCategoryDialog />
 			</div>
-			<div className="flex flex-row mt-4">
+			<div className="flex flex-col mt-4">
 				<h3 className="font-semibold text-2xl">List</h3>
+				<Table>
+					<TableCaption>Showing {categories.length} categories</TableCaption>
+					<TableHeader>
+						<TableRow>
+							<TableHead className="w-[100px]">Slug</TableHead>
+							<TableHead>Name</TableHead>
+							<TableHead>Items</TableHead>
+						</TableRow>
+					</TableHeader>
+					<TableBody>
+						{categories.map((category) => (
+							<TableRow key={category.slug}>
+								<TableCell className="font-medium">{category.slug}</TableCell>
+								<TableCell>{category.name}</TableCell>
+								<TableCell>{category.articleSlugs.length}</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
 			</div>
 		</ManagementLayout>
 	)
