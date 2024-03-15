@@ -19,7 +19,7 @@ namespace Backend.Controllers
             var categories = _dbContext.Categories
                 .Include(c => c.Articles)
                 .Select(c => new CategoryViewModel(c))
-                .ToList();
+                .ToList()??[];
             return Ok(categories);
         }
 

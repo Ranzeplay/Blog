@@ -6,7 +6,6 @@ export default function handler(
   res: NextApiResponse,
 ) {
   if (req.method === 'POST') {
-    console.log(req.body.token)
     if (req.body.token === process.env.LOGIN_PASSWORD) {
       let cookie = `token=${bcrypt.hashSync(req.body.token)}; Path=/; HttpOnly; SameSite=Strict;`;
       res.setHeader("Set-Cookie", cookie);

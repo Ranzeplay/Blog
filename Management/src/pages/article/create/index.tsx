@@ -7,11 +7,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import ManagementLayout from "@/pages/layout";
 import { XCircle } from "lucide-react";
-
-import React, { useState } from 'react';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import React, { useEffect, useState } from 'react';
 import { MdEditor } from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
 import { toast } from "sonner";
+import { CategoryViewModel } from "@/lib/blog/category";
+import { CreateArticleViewModel } from "@/lib/blog/article";
+import CreateCategoryComponent from "@/pages/category/createComp";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 
 export default function Index() {
 	const [content, setContent] = useState('Start typing from here...');
@@ -19,6 +27,42 @@ export default function Index() {
 	const [slug, setSlug] = useState('');
 	const [category, setCategory] = useState('');
 	const [tags, setTags] = useState([] as string[]);
+	
+	const [tagCreationDialogOpen, setTagCreationDialogOpen] = useState(false);
+	
+	const [existingCategories, setExistingCategories] = useState<CategoryViewModel[]>([]);
+	useEffect(() => {
+		fetch('/api/category/list').then(async (response) => {
+			response.json().then((data) => {
+				setExistingCategories(data);
+			})
+		});
+	}, []);
+
+	const [currentSelectedCategoryName, setCurrentSelectedCategoryName] = useState('Select here');
+
+	function publish() {
+		const article: CreateArticleViewModel = {
+			title,
+			slug,
+			categorySlug: category,
+			tagSlugs: tags,
+			content
+		};
+		fetch('/api/article/create', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(article)
+		}).then(async (response) => {
+			if (response.status === 201) {
+				toast.success('Article created successfully');
+			} else {
+				toast.error('Failed to create article');
+			}
+		});
+	}
 
 	return (
 		<ManagementLayout title="Articles" description="Create new article">
@@ -35,17 +79,29 @@ export default function Index() {
 					<Label>Category</Label>
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<Button variant="outline">Select</Button>
+							<Button variant="outline">{currentSelectedCategoryName}</Button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent className="w-56">
 							<Input type="text" id="category" placeholder="Search category" />
 							<DropdownMenuSeparator />
 							<DropdownMenuLabel>Existing categories</DropdownMenuLabel>
-							<DropdownMenuItem>Default</DropdownMenuItem>
-							<DropdownMenuItem>Hidden</DropdownMenuItem>
+							{existingCategories.map((category) => (
+								<DropdownMenuItem
+									key={category.slug}
+									onClick={() => {
+										setCategory(category.slug);
+										setCurrentSelectedCategoryName(category.name)
+									}}>
+									{category.name}
+								</DropdownMenuItem>
+							))}
 							<DropdownMenuSeparator />
 							<DropdownMenuLabel>Actions</DropdownMenuLabel>
-							<DropdownMenuItem>Create new category</DropdownMenuItem>
+							<DropdownMenuItem>
+								<CreateCategoryComponent trigger={(
+									<span>Create new</span>
+								)} />
+							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
 				</div>
@@ -58,7 +114,7 @@ export default function Index() {
 									<Badge key={index} variant={'outline'} className="font-normal gap-x-2">
 										<span>{tag}</span>
 										<XCircle
-											className="cursor-pointer text-gray-400 hover:text-gray-700"
+											className="cursor-pointer text-gray-400 hover:text-gray-700 transition"
 											strokeWidth={1.5}
 											fontWeight={"200"}
 											size={16}
@@ -76,18 +132,19 @@ export default function Index() {
 							type="text"
 							id="tag"
 							placeholder="New tag here"
-							onKeyDown={(e) => {
-								if (e.key === 'Enter' && e.currentTarget.value) {
-									if (tags.includes(e.currentTarget.value)) {
-										toast.error('Tag already exists');
-									} else {
-										setTags([...tags, e.currentTarget.value]);
-										e.currentTarget.value = '';
-									}
-									e.preventDefault(); // prevent form submission
+							onFocus={() => {
+								if (tags.length > 0) {
+									toast.info(`Existing tags: ${tags.join(', ')}`);
+								} else {
+									toast.info('No existing tags');
 								}
 							}}
+							onKeyDown={handleAddTag}
 						/>
+
+						<Dialog open={tagCreationDialogOpen}>
+							<CreateTagDialogContent />
+						</Dialog>
 					</div>
 				</div>
 				<div className="w-full min-h-48">
@@ -95,11 +152,108 @@ export default function Index() {
 					<MdEditor modelValue={content} onChange={setContent} language='en-us' tabWidth={2} />
 				</div>
 				<div className="flex flex-row gap-x-2">
-					<Button>Publish</Button>
-					<Button variant={'outline'}>Draft</Button>
+					<Button onClick={publish}>Publish</Button>
+					<Button variant={'outline'} disabled>Draft</Button>
 					<Button variant={'ghost'} className="text-gray-600">Cancel</Button>
 				</div>
 			</div>
 		</ManagementLayout>
 	)
+
+	function handleAddTag(e: React.KeyboardEvent<HTMLInputElement>) {
+		if (e.key === 'Enter' && e.currentTarget.value) {
+			if (tags.includes(e.currentTarget.value)) {
+				toast.error('Tag already exists');
+			} else {
+				setTags([...tags, e.currentTarget.value]);
+				e.currentTarget.value = '';
+			}
+			e.preventDefault();
+		}
+	}
+
+	function CreateTagDialogContent() {
+		const formSchema = z.object({
+			name: z.string().min(1),
+			slug: z.string().min(1)
+		});
+	
+		const form = useForm<z.infer<typeof formSchema>>({
+			resolver: zodResolver(formSchema),
+			defaultValues: {
+				name: "",
+				slug: ""
+			},
+		});
+	
+		return (
+			<DialogContent>
+				<DialogHeader>
+					<DialogTitle>Create new tag</DialogTitle>
+					<DialogDescription>
+						The tag you typed does not exist. Do you want to create a new one?
+					</DialogDescription>
+				</DialogHeader>
+				<Form {...form}>
+					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex flex-col">
+						<FormField
+							control={form.control}
+							name="name"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Name</FormLabel>
+									<FormControl>
+										<Input {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+	
+						<FormField
+							control={form.control}
+							name="slug"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Slug</FormLabel>
+									<FormControl>
+										<Input {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					</form>
+					<DialogFooter>
+						<Button type="submit" variant={'default'}>Submit</Button>
+						<DialogClose asChild>
+							<Button variant={'ghost'}>Cancel</Button>
+						</DialogClose>
+					</DialogFooter>
+				</Form>
+			</DialogContent>
+		)
+	
+		async function onSubmit(values: z.infer<typeof formSchema>) {
+			try {
+				const response = await fetch('/api/tag/create', {
+					method: 'POST',
+					body: JSON.stringify(values)
+				});
+				const data = await response.json();
+				if (response.ok) {
+					toast("Tag created successfully");
+					setTagCreationDialogOpen(false);
+					return true;
+				} else {
+					toast(data.message || "Failed to create tag");
+					return false;
+				}
+			} catch (error) {
+				toast("Failed to create tag");
+				console.error(error);
+				return false;
+			}
+		}
+	}
 }

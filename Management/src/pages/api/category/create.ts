@@ -12,10 +12,11 @@ export default async function handler(
 	}
 
   try {
-    const data = JSON.parse(req.body) as CreateCategoryViewModel;
+    const data = req.body as CreateCategoryViewModel;
     const result = await CategoryService.create(data);
     res.status(200).json(result);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Unable to create category" });
   }
 }
