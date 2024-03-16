@@ -41,6 +41,8 @@ export default function Index() {
 
 	const [currentSelectedCategoryName, setCurrentSelectedCategoryName] = useState('Select here');
 
+	const [openCreateCategoryPanel, setOpenCreateCategoryPanel] = useState(false);
+
 	function publish() {
 		const article: CreateArticleViewModel = {
 			title,
@@ -97,13 +99,12 @@ export default function Index() {
 							))}
 							<DropdownMenuSeparator />
 							<DropdownMenuLabel>Actions</DropdownMenuLabel>
-							<DropdownMenuItem>
-								<CreateCategoryComponent trigger={(
-									<span>Create new</span>
-								)} />
+							<DropdownMenuItem onClick={() => {setOpenCreateCategoryPanel(true)}}>
+								<span>Create new</span>
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
+					<CreateCategoryComponent open={openCreateCategoryPanel} setOpen={setOpenCreateCategoryPanel} />
 				</div>
 				<div className="grid w-full max-w-sm items-center gap-1.5">
 					<Label htmlFor="tag">Tags</Label>

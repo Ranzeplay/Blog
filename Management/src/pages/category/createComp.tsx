@@ -5,14 +5,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
-const CreateCategoryComponent: React.FC<{ trigger: React.ReactNode }> = ({ trigger }) => {
-	const [open, setOpen] = useState(false);
-
+const CreateCategoryComponent: React.FC<{ open: boolean, setOpen: (value: boolean) => void }> = ({ open, setOpen }) => {
 	const formSchema = z.object({
 		name: z.string().min(1),
 		slug: z.string().min(1)
@@ -28,7 +25,6 @@ const CreateCategoryComponent: React.FC<{ trigger: React.ReactNode }> = ({ trigg
 
 	return (
 		<Sheet open={open} onOpenChange={(e) => setOpen(e)}>
-			<SheetTrigger asChild>{trigger}</SheetTrigger>
 			<SheetContent className='flex flex-col gap-y-4'>
 				<SheetHeader>
 					<SheetTitle>Create new category</SheetTitle>

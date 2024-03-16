@@ -25,13 +25,14 @@ export default function Index() {
 		});
 	}, []);
 
+	const [openCategoryOpenPanel, setOpenCategoryOpenPanel] = useState(false);
+
 	return (
 		<ManagementLayout title="Categories" description="Manage your categories">
 			<div className="flex flex-col gap-y-2">
 				<h3 className="font-semibold text-2xl">Operations</h3>
-				<CreateCategoryComponent trigger={(
-					<Button variant={'link'} className="w-min text-blue-500 hover:underline">Create new category</Button>
-				)} />
+				<Button onClick={() => setOpenCategoryOpenPanel(true)} variant={'link'} className="w-min text-blue-500 hover:underline">Create new category</Button>
+				<CreateCategoryComponent open={openCategoryOpenPanel} setOpen={setOpenCategoryOpenPanel} />
 			</div>
 			<div className="flex flex-col mt-4">
 				<h3 className="font-semibold text-2xl">List</h3>
