@@ -21,7 +21,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 
-export default function Index() {
+export default function Create() {
 	const [content, setContent] = useState('Start typing from here...');
 	const [title, setTitle] = useState('');
 	const [slug, setSlug] = useState('');

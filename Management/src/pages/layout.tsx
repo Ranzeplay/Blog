@@ -19,6 +19,7 @@ export default function ManagementLayout({
 
 				<div className="flex flex-col space-between h-full">
 					<div className="flex flex-col grow">
+						<NavEntry title='Overview' href='/overview' />
 						<NavEntry title='Article' href='/article' />
 						<NavEntry title='Post' href='/post' />
 						<NavEntry title='Diary' href='/diary' />

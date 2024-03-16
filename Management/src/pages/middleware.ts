@@ -15,4 +15,4 @@ export default async function handler(request: NextRequest) {
   }
 }
 
-const unprotectedRoutes = ["/api/auth", "/"];
+const unprotectedRoutes = ["/api/auth", "/", ""];

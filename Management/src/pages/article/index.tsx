@@ -36,14 +36,18 @@ export default function Index() {
 							<TableHead className="w-[100px]">Slug</TableHead>
 							<TableHead>Name</TableHead>
 							<TableHead>Category</TableHead>
+							<TableHead>Tags</TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
 						{articles.map((article) => (
-							<TableRow key={article.slug}>
-								<TableCell className="font-medium">{article.slug}</TableCell>
+							<TableRow key={article.slug} className="cursor-pointer" onClick={() => window.location.pathname = '/article/entry/' + article.slug}>
+								<TableCell className="font-medium text-blue-500 hover:underline">
+									<Link href={'/article/entry/' + article.slug}>{article.slug}</Link>
+								</TableCell>
 								<TableCell>{article.title}</TableCell>
 								<TableCell>{article.category.name}</TableCell>
+								<TableCell>{article.tags.length}</TableCell>
 							</TableRow>
 						))}
 					</TableBody>

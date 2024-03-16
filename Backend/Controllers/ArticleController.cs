@@ -13,12 +13,14 @@ namespace Backend.Controllers
 
         [HttpGet("index")]
         [ServiceFilter(typeof(RequireFrontEndAccessToken))]
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
             var articles = _dbContext.Articles
                 .Include(a => a.Category)
                 .Include(a => a.Tags)
                 .Select(a => new ArticleViewModel(a));
+
+            await articles.ForEachAsync(a => a.Content = a.Content.Length > 50 ? a.Content[..50] : a.Content);
 
             return Ok(articles);
         }
@@ -32,6 +34,7 @@ namespace Backend.Controllers
                 .Include(a => a.Category)
                 .Include(a => a.Tags)
                 .FirstOrDefault();
+
             if (article == null)
             {
                 return NotFound();

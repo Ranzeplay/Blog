@@ -42,4 +42,16 @@ export class ArticleService {
 
     return response.json();
   }
+
+  public static async get(slug: string): Promise<ArticleViewModel> {
+    const response = await fetch(
+      process.env.BACKEND_URL + "/api/article/entry/" + slug,
+      {
+        headers: MGMT_REQ_HEADER,
+        method: "GET",
+      }
+    );
+
+    return response.json();
+  }
 }

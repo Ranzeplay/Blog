@@ -84,6 +84,9 @@ function CreateTagDialog() {
 		try {
 			const response = await fetch('/api/tag/create', {
 				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				body: JSON.stringify(values)
 			});
 			const data = await response.json();
