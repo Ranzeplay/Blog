@@ -9,3 +9,16 @@ export type ProjectViewModel = {
   siteUrl: string;
   externalUrls: Record<string, string>;
 };
+
+
+export const createEmptyProjectViewModel = (): ProjectViewModel => ({
+  id: '',
+  slug: '',
+  name: '',
+  description: '',
+  introduction: '',
+  iconUrl: '',
+  headImageUrl: '',
+  siteUrl: '',
+  externalUrls: {},
+});

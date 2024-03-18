@@ -1,11 +1,17 @@
 import { component$ } from "@builder.io/qwik";
+import { createEmptyProjectViewModel } from "~/libs/project";
+import { ProjectCard } from "../project/card";
 
 export const HomeProjectPanel = component$(() => {
+	const project = createEmptyProjectViewModel();
+	project.name = "Demo";
+	project.description = "A demo project for you to play.";
+
 	return (
 		<div class="bg-white w-full">
 			<div class="min-h-screen flex flex-row justify-between mx-auto max-w-screen-lg">
 				<div class="flex flex-col gap-y-8 self-center">
-					<div class="w-96 h-24 bg-black"></div>
+					<ProjectCard project={project} />
 					<div class="w-96 h-24 bg-black"></div>
 					<div class="w-96 h-24 bg-black"></div>
 				</div>

@@ -6,6 +6,7 @@ export const HomeArticlePanel = component$(() => {
 	const demoArticle = emptyArticle;
 	demoArticle.title = "Article title";
 	demoArticle.publishTime = new Date();
+	demoArticle.category.name = "Demo category";
 
 	return (
 		<div class="bg-white w-full">
