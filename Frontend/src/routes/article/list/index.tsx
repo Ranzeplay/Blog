@@ -19,12 +19,12 @@ export default component$(() => {
 	return (
 		<>
 			<RootNavBar />
-			<div class="mx-auto max-w-screen-md flex flex-col mt-12 gap-y-1">
+			<div class="mx-auto max-w-screen-md flex flex-col mt-12 gap-y-1.5">
 				<div class="flex flex-row items-baseline justify-between">
 					<h2 class="text-3xl text-black font-bold font-serif">Articles</h2>
 					<p class="text-sm text-gray-500">Showing 2 entries</p>
 				</div>
-				<input title="Search" placeholder="Search" class="outline-none border-b rounded p-1 border-gray-500 hover:border-black transition" />
+				<input title="Search" placeholder="Search" class="outline-none border-b p-1 border-gray-500 hover:border-black transition text-sm" />
 				<div class="mt-6 flex flex-col gap-y-4">
 					<ArticleEntry {...article} />
 					<ArticleEntry {...article} />
@@ -37,7 +37,9 @@ export default component$(() => {
 export const ArticleEntry = component$<ArticleViewModel>((props) => {
 	return (
 		<div class="border border-gray-400 rounded-lg p-4 flex flex-col gap-y-2">
-			<h3 class="font-bold text-lg">{props.title}</h3>
+			<h3 class="font-bold text-lg">
+				<a class="hover:underline" href="#">{props.title}</a>
+			</h3>
 			<p class="text-xs font-thin">{props.content}</p>
 			<div class="flex flex-row divide-x text-sm text-gray-500">
 				<p class="pr-2 flex flex-row gap-x-1 items-center"><LuLibrary opacity={0.5} /> {props.category.name}</p>
